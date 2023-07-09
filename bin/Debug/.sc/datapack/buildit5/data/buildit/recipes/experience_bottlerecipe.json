@@ -1,0 +1,15 @@
+{
+    "type": "crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:emerald"
+        },
+	{
+	    "item": "minecraft:glass_bottle"
+	}
+    ],
+    "result": {
+        "item": "minecraft:experience_bottle",
+        "count": 4
+    }
+}

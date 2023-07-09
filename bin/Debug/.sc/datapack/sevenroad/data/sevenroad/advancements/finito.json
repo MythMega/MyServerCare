@@ -1,0 +1,27 @@
+{
+    "__comment": "",
+    "display": {
+        "title": {
+            "text": "FINITO"
+        },
+        "description": {
+            "text": "Vous avez fini ! GG à vous"
+        },
+        "icon": {
+            "item": "minecraft:netherite_boots"
+        },
+        "frame": "goal",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "impo": {
+            "trigger": "minecraft:impossible"
+        }
+    },
+    "rewards": {
+        "function": "sevenroad:advfinito"
+    },
+    "parent": "sevenroad:300"
+}

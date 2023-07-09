@@ -1,0 +1,12 @@
+team leave @a
+team join blue @r[limit=3,sort=random,team=none]
+team join red @r[limit=3,sort=random,team=none]
+team join green @r[limit=3,sort=random,team=none]
+team join yellow @r[limit=3,sort=random,team=none]
+team join purple @r[limit=3,sort=random,team=none]
+team join cyan @r[limit=3,sort=random,team=none]
+team join pink @r[limit=3,sort=random,team=none]
+team join orange @r[limit=3,sort=random,team=none]
+team join gray @r[limit=3,sort=random,team=none]
+team join white @r[limit=3,sort=random,team=none]
+team join black @r[limit=3,sort=random,team=none]

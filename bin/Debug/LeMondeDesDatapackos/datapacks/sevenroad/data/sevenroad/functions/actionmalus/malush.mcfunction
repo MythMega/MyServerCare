@@ -1,0 +1,2 @@
+summon phantom ~ ~15 ~ {Passengers:[{id:"minecraft:skeleton",Passengers:[{id:"minecraft:chicken"}]}],ActiveEffects:[{Id:14b,Amplifier:0b,Duration:3600}]}
+tellraw @a ["",{"selector":"@s"},{"text":" à eu le malus "},{"text":"Squelette d'Hyrule","color":"dark_red"},{"text":" !"}]

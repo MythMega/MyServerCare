@@ -1,0 +1,29 @@
+{
+    "__comment": "",
+    "display": {
+        "title": {
+            "text": "7 Roads : Lancement !",
+            "bold": true,
+            "italic": true,
+            "underlined": true,
+            "strikethrough": false,
+            "obfuscated": false
+        },
+        "description": {
+            "text": "Atteignez le 0-0 !"
+        },
+        "icon": {
+            "item": "minecraft:compass"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": false,
+        "hidden": false,
+        "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+    },
+    "criteria": {
+        "impo": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}
