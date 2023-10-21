@@ -1,2 +1,0 @@
-summon phantom ~ ~ ~ {Size:20,ArmorItems:[{},{},{id:"minecraft:elytra",Count:3b},{}],ArmorDropChances:[0.085F,0.085F,1.000F,0.085F],Attributes:[{Name:generic.movement_speed,Base:8}]}
-tellraw @a ["",{"selector":"@s"},{"text":" à eu le malus "},{"text":"Terrible menace","color":"dark_red"},{"text":" !"}]
