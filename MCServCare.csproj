@@ -41,6 +41,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
@@ -70,6 +71,12 @@
     <Compile Include="DatapackDB.Designer.cs">
       <DependentUpon>DatapackDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmServerJar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmServerJar.Designer.cs">
+      <DependentUpon>FrmServerJar.cs</DependentUpon>
+    </Compile>
     <Compile Include="ServerManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +97,9 @@
     <EmbeddedResource Include="DatapackDB.resx">
       <DependentUpon>DatapackDB.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmServerJar.resx">
+      <DependentUpon>FrmServerJar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ServerManager.resx">
       <DependentUpon>ServerManager.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,10 +111,12 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="WorldCreation.resx">
       <DependentUpon>WorldCreation.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include=".sc.zip" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -122,6 +134,7 @@
   <ItemGroup>
     <Content Include="MCSC.ico" />
     <Content Include="Properties\Icon1.ico" />
+    <None Include="Resources\orangerefresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

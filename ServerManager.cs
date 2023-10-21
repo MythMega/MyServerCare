@@ -7,7 +7,10 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Net.NetworkInformation;
+using System.Reflection;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -18,48 +21,200 @@ namespace MCServCare
 {
     public partial class ServerManager : Form
     {
+        // modifier une valeur dans server.properties :
+        // UpdateServerProperties("view-distance", ((int)numViewDistance.Value).ToString());
 
         private string FULL_APP_LANGUAGE = "EN";
+        private string configFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "JMD", "mcservercare", "config.cfg");
+        private List<Button> btnOnOff = new List<Button>();
+        private Color background = Color.FromArgb(255, 36, 36, 44);
+        private Color deeperBackground = Color.FromArgb(255, 27, 27, 33);
+        private Color orangeTextColor = Color.Orange;
+        private string labelDownloadJar;
+        private string motdChanged;
+        private string Updated;
+        private string noWorld;
+
         public ServerManager()
         {
             InitializeComponent();
-            this.Icon = new Icon("chemin_vers_votre_icone.ico");
+            btnOnOff.Add(btnWhitelist);
+            btnOnOff.Add(btnEndOff);
+            btnOnOff.Add(btnHardcoreActive);
+            btnOnOff.Add(btnNetherOff);
+            btnOnOff.Add(btnOpenToCrack);
+            btnOnOff.Add(btnPVPActive);
+            btnOnOff.Add(btnCommandBlockActive);
+
+            
+
+            this.BackColor = background;
+            lvWorldSelection.BackColor = deeperBackground;
+            numRam.BackColor = deeperBackground;
+            numSlotAmount.BackColor = deeperBackground;
+            numViewDistance.BackColor = deeperBackground;
+            numSimulationDistance.BackColor = deeperBackground;
+            numSpawnProtecDistance.BackColor = deeperBackground;
+            txbMOTD.BackColor = deeperBackground;
+            comboGamemode.BackColor = deeperBackground;
+
+            lblNotif.ForeColor = orangeTextColor;
+            lblNotif.Visible = false;
         }
 
         private void ServerManager_Load(object sender, EventArgs e)
         {
+
+            // Vérifier si le dossier ".sc" existe
+            string scFolderPath = Path.Combine(Application.StartupPath, ".sc");
+            if (!Directory.Exists(scFolderPath))
+            {
+                Directory.CreateDirectory(scFolderPath);
+                getServerCareFiles();
+                //btnUpdateSC_Click(sender, EventArgs.Empty);
+            }
+
+
+            // Vérifier si le fichier server.properties existe
+            string serverPropertiesPath = Path.Combine(Application.StartupPath, "server.properties");
+            if (!File.Exists(serverPropertiesPath))
+            {
+                createServerProperties();
+            }
+
+            // Vérifier si le fichier start.bat existe
+            string startBatPath = Path.Combine(Application.StartupPath, "start.bat");
+            if (!File.Exists(startBatPath))
+            {
+                createStartBat();
+            }
+
+            // Vérifier si le fichier eula.txt existe
+            string eulaPath = Path.Combine(Application.StartupPath, "eula.txt");
+            if (!File.Exists(eulaPath))
+            {
+                createEula();
+            }
+
+            // Vérifier si le fichier server.jar existe
+            string serverJarPath = Path.Combine(Application.StartupPath, "server.jar");
+            if (!File.Exists(eulaPath))
+            {
+                // a voir ce qu'on fait
+            }
+            lblCurrWorld.Text = "- X X X -";
+            foreach (string worldName in getWorldList())
+            {
+                lvWorldSelection.Items.Add(new ListViewItem($"{worldName}"));
+                string c = GetProperty("level-name");
+                if (worldName == c)
+                    lblCurrWorld.Text = worldName;
+            }
+
             numRam.Value = GetMemoryAllocationFromStartBat();
             numSlotAmount.Value = int.Parse(GetProperty("max-players"));
             numViewDistance.Value = int.Parse(GetProperty("view-distance"));
             numSimulationDistance.Value = int.Parse(GetProperty("simulation-distance"));
             numSpawnProtecDistance.Value = int.Parse(GetProperty("spawn-protection"));
+            txbMOTD.Text = GetProperty("motd");
 
+            btnPVPActive.Tag = GetProperty("pvp");
+            btnWhitelist.Tag = GetProperty("white-list");
+            btnEndOff.Tag = "dis";
+            btnHardcoreActive.Tag = GetProperty("hardcore");
+            btnNetherOff.Tag = GetProperty("allow-nether");
+            btnOpenToCrack.Tag = GetProperty("online-mode");
+            btnCommandBlockActive.Tag = GetProperty("enable-command-block");
 
-
-            foreach (string worldName in getWorldList())
+            string gm = GetProperty("gamemode");
+            int selectedIndex = -1;
+            for (int i = 0; i < comboGamemode.Items.Count; i++)
             {
-                lvWorldSelection.Items.Add(new ListViewItem($"{worldName}"));
-            }
-
-            makeTranslation("FR");
-        }
-
-        private void btnRam_Click(object sender, EventArgs e)
-        {
-            if (numRam.Value > 7)
-            {
-                DialogResult dialogResult = MessageBox.Show("Vous avez saisie une valeur de ram élevée, attention celle ci sera alloué au serveur, êtes vous sur ?", "Attention, Warning Achtung", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.No)
+                if (gm == comboGamemode.Items[i].ToString())
                 {
-                    MessageBox.Show("Pas de soucis mon reuf");
-                    return;
+                    selectedIndex = i;
+                    break; // Sortir de la boucle dès que l'élément est trouvé
                 }
             }
-            string pre = "java -Xmx";
-            string post = "G -jar server.jar nogui";
-            string newString = pre + numRam.Value.ToString() + post;
+            comboGamemode.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            WriteInformationToFile(newString, "start.bat");
+            // Définir l'élément correspondant comme sélection par défaut
+            if (selectedIndex != -1)
+            {
+                comboGamemode.SelectedIndex = selectedIndex;
+            }
+            updateOnOffStyles();
+
+            VerifyFile();
+
+            if (GetProfileValue("langue") == null)
+                SetProfileValue("langue", "EN");
+            makeTranslation(GetProfileValue("langue"));
+            
+        }
+        private void VerifyFile()
+        {
+            if (!File.Exists(configFilePath))
+            {
+                // Le fichier n'existe pas, créons-le avec le contenu par défaut
+                try
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(configFilePath)); // Créer les répertoires si nécessaire
+                    File.WriteAllText(configFilePath, String.Empty);
+                    Console.WriteLine("Le fichier a été créé avec le contenu par défaut.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Une erreur est survenue lors de la création du fichier : " + ex.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Le fichier existe déjà.");
+            }
+        }
+        private void getServerCareFiles()
+        {
+            string zipFilePath = "https://jmdbymyth.000webhostapp.com/prj/mcservcare/.sc.zip";
+            string targetFolderPath = Path.Combine(Application.StartupPath, ".sc");
+
+            using (WebClient webClient = new WebClient())
+            {
+                // Télécharger le fichier ZIP depuis l'URL spécifiée
+                webClient.DownloadFile(zipFilePath, "temp.zip");
+
+                // Extraire le contenu du fichier ZIP vers le dossier cible
+                ZipFile.ExtractToDirectory("temp.zip", targetFolderPath);
+
+                // Supprimer le fichier ZIP temporaire
+                File.Delete("temp.zip");
+            }
+        }
+
+        private void createServerProperties()
+        {
+            WriteInformationToFile("#Minecraft server properties\r\n#Mon Jul 10 23:12:52 CEST 2023\r\nenable-jmx-monitoring=false\r\nrcon.port=25575\r\nlevel-seed=\r\ngamemode=survival\r\nenable-command-block=false\r\nenable-query=false\r\ngenerator-settings={}\r\nenforce-secure-profile=true\r\nlevel-name=world\r\nmotd=A Minecraft Server\r\nquery.port=25565\r\npvp=true\r\ngenerate-structures=true\r\nmax-chained-neighbor-updates=1000000\r\ndifficulty=easy\r\nnetwork-compression-threshold=256\r\nmax-tick-time=60000\r\nrequire-resource-pack=false\r\nuse-native-transport=true\r\nmax-players=20\r\nonline-mode=true\r\nenable-status=true\r\nallow-flight=false\r\ninitial-disabled-packs=\r\nbroadcast-rcon-to-ops=true\r\nview-distance=10\r\nserver-ip=\r\nresource-pack-prompt=\r\nallow-nether=true\r\nserver-port=25565\r\nenable-rcon=false\r\nsync-chunk-writes=true\r\nop-permission-level=4\r\nprevent-proxy-connections=false\r\nhide-online-players=false\r\nresource-pack=\r\nentity-broadcast-range-percentage=100\r\nsimulation-distance=10\r\nrcon.password=\r\nplayer-idle-timeout=0\r\ndebug=false\r\nforce-gamemode=false\r\nrate-limit=0\r\nhardcore=false\r\nwhite-list=false\r\nbroadcast-console-to-ops=true\r\nspawn-npcs=true\r\nspawn-animals=true\r\nfunction-permission-level=2\r\ninitial-enabled-packs=vanilla\r\nlevel-type=minecraft\\:normal\r\ntext-filtering-config=\r\nspawn-monsters=true\r\nenforce-whitelist=false\r\nspawn-protection=16\r\nresource-pack-sha1=\r\nmax-world-size=29999984\r\n", "server.properties");
+        }
+
+        private void createStartBat()
+        {
+            WriteInformationToFile("java -Xmx2G -jar server.jar nogui", "start.bat");
+        }
+
+        private void createEula()
+        {
+            DialogResult dialogResult = MessageBox.Show("Accept Eula ?\r\nStart will abort if no\n\r\nAcceptez l'EULA ?\r\nLe démarrage sera interrompu en cas de refus.\n\r\nEULA akzeptieren?\r\nDer Start wird abgebrochen, wenn Nein.\n\r\n¿Acepta el EULA?\r\nEl inicio se abortará si no.", "Warning", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.No)
+            {
+                MessageBox.Show("Pas de soucis mon reuf");
+                this.Close();
+            }
+            else
+            {
+                WriteInformationToFile("eula=true", "eula.txt");
+                return;
+            }
+            
         }
 
         private void WriteInformationToFile(string information, string file)
@@ -149,6 +304,7 @@ namespace MCServCare
         private void btnWorldCreation_Click(object sender, EventArgs e)
         {
             WorldCreation frmWorldCreation = new WorldCreation();
+            frmWorldCreation.setColor(background, deeperBackground);
             frmWorldCreation.makeTranslation(FULL_APP_LANGUAGE);
             frmWorldCreation.ShowDialog();
         }
@@ -181,78 +337,192 @@ namespace MCServCare
 
         private void btnWhitelistActive_Click(object sender, EventArgs e)
         {
-            UpdateServerProperties("white-list", "true");
+            Button myb = (Button)sender;
+            if(myb.Tag.ToString() == "true")
+            {
+                UpdateServerProperties("white-list", "false");
+                myb.Tag = "false";
+            }
+            else
+            {
+                UpdateServerProperties("white-list", "true");
+                myb.Tag = "true";
+            }
+            updateOnOffStyles();
+            sendNotif(Updated + gbWhitelist.Text + " : " + myb.Text + ".");
         }
 
-        private void btnWhitelistDesactive_Click(object sender, EventArgs e)
+        private void btnNetherOff_Click(object sender, EventArgs e)
         {
-            UpdateServerProperties("white-list", "false");
+            Button myb = (Button)sender;
+            if (myb.Tag.ToString() == "true")
+            {
+                UpdateServerProperties("allow-nether", "false");
+                myb.Tag = "false";
+            }
+            else
+            {
+                UpdateServerProperties("allow-nether", "true");
+                myb.Tag = "true";
+            }
+            updateOnOffStyles();
+            sendNotif(Updated + groupBox1.Text + " : " + myb.Text + ".");
         }
 
         private void btnOpenToCrack_Click(object sender, EventArgs e)
         {
-            UpdateServerProperties("online-mode", "false");
+            Button myb = (Button)sender;
+            if (myb.Tag.ToString() == "true")
+            {
+                UpdateServerProperties("online-mode", "false");
+                myb.Tag = "false";
+            }
+            else
+            {
+                UpdateServerProperties("online-mode", "true");
+                myb.Tag = "true";
+            }
+            updateOnOffStyles();
+            sendNotif(Updated + gbCracks.Text + " : " + myb.Text + ".");
         }
 
-        private void btnCloseToCrack_Click(object sender, EventArgs e)
-        {
-            UpdateServerProperties("online-mode", "true");
-        }
 
         private void btnPVPActive_Click(object sender, EventArgs e)
         {
-            UpdateServerProperties("pvp", "true");
+            Button myb = (Button)sender;
+            if (myb.Tag.ToString() == "true")
+            {
+                UpdateServerProperties("pvp", "false");
+                myb.Tag = "false";
+            }
+            else
+            {
+                UpdateServerProperties("pvp", "true");
+                myb.Tag = "true";
+            }
+            updateOnOffStyles();
+            sendNotif(Updated + gbPvp.Text + " : " + myb.Text + ".");
         }
 
-        private void btnPVPDesactive_Click(object sender, EventArgs e)
-        {
-            UpdateServerProperties("pvp", "false");
-        }
 
         private void btnCommandBlockActive_Click(object sender, EventArgs e)
         {
-            UpdateServerProperties("enable-command-block", "true");
-        }
-
-        private void btnCommandBlockDesactive_Click(object sender, EventArgs e)
-        {
-            UpdateServerProperties("enable-command-block", "false");
+            Button myb = (Button)sender;
+            if (myb.Tag.ToString() == "true")
+            {
+                UpdateServerProperties("enable-command-block", "false");
+                myb.Tag = "false";
+            }
+            else
+            {
+                UpdateServerProperties("enable-command-block", "true");
+                myb.Tag = "true";
+            }
+            updateOnOffStyles();
+            sendNotif(Updated + gbCommandBlock.Text + " : " + myb.Text + ".");
         }
 
         private void btnHardcoreActive_Click(object sender, EventArgs e)
         {
-            UpdateServerProperties("hardcore", "true");
+            Button myb = (Button)sender;
+            if (myb.Tag.ToString() == "true")
+            {
+                UpdateServerProperties("hardcore", "false");
+                myb.Tag = "false";
+            }
+            else
+            {
+                UpdateServerProperties("hardcore", "true");
+                myb.Tag = "true";
+            }
+            updateOnOffStyles();
+            sendNotif(Updated + gbHardcore.Text + " : " + myb.Text + ".");
+            
         }
 
-        private void btnHardcoreDesactive_Click(object sender, EventArgs e)
-        {
-            UpdateServerProperties("hardcore", "false");
-        }
 
         private void btnWorldSelection_Click(object sender, EventArgs e)
         {
-            string activeWorld = lvWorldSelection.SelectedItems[0].Text;
-            UpdateServerProperties("level-name", activeWorld);
+            try
+            {
+                string activeWorld = lvWorldSelection.SelectedItems[0].Text;
+                UpdateServerProperties("level-name", activeWorld);
+                lblCurrWorld.Text = "- " + activeWorld + " -";
+            }
+            catch {
+                MessageBox.Show(noWorld);
+                lblCurrWorld.Text = "- X X X -";
+            }
         }
 
-        private void btnViewDistance_Click(object sender, EventArgs e)
+        private void numRam_ValueChanged(object sender, EventArgs e)
         {
-            UpdateServerProperties("view-distance", ((int)numViewDistance.Value).ToString());
+            if (numRam.Value > 7)
+            {
+                DialogResult dialogResult = MessageBox.Show("Vous avez saisie une valeur de ram élevée, attention celle ci sera alloué au serveur, êtes vous sur ?", "Attention, Warning Achtung", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.No)
+                {
+                    MessageBox.Show("Pas de soucis mon reuf");
+                    return;
+                }
+            }
+            string pre = "java -Xmx";
+            string post = "G -jar server.jar nogui";
+            string newString = pre + numRam.Value.ToString() + post;
+
+            WriteInformationToFile(newString, "start.bat");
+
+            sendNotif(Updated + "Ram : " + numRam.Value.ToString() + "GB.");
         }
 
-        private void btnSimulationDistance_Click(object sender, EventArgs e)
-        {
-            UpdateServerProperties("simulation-distance", ((int)numSimulationDistance.Value).ToString());
-        }
-
-        private void btnSlotAmount_Click(object sender, EventArgs e)
+        private void numMaxPlayer_ValueChanged(object sender, EventArgs e)
         {
             UpdateServerProperties("max-players", ((int)numSlotAmount.Value).ToString());
+
+
+            sendNotif(Updated + "Max Players : " + numSlotAmount.Value.ToString() + ".");
+        }
+
+        private void numViewDistance_ValueChanged(object sender, EventArgs e)
+        {
+
+            UpdateServerProperties("view-distance", ((int)numViewDistance.Value).ToString());
+
+
+            sendNotif(Updated + "View distance : " + numViewDistance.Value.ToString() + ".");
+        }
+
+        private void numSimulationDistance_ValueChanged(object sender, EventArgs e)
+        {
+
+            UpdateServerProperties("simulation-distance", ((int)numSimulationDistance.Value).ToString());
+
+
+            sendNotif(Updated + "Simulation distance : " + numSimulationDistance.Value.ToString() + ".");
+        }
+
+        private void numSpawnProtecDistance_ValueChanged(object sender, EventArgs e)
+        {
+
+            UpdateServerProperties("spawn-protection", ((int)numSpawnProtecDistance.Value).ToString());
+
+
+            sendNotif(Updated + "Spawn protection : " + numSpawnProtecDistance.Value.ToString() + ".");
+        }
+
+        private void comboGamemode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateServerProperties("gamemode", comboGamemode.SelectedItem.ToString());
+
+            sendNotif(Updated + "Gamemode : " + comboGamemode.SelectedItem.ToString() + ".");
         }
 
         private void btnMOTD_Click(object sender, EventArgs e)
         {
+
             UpdateServerProperties("motd", txbMOTD.Text);
+
+            sendNotif(motdChanged);
         }
 
         private void btnStartServer_Click(object sender, EventArgs e)
@@ -292,16 +562,6 @@ namespace MCServCare
         }
 
 
-
-
-
-
-
-
-
-
-
-
         public string GetProperty(string propertyName)
         {
             string filePath = "server.properties";
@@ -333,25 +593,6 @@ namespace MCServCare
             throw new ArgumentException($"La propriété '{propertyName}' n'a pas été trouvée dans le fichier server.properties.");
         }
 
-        public List<Button> GetButtonsTags(string tag)
-        {
-            switch (tag)
-            {
-                case "active":
-                    return new List<Button>()
-                    {
-                        btnHardcoreActive, btnPVPActive, btnCommandBlockActive
-                    };
-                case "desactive":
-                    return new List<Button>()
-                    {
-                        btnHardcoreDesactive, btnPVPDesactive, btnCommandBlockDesactive
-                    };
-            }
-            return new List<Button>();
-
-        }
-
         public void makeTranslation(string languageCode)
         {
             FULL_APP_LANGUAGE = languageCode;
@@ -359,16 +600,20 @@ namespace MCServCare
             {
                 case "FR":
                     translationFR();
+                    SetProfileValue("langue", "FR");
                     break;
                 case "EN":
                     translationEN();
+                    SetProfileValue("langue", "EN");
                     break;
-                    //case "DE":
-                    //    translationDE();
-                    //    break;
-                    //case "ES":
-                    //    translationES();
-                    //    break;
+                case "DE":
+                    translationDE();
+                    SetProfileValue("langue", "DE");
+                    break;
+                case "ES":
+                    translationES();
+                    SetProfileValue("langue", "ES");
+                    break;
             }
         }
 
@@ -398,38 +643,23 @@ namespace MCServCare
         public void translationFR()
         {
             // DEBUT TRADUCTION
+            //label
+            lblViewDistance.Text = "Vue (chunk)";
 
             //---Boutons
-            //boutons activer
-            string btnActiveText = "Activer";
-            string btnDesactiveText = "Desactiver";
-
-            //boutons whitelist
-            btnWhitelistActive.Text = "Activer Whitelist";
-            btnWhitelistDesactive.Text = "Désactier Whitelist";
 
             //boutons systemes
+            btnDownloadServJar.Text = "Télécharger serveur";
             btnUpdateServer.Text = "Mettre à jour Serveur";
             btnStartServer.Text = "Démarrer Serveur";
 
             //boutons paramètres
-            btnRam.Text = "Changer RAM";
-
-            //cracks
-            btnCloseToCrack.Text = "Fermer aux cracks";
-            btnOpenToCrack.Text = "Ouvrir aux cracks";
+            lblRam.Text = "Changer RAM";
 
             //Maps
             btnWorldCreation.Text = "Gestion des mondes";
             btnWorldSelection.Text = "Changer de monde";
 
-            //Distances
-            btnViewDistance.Text = "Distance de vue";
-            btnSimulationDistance.Text = "Distance de Simulation";
-            btnSpawnProtec.Text = "Distance protec. Spawn";
-
-            //Nombre de slots
-            btnSlotAmount.Text = "Mettre à jour";
 
             //MOTD
             btnMOTD.Text = "changer MOTD";
@@ -442,7 +672,6 @@ namespace MCServCare
             gbPvp.Text = "PvP";
             gbCommandBlock.Text = "CommandBlock";
             gbHardcore.Text = "Hardcore";
-            gbSlot.Text = "Nombre de slot";
             gbMaps.Text = "Gestion de maps";
             gbDistances.Text = "Distances";
             gbMOTD.Text = "MOTD";
@@ -474,52 +703,34 @@ namespace MCServCare
             reposToolStripMenuItem.Text = "Repository";
             créateursToolStripMenuItem.Text = "Créateurs";
 
+            //Specials items label
+            labelDownloadJar = "Télécharger l'un des serveur parmis les types suivants et renommez 'server.jar' .";
+            motdChanged = "Le MOTD a bien été mis a jour.";
+            Updated = "MODIFIÉ - ";
+            noWorld = "Erreur, aucun monde selectionné";
 
-            foreach (Button myBtn in GetButtonsTags("active"))
-            {
-                myBtn.Text = btnActiveText;
-            }
-            foreach (Button myBtn in GetButtonsTags("desactive"))
-            {
-                myBtn.Text = btnDesactiveText;
-            }
         }
 
         public void translationEN()
         {
             // DEBUT TRADUCTION
 
-            //---Boutons
-            //boutons activer
-            string btnActiveText = "Enable";
-            string btnDesactiveText = "Disable";
+            //label
+            lblViewDistance.Text = "View (chunk)";
 
-            //boutons whitelist
-            btnWhitelistActive.Text = "Enable Whitelist";
-            btnWhitelistDesactive.Text = "Disable Whitelist";
+            //---Boutons
 
             //boutons systemes
+            btnDownloadServJar.Text = "Download Server";
             btnUpdateServer.Text = "Update server";
             btnStartServer.Text = "Start server";
 
             //boutons paramètres
-            btnRam.Text = "Edit RAM";
-
-            //cracks
-            btnCloseToCrack.Text = "Close to Cracks";
-            btnOpenToCrack.Text = "Open to Cracks";
+            lblRam.Text = "Edit RAM";
 
             //Maps
             btnWorldCreation.Text = "Maps management";
             btnWorldSelection.Text = "Switch active map";
-
-            //Distances
-            btnViewDistance.Text = "View Distance";
-            btnSimulationDistance.Text = "Simulation Distance";
-            btnSpawnProtec.Text = "Spawn protec.";
-
-            //Nombre de slots
-            btnSlotAmount.Text = "Update";
 
             //MOTD
             btnMOTD.Text = "change MOTD";
@@ -532,7 +743,6 @@ namespace MCServCare
             gbPvp.Text = "PvP";
             gbCommandBlock.Text = "CommandBlock";
             gbHardcore.Text = "Hardcore";
-            gbSlot.Text = "Slot amount";
             gbMaps.Text = "Maps management";
             gbDistances.Text = "Distances";
             gbMOTD.Text = "MOTD";
@@ -564,16 +774,153 @@ namespace MCServCare
             reposToolStripMenuItem.Text = "Repository";
             créateursToolStripMenuItem.Text = "Creators";
 
-
-            foreach (Button myBtn in GetButtonsTags("active"))
-            {
-                myBtn.Text = btnActiveText;
-            }
-            foreach (Button myBtn in GetButtonsTags("desactive"))
-            {
-                myBtn.Text = btnDesactiveText;
-            }
+            //Specials items label
+            labelDownloadJar = "Download jar from theses type, and rename it 'server.jar' .";
+            motdChanged = "MOTD has been updated.";
+            Updated = "UPDATED - ";
+            noWorld = "Error, no world selectionned";
         }
+
+        public void translationDE()
+        {
+            // DEBUT TRADUCTION
+
+            //label
+            lblViewDistance.Text = "Ansicht (Chunks)";
+
+            //---Boutons
+
+            //boutons systemes
+            btnDownloadServJar.Text = "Server herunterladen";
+            btnUpdateServer.Text = "Server aktualisieren";
+            btnStartServer.Text = "Server starten";
+
+            //boutons paramètres
+            lblRam.Text = "RAM bearbeiten";
+
+            //Maps
+            btnWorldCreation.Text = "Kartenverwaltung";
+            btnWorldSelection.Text = "Aktive Karte wechseln";
+
+            //MOTD
+            btnMOTD.Text = "MOTD ändern";
+
+            //---Groupes
+            gbSystem.Text = "System";
+            gbSettings.Text = "Einstellungen";
+            gbCracks.Text = "Crack";
+            gbWhitelist.Text = "Whitelist";
+            gbPvp.Text = "PvP";
+            gbCommandBlock.Text = "Befehlsblock";
+            gbHardcore.Text = "Hardcore";
+            gbMaps.Text = "Kartenverwaltung";
+            gbDistances.Text = "Entfernungen";
+            gbMOTD.Text = "MOTD";
+
+            //---Menu
+
+            //-Fichier
+            //Head
+            fichierToolStripMenuItem.Text = "Datei";
+            //Items
+            quitterToolStripMenuItem.Text = "Beenden";
+            rechargerToolStripMenuItem.Text = "Neu laden";
+
+            //-Langue
+            //Head
+            langueToolStripMenuItem.Text = "Sprache";
+            //Items
+            françaisToolStripMenuItem.Text = "Französisch";
+            anglaisToolStripMenuItem.Text = "Englisch";
+            allemandToolStripMenuItem.Text = "Deutsch";
+            espagnolToolStripMenuItem.Text = "Spanisch";
+
+            //-Infos
+            //Head
+            infosToolStripMenuItem.Text = "Informationen";
+            //Items
+            versionToolStripMenuItem.Text = "Version";
+            changelogToolStripMenuItem.Text = "Änderungsprotokoll";
+            reposToolStripMenuItem.Text = "Repository";
+            créateursToolStripMenuItem.Text = "Schöpfer";
+
+            //Specials items label
+            labelDownloadJar = "Laden Sie ein Jar von diesen Typen herunter und benennen Sie es in 'server.jar' um.";
+            motdChanged = "MOTD wurde aktualisiert.";
+            Updated = "AKTUALISIERT - ";
+            noWorld = "Fehler, keine Welt ausgewählt";
+        }
+
+        public void translationES()
+        {
+            // DEBUT TRADUCTION
+
+            //label
+            lblViewDistance.Text = "Vista (Chunks)";
+
+            //---Boutons
+
+            //boutons systemes
+            btnDownloadServJar.Text = "Descargar servidor";
+            btnUpdateServer.Text = "Actualizar servidor";
+            btnStartServer.Text = "Iniciar servidor";
+
+            //boutons paramètres
+            lblRam.Text = "Editar RAM";
+
+            //Maps
+            btnWorldCreation.Text = "Gestión de mapas";
+            btnWorldSelection.Text = "Cambiar mapa activo";
+
+            //MOTD
+            btnMOTD.Text = "Cambiar MOTD";
+
+            //---Groupes
+            gbSystem.Text = "Sistema";
+            gbSettings.Text = "Configuración";
+            gbCracks.Text = "Crack";
+            gbWhitelist.Text = "Lista blanca";
+            gbPvp.Text = "PvP";
+            gbCommandBlock.Text = "Bloque de comandos";
+            gbHardcore.Text = "Modo hardcore";
+            gbMaps.Text = "Gestión de mapas";
+            gbDistances.Text = "Distancias";
+            gbMOTD.Text = "MOTD";
+
+            //---Menu
+
+            //-Fichier
+            //Head
+            fichierToolStripMenuItem.Text = "Archivo";
+            //Items
+            quitterToolStripMenuItem.Text = "Salir";
+            rechargerToolStripMenuItem.Text = "Recargar";
+
+            //-Langue
+            //Head
+            langueToolStripMenuItem.Text = "Idioma";
+            //Items
+            françaisToolStripMenuItem.Text = "Francés";
+            anglaisToolStripMenuItem.Text = "Inglés";
+            allemandToolStripMenuItem.Text = "Alemán";
+            espagnolToolStripMenuItem.Text = "Español";
+
+            //-Infos
+            //Head
+            infosToolStripMenuItem.Text = "Información";
+            //Items
+            versionToolStripMenuItem.Text = "Versión";
+            changelogToolStripMenuItem.Text = "Registro de cambios";
+            reposToolStripMenuItem.Text = "Repositorio";
+            créateursToolStripMenuItem.Text = "Creadores";
+
+            //Specials items label
+            labelDownloadJar = "Descargue un archivo Jar de estos tipos y cambie su nombre a 'server.jar'.";
+            motdChanged = "El MOTD ha sido actualizado.";
+            Updated = "ACTUALIZADO - ";
+            noWorld = "Error, no se ha seleccionado ningún mundo";
+        }
+
 
         private void rechargerToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -583,24 +930,26 @@ namespace MCServCare
 
         private void versionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Version Beta b0.1.0");
+            MessageBox.Show("1.0 - pre01\nBuild : 2");
         }
 
         private void changelogToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/MythMega/mcservcare/commits/master");
+            System.Diagnostics.Process.Start("https://github.com/MythMega/MyServerCare/wiki/Changelog");
         }
 
         private void reposToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/MythMega/mcservcare/");
-
+            System.Diagnostics.Process.Start("https://github.com/MythMega/MyServerCare/");
         }
 
         private void créateursToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Creator creator = new Creator();
-            creator.ShowDialog();
+            System.Diagnostics.Process.Start("https://github.com/MythMega/MyServerCare/wiki/Creators");
+        }
+        private void contributors(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/MythMega/MyServerCare/wiki/Contributors");
         }
 
         private void btnCreateBackup_Click(object sender, EventArgs e)
@@ -641,5 +990,137 @@ namespace MCServCare
             MessageBox.Show($"Sauvegarde créée : {destinationFilePath}");
         }
     }
+
+        private void btnUpdateSC_Click(object sender, EventArgs e)
+        {
+            getServerCareFiles();
+            // Obtenez le chemin du fichier .sc.zip inclus dans l'application
+            string zipFileName = ".sc.zip";
+            string zipFilePath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), zipFileName);
+
+            // Vérifiez si le fichier .sc.zip existe
+            if (File.Exists(zipFilePath))
+            {
+                // Obtenez le chemin du répertoire de destination
+                string destinationDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+
+                // Extrayez les fichiers du .sc.zip dans le répertoire de destination
+                using (ZipArchive archive = ZipFile.OpenRead(zipFilePath))
+                {
+                    foreach (ZipArchiveEntry entry in archive.Entries)
+                    {
+                        string entryPath = Path.Combine(destinationDirectory, entry.FullName);
+                        entry.ExtractToFile(entryPath, true);
+                    }
+                }
+            }
+            else
+            {
+                // Le fichier .sc.zip n'existe pas
+                MessageBox.Show("Le fichier .sc.zip n'a pas été trouvé.");
+            }
+        }
+
+        private void btnOpenFolder_Click(object sender, EventArgs e)
+        {
+            string workingDirectory = Application.StartupPath;
+
+            Process process = new Process();
+            process.StartInfo.FileName = "explorer.exe";
+            process.StartInfo.Arguments = workingDirectory;
+            process.Start();
+        }
+
+        private void sendNotif(string notifText)
+        {
+            lblNotif.Text = notifText;
+            lblNotif.Visible = true;
+            timerItem.Stop();
+            timerItem.Start();
+        }
+
+        private void TimerItem_Tick(object sender, EventArgs e)
+        {
+            lblNotif.Visible = false;
+            timerItem.Stop();
+            lblNotif.Text = ""; // Réinitialisez le texte
+        }
+        private void updateOnOffStyles()
+        {
+            foreach (Button btn in btnOnOff)
+            {
+                if (btn.Tag.ToString() == "true")
+                {
+                    btn.BackColor = Color.Green;
+                    btn.Text = "ON";
+                }
+                if (btn.Tag.ToString() == "false")
+                {
+                    btn.BackColor = Color.Red;
+                    btn.Text = "OFF";
+                }
+                if (btn.Tag.ToString() == "dis")
+                {
+                    btn.Enabled = false;
+                    btn.BackColor = Color.Orange;
+                    btn.ForeColor = Color.White;
+                    btn.Text = "Not Available";
+                }
+
+            }
+        }
+
+        private void btnDownloadServJar_Click(object sender, EventArgs e)
+        {
+            FrmServerJar frmServerJar = new FrmServerJar();
+            frmServerJar.setTextAndColor(background, labelDownloadJar);
+            frmServerJar.ShowDialog();
+        }
+
+        public string GetProfileValue(string criterion)
+        {
+            string[] lines = File.ReadAllLines(configFilePath);
+
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split('=');
+
+                if (parts.Length == 2 && parts[0] == criterion)
+                {
+                    return parts[1];
+                }
+            }
+
+            // Critère non trouvé, retourner une valeur par défaut ou une chaîne vide
+            return null;
+        }
+
+        public void SetProfileValue(string criterion, string value)
+        {
+            string[] lines = File.ReadAllLines(configFilePath);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string line = lines[i];
+                string[] parts = line.Split('=');
+
+                if (parts.Length == 2 && parts[0] == criterion)
+                {
+                    lines[i] = $"{criterion}={value}";
+                    File.WriteAllLines(configFilePath, lines);
+                    return;
+                }
+            }
+
+            // Critère non trouvé, ajouter une nouvelle ligne avec le critère et la valeur
+            string newLine = $"{criterion}={value}";
+            File.AppendAllText(configFilePath, Environment.NewLine + newLine);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            lvWorldSelection.Items.Clear();
+            ServerManager_Load(sender, e);
+        }
     }
 }

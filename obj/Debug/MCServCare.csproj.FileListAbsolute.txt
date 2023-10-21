@@ -12,3 +12,4 @@ C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.pdb
 C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.WorldCreation.resources
 C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.DatapackDB.resources
 C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.Creator.resources
+C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.FrmServerJar.resources

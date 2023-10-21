@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -140,7 +141,7 @@ namespace MCServCare
                     Directory.CreateDirectory(destinationDirectory);
                     DirectoryCopy(sourceDirectory, destinationDirectory, true);
 
-                    MessageBox.Show("Le dossier du datapack a été créé et son contenu a été copié avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Le dossier du datapack a été créé et son contenu a été copié avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -165,15 +166,13 @@ namespace MCServCare
             addDatapack();
         }
 
-
-
-
-
-
-
-
-
-
+        public void setColor(Color background, Color deeperBackground)
+        {
+            this.BackColor = background;
+            txbWorldName.BackColor = deeperBackground;
+            lvDatapackList.BackColor = deeperBackground;
+            lvWorldPreset.BackColor = deeperBackground;
+        }
 
 
 
@@ -335,6 +334,24 @@ namespace MCServCare
         }
 
         #endregion
+
+        private void lvDatapackList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(lvDatapackList.SelectedItems.Count < 1)
+            {
+                lblDatapackListData.Text = "{}";
+            }
+            else
+            {
+                string r = "";
+                foreach(ListViewItem selectedItem in  lvDatapackList.SelectedItems)
+                {
+                    r += selectedItem.Text + "; ";
+                }
+                lblDatapackListData.Text = "{" + r + "}";
+                 
+            }
+        }
     }
 
 
