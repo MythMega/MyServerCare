@@ -108,7 +108,7 @@ namespace MCServCare
                 lvWorldSelection.Items.Add(new ListViewItem($"{worldName}"));
                 string c = GetProperty("level-name");
                 if (worldName == c)
-                    lblCurrWorld.Text = worldName;
+                    lblCurrWorld.Text = "- " + worldName + " -";
             }
 
             numRam.Value = GetMemoryAllocationFromStartBat();
@@ -117,6 +117,16 @@ namespace MCServCare
             numSimulationDistance.Value = int.Parse(GetProperty("simulation-distance"));
             numSpawnProtecDistance.Value = int.Parse(GetProperty("spawn-protection"));
             txbMOTD.Text = GetProperty("motd");
+
+            numViewDistance.Maximum = 32;
+            numViewDistance.Minimum = 2;
+            numSimulationDistance.Maximum = 32;
+            numSimulationDistance.Minimum = 2;
+            numSpawnProtecDistance.Minimum = 0;
+
+            numSlotAmount.Minimum = 0;
+            numRam.Minimum = 0;
+            txbMOTD.MaxLength = 59;
 
             btnPVPActive.Tag = GetProperty("pvp");
             btnWhitelist.Tag = GetProperty("white-list");
@@ -366,7 +376,7 @@ namespace MCServCare
                 myb.Tag = "true";
             }
             updateOnOffStyles();
-            sendNotif(Updated + groupBox1.Text + " : " + myb.Text + ".");
+            sendNotif(Updated + gbNether.Text + " : " + myb.Text + ".");
         }
 
         private void btnOpenToCrack_Click(object sender, EventArgs e)
@@ -667,7 +677,7 @@ namespace MCServCare
             //---Groupes
             gbSystem.Text = "Système";
             gbSettings.Text = "Paramètres";
-            gbCracks.Text = "Crack";
+            gbCracks.Text = "Premium Only";
             gbWhitelist.Text = "Whitelist";
             gbPvp.Text = "PvP";
             gbCommandBlock.Text = "CommandBlock";
@@ -690,9 +700,9 @@ namespace MCServCare
             langueToolStripMenuItem.Text = "Langue";
             //Items
             françaisToolStripMenuItem.Text = "Français";
-            anglaisToolStripMenuItem.Text = "Anglais";
-            allemandToolStripMenuItem.Text = "Allemand";
-            espagnolToolStripMenuItem.Text = "Espagnol";
+            anglaisToolStripMenuItem.Text = "English";
+            allemandToolStripMenuItem.Text = "Deutsch";
+            espagnolToolStripMenuItem.Text = "Español";
 
             //-Infos
             //Head
@@ -738,7 +748,7 @@ namespace MCServCare
             //---Groupes
             gbSystem.Text = "System";
             gbSettings.Text = "Settings";
-            gbCracks.Text = "Crack";
+            gbCracks.Text = "Premium Only";
             gbWhitelist.Text = "Whitelist";
             gbPvp.Text = "PvP";
             gbCommandBlock.Text = "CommandBlock";
@@ -760,10 +770,10 @@ namespace MCServCare
             //Head
             langueToolStripMenuItem.Text = "Language";
             //Items
-            françaisToolStripMenuItem.Text = "French";
+            françaisToolStripMenuItem.Text = "Français";
             anglaisToolStripMenuItem.Text = "English";
-            allemandToolStripMenuItem.Text = "German";
-            espagnolToolStripMenuItem.Text = "Spanish";
+            allemandToolStripMenuItem.Text = "Deutsch";
+            espagnolToolStripMenuItem.Text = "Español";
 
             //-Infos
             //Head
@@ -808,7 +818,7 @@ namespace MCServCare
             //---Groupes
             gbSystem.Text = "System";
             gbSettings.Text = "Einstellungen";
-            gbCracks.Text = "Crack";
+            gbCracks.Text = "Premium Only";
             gbWhitelist.Text = "Whitelist";
             gbPvp.Text = "PvP";
             gbCommandBlock.Text = "Befehlsblock";
@@ -830,10 +840,10 @@ namespace MCServCare
             //Head
             langueToolStripMenuItem.Text = "Sprache";
             //Items
-            françaisToolStripMenuItem.Text = "Französisch";
-            anglaisToolStripMenuItem.Text = "Englisch";
+            françaisToolStripMenuItem.Text = "Français";
+            anglaisToolStripMenuItem.Text = "English";
             allemandToolStripMenuItem.Text = "Deutsch";
-            espagnolToolStripMenuItem.Text = "Spanisch";
+            espagnolToolStripMenuItem.Text = "Español";
 
             //-Infos
             //Head
@@ -878,7 +888,7 @@ namespace MCServCare
             //---Groupes
             gbSystem.Text = "Sistema";
             gbSettings.Text = "Configuración";
-            gbCracks.Text = "Crack";
+            gbCracks.Text = "Premium Only";
             gbWhitelist.Text = "Lista blanca";
             gbPvp.Text = "PvP";
             gbCommandBlock.Text = "Bloque de comandos";
@@ -900,9 +910,9 @@ namespace MCServCare
             //Head
             langueToolStripMenuItem.Text = "Idioma";
             //Items
-            françaisToolStripMenuItem.Text = "Francés";
-            anglaisToolStripMenuItem.Text = "Inglés";
-            allemandToolStripMenuItem.Text = "Alemán";
+            françaisToolStripMenuItem.Text = "Français";
+            anglaisToolStripMenuItem.Text = "English";
+            allemandToolStripMenuItem.Text = "Deutsch";
             espagnolToolStripMenuItem.Text = "Español";
 
             //-Infos
@@ -930,7 +940,7 @@ namespace MCServCare
 
         private void versionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("1.0 - pre01\nBuild : 2");
+            MessageBox.Show("1.0\nBuild : 3");
         }
 
         private void changelogToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1121,6 +1131,11 @@ namespace MCServCare
         {
             lvWorldSelection.Items.Clear();
             ServerManager_Load(sender, e);
+        }
+
+        private void contributeursToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/MythMega/MyServerCare/wiki/Contributors");
         }
     }
 }
