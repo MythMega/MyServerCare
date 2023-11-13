@@ -476,7 +476,13 @@ namespace MCServCare
                     return;
                 }
             }
-            string pre = "java -Xmx";
+
+            string directoryPath = AppDomain.CurrentDomain.BaseDirectory;
+            string filePath = Path.Combine(directoryPath, "start.bat");
+
+            string javalink = File.ReadAllText(filePath).Split(' ')[0];
+
+            string pre = javalink + " -Xmx";
             string post = "G -jar server.jar nogui";
             string newString = pre + numRam.Value.ToString() + post;
 

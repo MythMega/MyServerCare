@@ -47,6 +47,8 @@
             this.lblRam = new System.Windows.Forms.Label();
             this.numRam = new System.Windows.Forms.NumericUpDown();
             this.gbMaps = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblCurrWorld = new System.Windows.Forms.Label();
             this.btnCreateBackup = new System.Windows.Forms.Button();
             this.gbCracks = new System.Windows.Forms.GroupBox();
             this.btnOpenToCrack = new System.Windows.Forms.Button();
@@ -90,15 +92,14 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.lblNotif = new System.Windows.Forms.Label();
             this.timerItem = new System.Windows.Forms.Timer(this.components);
-            this.bgNether = new System.Windows.Forms.GroupBox();
-            this.lblCurrWorld = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.gbNether = new System.Windows.Forms.GroupBox();
             this.gbSystem.SuspendLayout();
             this.gbWhitelist.SuspendLayout();
             this.gbSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSlotAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRam)).BeginInit();
             this.gbMaps.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbCracks.SuspendLayout();
             this.gbCommandBlock.SuspendLayout();
             this.gbPvp.SuspendLayout();
@@ -111,8 +112,7 @@
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbEnd.SuspendLayout();
-            this.bgNether.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.gbNether.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnUpdateServer
@@ -134,8 +134,7 @@
             // 
             // btnStartServer
             // 
-            this.btnStartServer.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnStartServer.FlatAppearance.BorderSize = 0;
+            this.btnStartServer.FlatAppearance.BorderColor = System.Drawing.Color.Lime;
             this.btnStartServer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
             this.btnStartServer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnStartServer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -345,6 +344,26 @@
             this.gbMaps.TabIndex = 13;
             this.gbMaps.TabStop = false;
             this.gbMaps.Text = "Maps";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::MCServCare.Properties.Resources.orangerefresh;
+            this.pictureBox1.Location = new System.Drawing.Point(170, 64);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // lblCurrWorld
+            // 
+            this.lblCurrWorld.AutoSize = true;
+            this.lblCurrWorld.Location = new System.Drawing.Point(7, 71);
+            this.lblCurrWorld.Name = "lblCurrWorld";
+            this.lblCurrWorld.Size = new System.Drawing.Size(16, 13);
+            this.lblCurrWorld.TabIndex = 11;
+            this.lblCurrWorld.Text = "- -";
             // 
             // btnCreateBackup
             // 
@@ -606,14 +625,14 @@
             // quitterToolStripMenuItem
             // 
             this.quitterToolStripMenuItem.Name = "quitterToolStripMenuItem";
-            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.quitterToolStripMenuItem.Text = "Quitter";
             this.quitterToolStripMenuItem.Click += new System.EventHandler(this.quitterToolStripMenuItem1_Click);
             // 
             // rechargerToolStripMenuItem
             // 
             this.rechargerToolStripMenuItem.Name = "rechargerToolStripMenuItem";
-            this.rechargerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rechargerToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.rechargerToolStripMenuItem.Text = "Recharger";
             this.rechargerToolStripMenuItem.Click += new System.EventHandler(this.rechargerToolStripMenuItem_Click);
             // 
@@ -705,6 +724,7 @@
             this.contributeursToolStripMenuItem.Name = "contributeursToolStripMenuItem";
             this.contributeursToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.contributeursToolStripMenuItem.Text = "Contributeurs";
+            this.contributeursToolStripMenuItem.Click += new System.EventHandler(this.contributeursToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
@@ -804,36 +824,16 @@
             this.timerItem.Interval = 4000;
             this.timerItem.Tick += new System.EventHandler(this.TimerItem_Tick);
             // 
-            // bgNether
+            // gbNether
             // 
-            this.bgNether.Controls.Add(this.btnNetherOff);
-            this.bgNether.ForeColor = System.Drawing.Color.Orange;
-            this.bgNether.Location = new System.Drawing.Point(420, 360);
-            this.bgNether.Name = "bgNether";
-            this.bgNether.Size = new System.Drawing.Size(200, 53);
-            this.bgNether.TabIndex = 27;
-            this.bgNether.TabStop = false;
-            this.bgNether.Text = "Dimension : The Nether";
-            // 
-            // lblCurrWorld
-            // 
-            this.lblCurrWorld.AutoSize = true;
-            this.lblCurrWorld.Location = new System.Drawing.Point(7, 71);
-            this.lblCurrWorld.Name = "lblCurrWorld";
-            this.lblCurrWorld.Size = new System.Drawing.Size(16, 13);
-            this.lblCurrWorld.TabIndex = 11;
-            this.lblCurrWorld.Text = "- -";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::MCServCare.Properties.Resources.orangerefresh;
-            this.pictureBox1.Location = new System.Drawing.Point(170, 64);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(24, 24);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.gbNether.Controls.Add(this.btnNetherOff);
+            this.gbNether.ForeColor = System.Drawing.Color.Orange;
+            this.gbNether.Location = new System.Drawing.Point(420, 360);
+            this.gbNether.Name = "gbNether";
+            this.gbNether.Size = new System.Drawing.Size(200, 53);
+            this.gbNether.TabIndex = 27;
+            this.gbNether.TabStop = false;
+            this.gbNether.Text = "Dimension : The Nether";
             // 
             // ServerManager
             // 
@@ -841,7 +841,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(634, 611);
-            this.Controls.Add(this.bgNether);
+            this.Controls.Add(this.gbNether);
             this.Controls.Add(this.lblNotif);
             this.Controls.Add(this.gbEnd);
             this.Controls.Add(this.groupBox1);
@@ -859,7 +859,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ServerManager";
-            this.Text = "ServerManager";
+            this.Text = "MCServerCare";
             this.Load += new System.EventHandler(this.ServerManager_Load);
             this.gbSystem.ResumeLayout(false);
             this.gbWhitelist.ResumeLayout(false);
@@ -869,6 +869,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numRam)).EndInit();
             this.gbMaps.ResumeLayout(false);
             this.gbMaps.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gbCracks.ResumeLayout(false);
             this.gbCommandBlock.ResumeLayout(false);
             this.gbPvp.ResumeLayout(false);
@@ -884,8 +885,7 @@
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.gbEnd.ResumeLayout(false);
-            this.bgNether.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.gbNether.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -953,7 +953,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblViewDistance;
         private System.Windows.Forms.Timer timerItem;
-        private System.Windows.Forms.GroupBox bgNether;
+        private System.Windows.Forms.GroupBox gbNether;
         private System.Windows.Forms.Label lblCurrWorld;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
