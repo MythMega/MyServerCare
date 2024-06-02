@@ -86,6 +86,7 @@
             this.reposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.créateursToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contributeursToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.roadMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.btnUpdateSC = new System.Windows.Forms.Button();
@@ -104,7 +105,6 @@
             this.refreshJarSwitcher = new System.Windows.Forms.PictureBox();
             this.gbPort = new System.Windows.Forms.GroupBox();
             this.numPort = new System.Windows.Forms.NumericUpDown();
-            this.roadMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbSystem.SuspendLayout();
             this.gbWhitelist.SuspendLayout();
             this.gbSettings.SuspendLayout();
@@ -228,6 +228,8 @@
             this.lvWorldSelection.TabIndex = 9;
             this.lvWorldSelection.UseCompatibleStateImageBehavior = false;
             this.lvWorldSelection.View = System.Windows.Forms.View.List;
+            this.lvWorldSelection.DragDrop += new System.Windows.Forms.DragEventHandler(this.lvWorldSelection_DragDrop);
+            this.lvWorldSelection.DragEnter += new System.Windows.Forms.DragEventHandler(this.lvWorldSelection_DragEnter);
             // 
             // gbSystem
             // 
@@ -794,37 +796,44 @@
             // versionToolStripMenuItem
             // 
             this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.versionToolStripMenuItem.Text = "Version";
             this.versionToolStripMenuItem.Click += new System.EventHandler(this.versionToolStripMenuItem_Click);
             // 
             // changelogToolStripMenuItem
             // 
             this.changelogToolStripMenuItem.Name = "changelogToolStripMenuItem";
-            this.changelogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.changelogToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.changelogToolStripMenuItem.Text = "Changelog";
             this.changelogToolStripMenuItem.Click += new System.EventHandler(this.changelogToolStripMenuItem_Click);
             // 
             // reposToolStripMenuItem
             // 
             this.reposToolStripMenuItem.Name = "reposToolStripMenuItem";
-            this.reposToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reposToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.reposToolStripMenuItem.Text = "Repos";
             this.reposToolStripMenuItem.Click += new System.EventHandler(this.reposToolStripMenuItem_Click);
             // 
             // créateursToolStripMenuItem
             // 
             this.créateursToolStripMenuItem.Name = "créateursToolStripMenuItem";
-            this.créateursToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.créateursToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.créateursToolStripMenuItem.Text = "Créateurs";
             this.créateursToolStripMenuItem.Click += new System.EventHandler(this.créateursToolStripMenuItem_Click);
             // 
             // contributeursToolStripMenuItem
             // 
             this.contributeursToolStripMenuItem.Name = "contributeursToolStripMenuItem";
-            this.contributeursToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.contributeursToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.contributeursToolStripMenuItem.Text = "Contributeurs";
             this.contributeursToolStripMenuItem.Click += new System.EventHandler(this.contributeursToolStripMenuItem_Click);
+            // 
+            // roadMapToolStripMenuItem
+            // 
+            this.roadMapToolStripMenuItem.Name = "roadMapToolStripMenuItem";
+            this.roadMapToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.roadMapToolStripMenuItem.Text = "RoadMap";
+            this.roadMapToolStripMenuItem.Click += new System.EventHandler(this.roadMapToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
@@ -1038,13 +1047,6 @@
             this.numPort.Size = new System.Drawing.Size(185, 21);
             this.numPort.TabIndex = 27;
             this.numPort.ValueChanged += new System.EventHandler(this.numPort_ValueChanged);
-            // 
-            // roadMapToolStripMenuItem
-            // 
-            this.roadMapToolStripMenuItem.Name = "roadMapToolStripMenuItem";
-            this.roadMapToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.roadMapToolStripMenuItem.Text = "RoadMap";
-            this.roadMapToolStripMenuItem.Click += new System.EventHandler(this.roadMapToolStripMenuItem_Click);
             // 
             // ServerManager
             // 

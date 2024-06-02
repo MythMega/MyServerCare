@@ -69,6 +69,8 @@ namespace MCServCare
 
             lblNotif.ForeColor = orangeTextColor;
             lblNotif.Visible = false;
+
+            lvWorldSelection.AllowDrop = true;
         }
 
         private void ServerManager_Load(object sender, EventArgs e)
@@ -1366,5 +1368,63 @@ namespace MCServCare
         {
             System.Diagnostics.Process.Start("https://github.com/MythMega/MyServerCare/wiki/RoadMap");
         }
+
+        private void lvWorldSelection_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void CopyDirectory(string sourceDir, string targetDir)
+        {
+            Directory.CreateDirectory(targetDir);
+
+            foreach (var file in Directory.GetFiles(sourceDir))
+            {
+                string targetPath = Path.Combine(targetDir, Path.GetFileName(file));
+                File.Copy(file, targetPath);
+            }
+
+            foreach (var directory in Directory.GetDirectories(sourceDir))
+            {
+                string targetPath = Path.Combine(targetDir, Path.GetFileName(directory));
+                CopyDirectory(directory, targetPath);
+            }
+        }
+
+        private void lvWorldSelection_DragDrop(object sender, DragEventArgs e)
+        {
+            bool needReload = false;
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (string file in files)
+            {
+                if (Directory.Exists(file))
+                {
+                    string levelDatPath = Path.Combine(file, "level.dat");
+                    if (File.Exists(levelDatPath))
+                    {
+                        string destPath = Path.Combine(Application.StartupPath, Path.GetFileName(file));
+                        CopyDirectory(file, destPath);
+                        needReload = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"L'élément nommé \"{file}\" n'est pas un monde Minecraft valide.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"L'élément nommé \"{file}\" n'est pas un monde Minecraft valide.");
+                }
+            }
+            if(needReload)
+            {
+                pictureBox1_Click(null, null);
+            }
+        }
+
+
     }
 }

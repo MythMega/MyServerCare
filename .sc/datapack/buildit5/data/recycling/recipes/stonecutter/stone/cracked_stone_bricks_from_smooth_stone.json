@@ -1,8 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item": "minecraft:smooth_stone"
-    },
-    "result": "minecraft:cracked_stone_bricks",
-    "count": 1
-}

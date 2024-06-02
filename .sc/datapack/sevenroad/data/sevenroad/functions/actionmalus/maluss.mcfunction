@@ -1,2 +1,0 @@
-summon wither_skeleton ~ ~ ~ {Attributes:[{Name:generic.movement_speed,Base:8}]}
-tellraw @a ["",{"selector":"@s"},{"text":" à eu le malus "},{"text":"Ennemi interdimensionnel","color":"dark_red"},{"text":" !"}]
