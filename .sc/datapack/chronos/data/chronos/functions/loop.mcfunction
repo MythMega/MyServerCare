@@ -1,0 +1,1 @@
+execute if score ch_IsStarted ch_startedbool matches 1 run function chronos:loopeffect

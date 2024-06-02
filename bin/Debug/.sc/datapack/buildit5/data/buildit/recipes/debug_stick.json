@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:dragon_egg"
+    },
+    "addition": {
+        "item": "minecraft:command_block"
+    },
+    "result": {
+        "item": "minecraft:debug_stick"
+    }
+}

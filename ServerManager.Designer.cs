@@ -47,6 +47,7 @@
             this.lblRam = new System.Windows.Forms.Label();
             this.numRam = new System.Windows.Forms.NumericUpDown();
             this.gbMaps = new System.Windows.Forms.GroupBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblCurrWorld = new System.Windows.Forms.Label();
             this.btnCreateBackup = new System.Windows.Forms.Button();
@@ -93,12 +94,23 @@
             this.lblNotif = new System.Windows.Forms.Label();
             this.timerItem = new System.Windows.Forms.Timer(this.components);
             this.gbNether = new System.Windows.Forms.GroupBox();
+            this.cbJarSwitcher = new System.Windows.Forms.ComboBox();
+            this.jarSwitcherText = new System.Windows.Forms.Label();
+            this.cbJavaSwutcher = new System.Windows.Forms.ComboBox();
+            this.CustomJava = new System.Windows.Forms.Label();
+            this.pbPlusjava = new System.Windows.Forms.PictureBox();
+            this.refreshJarSwitcher = new System.Windows.Forms.PictureBox();
+            this.btnDeleteWorld = new System.Windows.Forms.Button();
+            this.btnOpenWorldFolder = new System.Windows.Forms.Button();
+            this.gbPort = new System.Windows.Forms.GroupBox();
+            this.numPort = new System.Windows.Forms.NumericUpDown();
             this.gbSystem.SuspendLayout();
             this.gbWhitelist.SuspendLayout();
             this.gbSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSlotAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRam)).BeginInit();
             this.gbMaps.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbCracks.SuspendLayout();
             this.gbCommandBlock.SuspendLayout();
@@ -113,6 +125,10 @@
             this.groupBox1.SuspendLayout();
             this.gbEnd.SuspendLayout();
             this.gbNether.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlusjava)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshJarSwitcher)).BeginInit();
+            this.gbPort.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.SuspendLayout();
             // 
             // btnUpdateServer
@@ -123,6 +139,7 @@
             this.btnUpdateServer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
             this.btnUpdateServer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnUpdateServer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateServer.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdateServer.ForeColor = System.Drawing.Color.White;
             this.btnUpdateServer.Location = new System.Drawing.Point(1, 54);
             this.btnUpdateServer.Name = "btnUpdateServer";
@@ -134,14 +151,15 @@
             // 
             // btnStartServer
             // 
-            this.btnStartServer.FlatAppearance.BorderColor = System.Drawing.Color.Lime;
-            this.btnStartServer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
-            this.btnStartServer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnStartServer.FlatAppearance.BorderColor = System.Drawing.Color.DarkCyan;
+            this.btnStartServer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
+            this.btnStartServer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
             this.btnStartServer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStartServer.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartServer.ForeColor = System.Drawing.Color.White;
-            this.btnStartServer.Location = new System.Drawing.Point(1, 84);
+            this.btnStartServer.Location = new System.Drawing.Point(12, 559);
             this.btnStartServer.Name = "btnStartServer";
-            this.btnStartServer.Size = new System.Drawing.Size(198, 23);
+            this.btnStartServer.Size = new System.Drawing.Size(610, 76);
             this.btnStartServer.TabIndex = 1;
             this.btnStartServer.Text = "Démarrer Serveur";
             this.btnStartServer.UseVisualStyleBackColor = true;
@@ -154,10 +172,11 @@
             this.btnWorldCreation.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
             this.btnWorldCreation.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnWorldCreation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWorldCreation.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnWorldCreation.ForeColor = System.Drawing.Color.White;
-            this.btnWorldCreation.Location = new System.Drawing.Point(1, 16);
+            this.btnWorldCreation.Location = new System.Drawing.Point(5, 16);
             this.btnWorldCreation.Name = "btnWorldCreation";
-            this.btnWorldCreation.Size = new System.Drawing.Size(198, 48);
+            this.btnWorldCreation.Size = new System.Drawing.Size(141, 48);
             this.btnWorldCreation.TabIndex = 2;
             this.btnWorldCreation.Text = "Ajouter un monde";
             this.btnWorldCreation.UseVisualStyleBackColor = true;
@@ -168,6 +187,7 @@
             this.btnWhitelist.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnWhitelist.FlatAppearance.BorderSize = 0;
             this.btnWhitelist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWhitelist.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnWhitelist.ForeColor = System.Drawing.Color.White;
             this.btnWhitelist.Location = new System.Drawing.Point(1, 24);
             this.btnWhitelist.Name = "btnWhitelist";
@@ -185,8 +205,9 @@
             this.btnWorldSelection.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
             this.btnWorldSelection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnWorldSelection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWorldSelection.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnWorldSelection.ForeColor = System.Drawing.Color.White;
-            this.btnWorldSelection.Location = new System.Drawing.Point(1, 321);
+            this.btnWorldSelection.Location = new System.Drawing.Point(1, 348);
             this.btnWorldSelection.Name = "btnWorldSelection";
             this.btnWorldSelection.Size = new System.Drawing.Size(198, 23);
             this.btnWorldSelection.TabIndex = 8;
@@ -198,10 +219,11 @@
             // 
             this.lvWorldSelection.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.lvWorldSelection.ForeColor = System.Drawing.Color.White;
+            this.lvWorldSelection.GridLines = true;
             this.lvWorldSelection.HideSelection = false;
             this.lvWorldSelection.Location = new System.Drawing.Point(6, 94);
             this.lvWorldSelection.Name = "lvWorldSelection";
-            this.lvWorldSelection.Size = new System.Drawing.Size(188, 221);
+            this.lvWorldSelection.Size = new System.Drawing.Size(188, 246);
             this.lvWorldSelection.TabIndex = 9;
             this.lvWorldSelection.UseCompatibleStateImageBehavior = false;
             this.lvWorldSelection.View = System.Windows.Forms.View.List;
@@ -210,12 +232,12 @@
             // 
             this.gbSystem.BackColor = System.Drawing.Color.Transparent;
             this.gbSystem.Controls.Add(this.btnDownloadServJar);
-            this.gbSystem.Controls.Add(this.btnStartServer);
             this.gbSystem.Controls.Add(this.btnUpdateServer);
+            this.gbSystem.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbSystem.ForeColor = System.Drawing.Color.Orange;
             this.gbSystem.Location = new System.Drawing.Point(10, 27);
             this.gbSystem.Name = "gbSystem";
-            this.gbSystem.Size = new System.Drawing.Size(200, 129);
+            this.gbSystem.Size = new System.Drawing.Size(200, 92);
             this.gbSystem.TabIndex = 10;
             this.gbSystem.TabStop = false;
             this.gbSystem.Text = "Système";
@@ -227,6 +249,7 @@
             this.btnDownloadServJar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
             this.btnDownloadServJar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnDownloadServJar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDownloadServJar.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDownloadServJar.ForeColor = System.Drawing.Color.White;
             this.btnDownloadServJar.Location = new System.Drawing.Point(1, 24);
             this.btnDownloadServJar.Name = "btnDownloadServJar";
@@ -240,8 +263,9 @@
             // 
             this.gbWhitelist.BackColor = System.Drawing.Color.Transparent;
             this.gbWhitelist.Controls.Add(this.btnWhitelist);
+            this.gbWhitelist.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbWhitelist.ForeColor = System.Drawing.Color.Orange;
-            this.gbWhitelist.Location = new System.Drawing.Point(419, 150);
+            this.gbWhitelist.Location = new System.Drawing.Point(421, 55);
             this.gbWhitelist.Name = "gbWhitelist";
             this.gbWhitelist.Size = new System.Drawing.Size(200, 53);
             this.gbWhitelist.TabIndex = 11;
@@ -257,10 +281,11 @@
             this.gbSettings.Controls.Add(this.lblMaxPlayers);
             this.gbSettings.Controls.Add(this.lblRam);
             this.gbSettings.Controls.Add(this.numRam);
+            this.gbSettings.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbSettings.ForeColor = System.Drawing.Color.Orange;
-            this.gbSettings.Location = new System.Drawing.Point(10, 155);
+            this.gbSettings.Location = new System.Drawing.Point(10, 119);
             this.gbSettings.Name = "gbSettings";
-            this.gbSettings.Size = new System.Drawing.Size(200, 170);
+            this.gbSettings.Size = new System.Drawing.Size(200, 180);
             this.gbSettings.TabIndex = 12;
             this.gbSettings.TabStop = false;
             this.gbSettings.Text = "Paramètres";
@@ -271,16 +296,18 @@
             this.numSlotAmount.ForeColor = System.Drawing.Color.White;
             this.numSlotAmount.Location = new System.Drawing.Point(9, 89);
             this.numSlotAmount.Name = "numSlotAmount";
-            this.numSlotAmount.Size = new System.Drawing.Size(185, 20);
+            this.numSlotAmount.Size = new System.Drawing.Size(185, 21);
             this.numSlotAmount.TabIndex = 19;
             this.numSlotAmount.ValueChanged += new System.EventHandler(this.numMaxPlayer_ValueChanged);
             // 
             // lblGamemode
             // 
             this.lblGamemode.AutoSize = true;
+            this.lblGamemode.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGamemode.ForeColor = System.Drawing.Color.Orange;
             this.lblGamemode.Location = new System.Drawing.Point(8, 125);
             this.lblGamemode.Name = "lblGamemode";
-            this.lblGamemode.Size = new System.Drawing.Size(61, 13);
+            this.lblGamemode.Size = new System.Drawing.Size(74, 15);
             this.lblGamemode.TabIndex = 12;
             this.lblGamemode.Text = "Gamemode";
             // 
@@ -294,27 +321,31 @@
             "creative",
             "adventure",
             "spectator"});
-            this.comboGamemode.Location = new System.Drawing.Point(10, 140);
+            this.comboGamemode.Location = new System.Drawing.Point(8, 140);
             this.comboGamemode.Name = "comboGamemode";
-            this.comboGamemode.Size = new System.Drawing.Size(185, 21);
+            this.comboGamemode.Size = new System.Drawing.Size(185, 23);
             this.comboGamemode.TabIndex = 11;
             this.comboGamemode.SelectedIndexChanged += new System.EventHandler(this.comboGamemode_SelectedIndexChanged);
             // 
             // lblMaxPlayers
             // 
             this.lblMaxPlayers.AutoSize = true;
+            this.lblMaxPlayers.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaxPlayers.ForeColor = System.Drawing.Color.Orange;
             this.lblMaxPlayers.Location = new System.Drawing.Point(7, 74);
             this.lblMaxPlayers.Name = "lblMaxPlayers";
-            this.lblMaxPlayers.Size = new System.Drawing.Size(63, 13);
+            this.lblMaxPlayers.Size = new System.Drawing.Size(71, 15);
             this.lblMaxPlayers.TabIndex = 10;
             this.lblMaxPlayers.Text = "Max players";
             // 
             // lblRam
             // 
             this.lblRam.AutoSize = true;
+            this.lblRam.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRam.ForeColor = System.Drawing.Color.Orange;
             this.lblRam.Location = new System.Drawing.Point(7, 27);
             this.lblRam.Name = "lblRam";
-            this.lblRam.Size = new System.Drawing.Size(31, 13);
+            this.lblRam.Size = new System.Drawing.Size(34, 15);
             this.lblRam.TabIndex = 9;
             this.lblRam.Text = "RAM";
             // 
@@ -324,31 +355,46 @@
             this.numRam.ForeColor = System.Drawing.Color.White;
             this.numRam.Location = new System.Drawing.Point(9, 42);
             this.numRam.Name = "numRam";
-            this.numRam.Size = new System.Drawing.Size(185, 20);
+            this.numRam.Size = new System.Drawing.Size(185, 21);
             this.numRam.TabIndex = 7;
             this.numRam.ValueChanged += new System.EventHandler(this.numRam_ValueChanged);
             // 
             // gbMaps
             // 
             this.gbMaps.BackColor = System.Drawing.Color.Transparent;
+            this.gbMaps.Controls.Add(this.btnOpenWorldFolder);
+            this.gbMaps.Controls.Add(this.btnDeleteWorld);
+            this.gbMaps.Controls.Add(this.pictureBox2);
             this.gbMaps.Controls.Add(this.pictureBox1);
             this.gbMaps.Controls.Add(this.lblCurrWorld);
             this.gbMaps.Controls.Add(this.btnCreateBackup);
             this.gbMaps.Controls.Add(this.lvWorldSelection);
             this.gbMaps.Controls.Add(this.btnWorldSelection);
             this.gbMaps.Controls.Add(this.btnWorldCreation);
+            this.gbMaps.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbMaps.ForeColor = System.Drawing.Color.Orange;
             this.gbMaps.Location = new System.Drawing.Point(215, 27);
             this.gbMaps.Name = "gbMaps";
-            this.gbMaps.Size = new System.Drawing.Size(200, 384);
+            this.gbMaps.Size = new System.Drawing.Size(200, 526);
             this.gbMaps.TabIndex = 13;
             this.gbMaps.TabStop = false;
             this.gbMaps.Text = "Maps";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::MCServCare.Properties.Resources.import;
+            this.pictureBox2.Location = new System.Drawing.Point(153, 19);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(36, 36);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 13;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::MCServCare.Properties.Resources.orangerefresh;
-            this.pictureBox1.Location = new System.Drawing.Point(170, 64);
+            this.pictureBox1.Location = new System.Drawing.Point(170, 68);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(24, 24);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -359,9 +405,10 @@
             // lblCurrWorld
             // 
             this.lblCurrWorld.AutoSize = true;
+            this.lblCurrWorld.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCurrWorld.Location = new System.Drawing.Point(7, 71);
             this.lblCurrWorld.Name = "lblCurrWorld";
-            this.lblCurrWorld.Size = new System.Drawing.Size(16, 13);
+            this.lblCurrWorld.Size = new System.Drawing.Size(18, 15);
             this.lblCurrWorld.TabIndex = 11;
             this.lblCurrWorld.Text = "- -";
             // 
@@ -372,8 +419,9 @@
             this.btnCreateBackup.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
             this.btnCreateBackup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnCreateBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreateBackup.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateBackup.ForeColor = System.Drawing.Color.White;
-            this.btnCreateBackup.Location = new System.Drawing.Point(1, 351);
+            this.btnCreateBackup.Location = new System.Drawing.Point(1, 492);
             this.btnCreateBackup.Name = "btnCreateBackup";
             this.btnCreateBackup.Size = new System.Drawing.Size(198, 23);
             this.btnCreateBackup.TabIndex = 10;
@@ -385,10 +433,11 @@
             // 
             this.gbCracks.BackColor = System.Drawing.Color.Transparent;
             this.gbCracks.Controls.Add(this.btnOpenToCrack);
+            this.gbCracks.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbCracks.ForeColor = System.Drawing.Color.Orange;
-            this.gbCracks.Location = new System.Drawing.Point(420, 466);
+            this.gbCracks.Location = new System.Drawing.Point(420, 500);
             this.gbCracks.Name = "gbCracks";
-            this.gbCracks.Size = new System.Drawing.Size(200, 55);
+            this.gbCracks.Size = new System.Drawing.Size(200, 53);
             this.gbCracks.TabIndex = 14;
             this.gbCracks.TabStop = false;
             this.gbCracks.Text = "Only Premium";
@@ -398,6 +447,7 @@
             this.btnOpenToCrack.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnOpenToCrack.FlatAppearance.BorderSize = 0;
             this.btnOpenToCrack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenToCrack.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOpenToCrack.ForeColor = System.Drawing.Color.White;
             this.btnOpenToCrack.Location = new System.Drawing.Point(1, 24);
             this.btnOpenToCrack.Name = "btnOpenToCrack";
@@ -412,7 +462,7 @@
             this.gbCommandBlock.BackColor = System.Drawing.Color.Transparent;
             this.gbCommandBlock.Controls.Add(this.btnCommandBlockActive);
             this.gbCommandBlock.ForeColor = System.Drawing.Color.Orange;
-            this.gbCommandBlock.Location = new System.Drawing.Point(419, 203);
+            this.gbCommandBlock.Location = new System.Drawing.Point(421, 108);
             this.gbCommandBlock.Name = "gbCommandBlock";
             this.gbCommandBlock.Size = new System.Drawing.Size(200, 53);
             this.gbCommandBlock.TabIndex = 15;
@@ -424,6 +474,7 @@
             this.btnCommandBlockActive.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnCommandBlockActive.FlatAppearance.BorderSize = 0;
             this.btnCommandBlockActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCommandBlockActive.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCommandBlockActive.ForeColor = System.Drawing.Color.White;
             this.btnCommandBlockActive.Location = new System.Drawing.Point(1, 24);
             this.btnCommandBlockActive.Name = "btnCommandBlockActive";
@@ -437,8 +488,9 @@
             // 
             this.gbPvp.BackColor = System.Drawing.Color.Transparent;
             this.gbPvp.Controls.Add(this.btnPVPActive);
+            this.gbPvp.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbPvp.ForeColor = System.Drawing.Color.Orange;
-            this.gbPvp.Location = new System.Drawing.Point(419, 256);
+            this.gbPvp.Location = new System.Drawing.Point(421, 161);
             this.gbPvp.Name = "gbPvp";
             this.gbPvp.Size = new System.Drawing.Size(200, 53);
             this.gbPvp.TabIndex = 16;
@@ -450,6 +502,7 @@
             this.btnPVPActive.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnPVPActive.FlatAppearance.BorderSize = 0;
             this.btnPVPActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPVPActive.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPVPActive.ForeColor = System.Drawing.Color.White;
             this.btnPVPActive.Location = new System.Drawing.Point(1, 24);
             this.btnPVPActive.Name = "btnPVPActive";
@@ -463,8 +516,9 @@
             // 
             this.gbHardcore.BackColor = System.Drawing.Color.Transparent;
             this.gbHardcore.Controls.Add(this.btnHardcoreActive);
+            this.gbHardcore.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbHardcore.ForeColor = System.Drawing.Color.Orange;
-            this.gbHardcore.Location = new System.Drawing.Point(419, 309);
+            this.gbHardcore.Location = new System.Drawing.Point(421, 214);
             this.gbHardcore.Name = "gbHardcore";
             this.gbHardcore.Size = new System.Drawing.Size(200, 51);
             this.gbHardcore.TabIndex = 17;
@@ -476,6 +530,7 @@
             this.btnHardcoreActive.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnHardcoreActive.FlatAppearance.BorderSize = 0;
             this.btnHardcoreActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHardcoreActive.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHardcoreActive.ForeColor = System.Drawing.Color.White;
             this.btnHardcoreActive.Location = new System.Drawing.Point(1, 24);
             this.btnHardcoreActive.Name = "btnHardcoreActive";
@@ -490,10 +545,11 @@
             this.gbMOTD.BackColor = System.Drawing.Color.Transparent;
             this.gbMOTD.Controls.Add(this.btnMOTD);
             this.gbMOTD.Controls.Add(this.txbMOTD);
+            this.gbMOTD.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbMOTD.ForeColor = System.Drawing.Color.Orange;
-            this.gbMOTD.Location = new System.Drawing.Point(215, 411);
+            this.gbMOTD.Location = new System.Drawing.Point(421, 371);
             this.gbMOTD.Name = "gbMOTD";
-            this.gbMOTD.Size = new System.Drawing.Size(200, 110);
+            this.gbMOTD.Size = new System.Drawing.Size(200, 125);
             this.gbMOTD.TabIndex = 22;
             this.gbMOTD.TabStop = false;
             this.gbMOTD.Text = "MOTD";
@@ -505,8 +561,9 @@
             this.btnMOTD.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
             this.btnMOTD.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnMOTD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMOTD.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMOTD.ForeColor = System.Drawing.Color.White;
-            this.btnMOTD.Location = new System.Drawing.Point(1, 78);
+            this.btnMOTD.Location = new System.Drawing.Point(1, 93);
             this.btnMOTD.Name = "btnMOTD";
             this.btnMOTD.Size = new System.Drawing.Size(198, 23);
             this.btnMOTD.TabIndex = 1;
@@ -521,7 +578,7 @@
             this.txbMOTD.Location = new System.Drawing.Point(7, 20);
             this.txbMOTD.Multiline = true;
             this.txbMOTD.Name = "txbMOTD";
-            this.txbMOTD.Size = new System.Drawing.Size(187, 47);
+            this.txbMOTD.Size = new System.Drawing.Size(187, 69);
             this.txbMOTD.TabIndex = 0;
             // 
             // gbDistances
@@ -533,8 +590,9 @@
             this.gbDistances.Controls.Add(this.numSpawnProtecDistance);
             this.gbDistances.Controls.Add(this.numSimulationDistance);
             this.gbDistances.Controls.Add(this.numViewDistance);
+            this.gbDistances.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbDistances.ForeColor = System.Drawing.Color.Orange;
-            this.gbDistances.Location = new System.Drawing.Point(10, 325);
+            this.gbDistances.Location = new System.Drawing.Point(10, 299);
             this.gbDistances.Name = "gbDistances";
             this.gbDistances.Size = new System.Drawing.Size(200, 170);
             this.gbDistances.TabIndex = 23;
@@ -544,27 +602,33 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Orange;
             this.label3.Location = new System.Drawing.Point(8, 125);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(124, 13);
+            this.label3.Size = new System.Drawing.Size(142, 15);
             this.label3.TabIndex = 26;
             this.label3.Text = "Spawn protection (blocs)";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Orange;
             this.label2.Location = new System.Drawing.Point(7, 74);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 13);
+            this.label2.Size = new System.Drawing.Size(111, 15);
             this.label2.TabIndex = 25;
             this.label2.Text = "Simulation (chunk)";
             // 
             // lblViewDistance
             // 
             this.lblViewDistance.AutoSize = true;
+            this.lblViewDistance.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblViewDistance.ForeColor = System.Drawing.Color.Orange;
             this.lblViewDistance.Location = new System.Drawing.Point(7, 27);
             this.lblViewDistance.Name = "lblViewDistance";
-            this.lblViewDistance.Size = new System.Drawing.Size(64, 13);
+            this.lblViewDistance.Size = new System.Drawing.Size(72, 15);
             this.lblViewDistance.TabIndex = 24;
             this.lblViewDistance.Text = "vue (chunk)";
             // 
@@ -574,7 +638,7 @@
             this.numSpawnProtecDistance.ForeColor = System.Drawing.Color.White;
             this.numSpawnProtecDistance.Location = new System.Drawing.Point(10, 140);
             this.numSpawnProtecDistance.Name = "numSpawnProtecDistance";
-            this.numSpawnProtecDistance.Size = new System.Drawing.Size(185, 20);
+            this.numSpawnProtecDistance.Size = new System.Drawing.Size(185, 21);
             this.numSpawnProtecDistance.TabIndex = 23;
             this.numSpawnProtecDistance.ValueChanged += new System.EventHandler(this.numSpawnProtecDistance_ValueChanged);
             // 
@@ -584,7 +648,7 @@
             this.numSimulationDistance.ForeColor = System.Drawing.Color.White;
             this.numSimulationDistance.Location = new System.Drawing.Point(9, 89);
             this.numSimulationDistance.Name = "numSimulationDistance";
-            this.numSimulationDistance.Size = new System.Drawing.Size(185, 20);
+            this.numSimulationDistance.Size = new System.Drawing.Size(185, 21);
             this.numSimulationDistance.TabIndex = 22;
             this.numSimulationDistance.ValueChanged += new System.EventHandler(this.numSimulationDistance_ValueChanged);
             // 
@@ -594,7 +658,7 @@
             this.numViewDistance.ForeColor = System.Drawing.Color.White;
             this.numViewDistance.Location = new System.Drawing.Point(9, 42);
             this.numViewDistance.Name = "numViewDistance";
-            this.numViewDistance.Size = new System.Drawing.Size(185, 20);
+            this.numViewDistance.Size = new System.Drawing.Size(185, 21);
             this.numViewDistance.TabIndex = 21;
             this.numViewDistance.ValueChanged += new System.EventHandler(this.numViewDistance_ValueChanged);
             // 
@@ -607,7 +671,7 @@
             this.infosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(634, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(633, 24);
             this.menuStrip1.TabIndex = 24;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -694,35 +758,35 @@
             // versionToolStripMenuItem
             // 
             this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.versionToolStripMenuItem.Text = "Version";
             this.versionToolStripMenuItem.Click += new System.EventHandler(this.versionToolStripMenuItem_Click);
             // 
             // changelogToolStripMenuItem
             // 
             this.changelogToolStripMenuItem.Name = "changelogToolStripMenuItem";
-            this.changelogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.changelogToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.changelogToolStripMenuItem.Text = "Changelog";
             this.changelogToolStripMenuItem.Click += new System.EventHandler(this.changelogToolStripMenuItem_Click);
             // 
             // reposToolStripMenuItem
             // 
             this.reposToolStripMenuItem.Name = "reposToolStripMenuItem";
-            this.reposToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reposToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.reposToolStripMenuItem.Text = "Repos";
             this.reposToolStripMenuItem.Click += new System.EventHandler(this.reposToolStripMenuItem_Click);
             // 
             // créateursToolStripMenuItem
             // 
             this.créateursToolStripMenuItem.Name = "créateursToolStripMenuItem";
-            this.créateursToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.créateursToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.créateursToolStripMenuItem.Text = "Créateurs";
             this.créateursToolStripMenuItem.Click += new System.EventHandler(this.créateursToolStripMenuItem_Click);
             // 
             // contributeursToolStripMenuItem
             // 
             this.contributeursToolStripMenuItem.Name = "contributeursToolStripMenuItem";
-            this.contributeursToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.contributeursToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.contributeursToolStripMenuItem.Text = "Contributeurs";
             this.contributeursToolStripMenuItem.Click += new System.EventHandler(this.contributeursToolStripMenuItem_Click);
             // 
@@ -732,7 +796,7 @@
             this.groupBox1.Controls.Add(this.btnOpenFolder);
             this.groupBox1.Controls.Add(this.btnUpdateSC);
             this.groupBox1.ForeColor = System.Drawing.Color.Orange;
-            this.groupBox1.Location = new System.Drawing.Point(10, 521);
+            this.groupBox1.Location = new System.Drawing.Point(12, 677);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(610, 80);
             this.groupBox1.TabIndex = 25;
@@ -746,6 +810,7 @@
             this.btnOpenFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
             this.btnOpenFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnOpenFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenFolder.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOpenFolder.ForeColor = System.Drawing.Color.White;
             this.btnOpenFolder.Location = new System.Drawing.Point(7, 50);
             this.btnOpenFolder.Name = "btnOpenFolder";
@@ -757,11 +822,13 @@
             // 
             // btnUpdateSC
             // 
+            this.btnUpdateSC.Enabled = false;
             this.btnUpdateSC.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnUpdateSC.FlatAppearance.BorderSize = 0;
             this.btnUpdateSC.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
             this.btnUpdateSC.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnUpdateSC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateSC.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdateSC.ForeColor = System.Drawing.Color.White;
             this.btnUpdateSC.Location = new System.Drawing.Point(7, 20);
             this.btnUpdateSC.Name = "btnUpdateSC";
@@ -774,8 +841,9 @@
             // gbEnd
             // 
             this.gbEnd.Controls.Add(this.btnEndOff);
+            this.gbEnd.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbEnd.ForeColor = System.Drawing.Color.Orange;
-            this.gbEnd.Location = new System.Drawing.Point(420, 413);
+            this.gbEnd.Location = new System.Drawing.Point(422, 318);
             this.gbEnd.Name = "gbEnd";
             this.gbEnd.Size = new System.Drawing.Size(200, 53);
             this.gbEnd.TabIndex = 26;
@@ -787,6 +855,7 @@
             this.btnEndOff.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnEndOff.FlatAppearance.BorderSize = 0;
             this.btnEndOff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEndOff.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEndOff.ForeColor = System.Drawing.Color.White;
             this.btnEndOff.Location = new System.Drawing.Point(1, 24);
             this.btnEndOff.Name = "btnEndOff";
@@ -800,6 +869,7 @@
             this.btnNetherOff.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnNetherOff.FlatAppearance.BorderSize = 0;
             this.btnNetherOff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNetherOff.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNetherOff.ForeColor = System.Drawing.Color.White;
             this.btnNetherOff.Location = new System.Drawing.Point(1, 24);
             this.btnNetherOff.Name = "btnNetherOff";
@@ -812,11 +882,12 @@
             // lblNotif
             // 
             this.lblNotif.AutoSize = true;
-            this.lblNotif.Location = new System.Drawing.Point(429, 36);
+            this.lblNotif.Location = new System.Drawing.Point(425, 35);
             this.lblNotif.MaximumSize = new System.Drawing.Size(200, 0);
             this.lblNotif.Name = "lblNotif";
-            this.lblNotif.Size = new System.Drawing.Size(0, 13);
+            this.lblNotif.Size = new System.Drawing.Size(44, 13);
             this.lblNotif.TabIndex = 27;
+            this.lblNotif.Text = "fdzefzef";
             this.lblNotif.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // timerItem
@@ -827,20 +898,159 @@
             // gbNether
             // 
             this.gbNether.Controls.Add(this.btnNetherOff);
+            this.gbNether.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbNether.ForeColor = System.Drawing.Color.Orange;
-            this.gbNether.Location = new System.Drawing.Point(420, 360);
+            this.gbNether.Location = new System.Drawing.Point(422, 265);
             this.gbNether.Name = "gbNether";
             this.gbNether.Size = new System.Drawing.Size(200, 53);
             this.gbNether.TabIndex = 27;
             this.gbNether.TabStop = false;
             this.gbNether.Text = "Dimension : The Nether";
             // 
+            // cbJarSwitcher
+            // 
+            this.cbJarSwitcher.BackColor = System.Drawing.SystemColors.MenuText;
+            this.cbJarSwitcher.ForeColor = System.Drawing.Color.White;
+            this.cbJarSwitcher.FormattingEnabled = true;
+            this.cbJarSwitcher.Location = new System.Drawing.Point(15, 654);
+            this.cbJarSwitcher.Name = "cbJarSwitcher";
+            this.cbJarSwitcher.Size = new System.Drawing.Size(248, 21);
+            this.cbJarSwitcher.TabIndex = 20;
+            this.cbJarSwitcher.SelectedIndexChanged += new System.EventHandler(this.cbJarSwitcher_SelectedIndexChanged);
+            // 
+            // jarSwitcherText
+            // 
+            this.jarSwitcherText.AutoSize = true;
+            this.jarSwitcherText.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.jarSwitcherText.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.jarSwitcherText.Location = new System.Drawing.Point(18, 638);
+            this.jarSwitcherText.Name = "jarSwitcherText";
+            this.jarSwitcherText.Size = new System.Drawing.Size(58, 15);
+            this.jarSwitcherText.TabIndex = 20;
+            this.jarSwitcherText.Text = "ServerJar";
+            // 
+            // cbJavaSwutcher
+            // 
+            this.cbJavaSwutcher.BackColor = System.Drawing.SystemColors.MenuText;
+            this.cbJavaSwutcher.ForeColor = System.Drawing.Color.White;
+            this.cbJavaSwutcher.FormattingEnabled = true;
+            this.cbJavaSwutcher.Items.AddRange(new object[] {
+            "java"});
+            this.cbJavaSwutcher.Location = new System.Drawing.Point(342, 654);
+            this.cbJavaSwutcher.Name = "cbJavaSwutcher";
+            this.cbJavaSwutcher.Size = new System.Drawing.Size(247, 21);
+            this.cbJavaSwutcher.TabIndex = 28;
+            this.cbJavaSwutcher.SelectedIndexChanged += new System.EventHandler(this.cbJarSwitcher_SelectedIndexChanged);
+            // 
+            // CustomJava
+            // 
+            this.CustomJava.AutoSize = true;
+            this.CustomJava.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomJava.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.CustomJava.Location = new System.Drawing.Point(345, 639);
+            this.CustomJava.Name = "CustomJava";
+            this.CustomJava.Size = new System.Drawing.Size(61, 15);
+            this.CustomJava.TabIndex = 30;
+            this.CustomJava.Text = "JavaJar /!\\";
+            // 
+            // pbPlusjava
+            // 
+            this.pbPlusjava.Image = global::MCServCare.Properties.Resources.plus;
+            this.pbPlusjava.Location = new System.Drawing.Point(594, 652);
+            this.pbPlusjava.Name = "pbPlusjava";
+            this.pbPlusjava.Size = new System.Drawing.Size(24, 24);
+            this.pbPlusjava.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbPlusjava.TabIndex = 29;
+            this.pbPlusjava.TabStop = false;
+            this.pbPlusjava.Click += new System.EventHandler(this.pbPlusjava_Click);
+            // 
+            // refreshJarSwitcher
+            // 
+            this.refreshJarSwitcher.Image = global::MCServCare.Properties.Resources.orangerefresh;
+            this.refreshJarSwitcher.Location = new System.Drawing.Point(267, 653);
+            this.refreshJarSwitcher.Name = "refreshJarSwitcher";
+            this.refreshJarSwitcher.Size = new System.Drawing.Size(24, 24);
+            this.refreshJarSwitcher.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.refreshJarSwitcher.TabIndex = 13;
+            this.refreshJarSwitcher.TabStop = false;
+            this.refreshJarSwitcher.Click += new System.EventHandler(this.refreshJarSwitcher_Click);
+            // 
+            // btnDeleteWorld
+            // 
+            this.btnDeleteWorld.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnDeleteWorld.FlatAppearance.BorderSize = 0;
+            this.btnDeleteWorld.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
+            this.btnDeleteWorld.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnDeleteWorld.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteWorld.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteWorld.ForeColor = System.Drawing.Color.White;
+            this.btnDeleteWorld.Location = new System.Drawing.Point(1, 459);
+            this.btnDeleteWorld.Name = "btnDeleteWorld";
+            this.btnDeleteWorld.Size = new System.Drawing.Size(198, 23);
+            this.btnDeleteWorld.TabIndex = 14;
+            this.btnDeleteWorld.Text = "Delete World";
+            this.btnDeleteWorld.UseVisualStyleBackColor = true;
+            this.btnDeleteWorld.Click += new System.EventHandler(this.btnDeleteWorld_Click);
+            // 
+            // btnOpenWorldFolder
+            // 
+            this.btnOpenWorldFolder.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnOpenWorldFolder.FlatAppearance.BorderSize = 0;
+            this.btnOpenWorldFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
+            this.btnOpenWorldFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnOpenWorldFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenWorldFolder.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenWorldFolder.ForeColor = System.Drawing.Color.White;
+            this.btnOpenWorldFolder.Location = new System.Drawing.Point(1, 424);
+            this.btnOpenWorldFolder.Name = "btnOpenWorldFolder";
+            this.btnOpenWorldFolder.Size = new System.Drawing.Size(198, 23);
+            this.btnOpenWorldFolder.TabIndex = 15;
+            this.btnOpenWorldFolder.Text = "Open World Folder";
+            this.btnOpenWorldFolder.UseVisualStyleBackColor = true;
+            this.btnOpenWorldFolder.Click += new System.EventHandler(this.btnOpenWorldFolder_Click);
+            // 
+            // gbPort
+            // 
+            this.gbPort.BackColor = System.Drawing.Color.Transparent;
+            this.gbPort.Controls.Add(this.numPort);
+            this.gbPort.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbPort.ForeColor = System.Drawing.Color.Orange;
+            this.gbPort.Location = new System.Drawing.Point(10, 469);
+            this.gbPort.Name = "gbPort";
+            this.gbPort.Size = new System.Drawing.Size(201, 53);
+            this.gbPort.TabIndex = 12;
+            this.gbPort.TabStop = false;
+            this.gbPort.Text = "Port";
+            // 
+            // numPort
+            // 
+            this.numPort.BackColor = System.Drawing.SystemColors.MenuText;
+            this.numPort.ForeColor = System.Drawing.Color.White;
+            this.numPort.Location = new System.Drawing.Point(9, 23);
+            this.numPort.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numPort.Name = "numPort";
+            this.numPort.Size = new System.Drawing.Size(185, 21);
+            this.numPort.TabIndex = 27;
+            this.numPort.ValueChanged += new System.EventHandler(this.numPort_ValueChanged);
+            // 
             // ServerManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(634, 611);
+            this.ClientSize = new System.Drawing.Size(633, 763);
+            this.Controls.Add(this.gbPort);
+            this.Controls.Add(this.CustomJava);
+            this.Controls.Add(this.btnStartServer);
+            this.Controls.Add(this.pbPlusjava);
+            this.Controls.Add(this.cbJavaSwutcher);
+            this.Controls.Add(this.jarSwitcherText);
+            this.Controls.Add(this.refreshJarSwitcher);
+            this.Controls.Add(this.cbJarSwitcher);
             this.Controls.Add(this.gbNether);
             this.Controls.Add(this.lblNotif);
             this.Controls.Add(this.gbEnd);
@@ -869,6 +1079,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numRam)).EndInit();
             this.gbMaps.ResumeLayout(false);
             this.gbMaps.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gbCracks.ResumeLayout(false);
             this.gbCommandBlock.ResumeLayout(false);
@@ -886,6 +1097,10 @@
             this.groupBox1.ResumeLayout(false);
             this.gbEnd.ResumeLayout(false);
             this.gbNether.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlusjava)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshJarSwitcher)).EndInit();
+            this.gbPort.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -956,6 +1171,17 @@
         private System.Windows.Forms.GroupBox gbNether;
         private System.Windows.Forms.Label lblCurrWorld;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ComboBox cbJarSwitcher;
+        private System.Windows.Forms.PictureBox refreshJarSwitcher;
+        private System.Windows.Forms.Label jarSwitcherText;
+        private System.Windows.Forms.ComboBox cbJavaSwutcher;
+        private System.Windows.Forms.PictureBox pbPlusjava;
+        private System.Windows.Forms.Label CustomJava;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button btnOpenWorldFolder;
+        private System.Windows.Forms.Button btnDeleteWorld;
+        private System.Windows.Forms.GroupBox gbPort;
+        private System.Windows.Forms.NumericUpDown numPort;
     }
 }
 

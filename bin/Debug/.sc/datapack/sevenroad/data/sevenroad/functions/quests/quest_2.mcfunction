@@ -1,0 +1,2 @@
+tellraw @s ["",{"text":"Vous avez obtenu la quête suivante : "},{"text":"Miner 32 stone","bold":true,"underlined":true,"color":"gold"},{"text":".\nTant que cette mission ne sera pas terminée, vous aurez le malus suivant : "},{"text":"affamé","bold":true,"color":"red"},{"text":"."}]
+scoreboard players set @s 7r_brk_stone -32

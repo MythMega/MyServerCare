@@ -11,6 +11,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -35,6 +36,11 @@ namespace MCServCare
         private string Updated;
         private string noWorld;
 
+        public string APP_VERSION = "1.2";
+        public string APP_BUILD = "24";
+
+        public bool IS_LOADED = false;
+
         public ServerManager()
         {
             InitializeComponent();
@@ -55,8 +61,11 @@ namespace MCServCare
             numViewDistance.BackColor = deeperBackground;
             numSimulationDistance.BackColor = deeperBackground;
             numSpawnProtecDistance.BackColor = deeperBackground;
+            numPort.BackColor = deeperBackground;
             txbMOTD.BackColor = deeperBackground;
             comboGamemode.BackColor = deeperBackground;
+            cbJarSwitcher.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbJavaSwutcher.DropDownStyle = ComboBoxStyle.DropDownList;
 
             lblNotif.ForeColor = orangeTextColor;
             lblNotif.Visible = false;
@@ -64,15 +73,10 @@ namespace MCServCare
 
         private void ServerManager_Load(object sender, EventArgs e)
         {
+            string a = GetProfileValue("ServerJar");
 
-            // Vérifier si le dossier ".sc" existe
-            string scFolderPath = Path.Combine(Application.StartupPath, ".sc");
-            if (!Directory.Exists(scFolderPath))
-            {
-                Directory.CreateDirectory(scFolderPath);
-                getServerCareFiles();
-                //btnUpdateSC_Click(sender, EventArgs.Empty);
-            }
+            getServerCareFiles();
+
 
 
             // Vérifier si le fichier server.properties existe
@@ -116,6 +120,7 @@ namespace MCServCare
             numViewDistance.Value = int.Parse(GetProperty("view-distance"));
             numSimulationDistance.Value = int.Parse(GetProperty("simulation-distance"));
             numSpawnProtecDistance.Value = int.Parse(GetProperty("spawn-protection"));
+            numPort.Value = int.Parse(GetProperty("server-port"));
             txbMOTD.Text = GetProperty("motd");
 
             numViewDistance.Maximum = 32;
@@ -156,12 +161,37 @@ namespace MCServCare
             updateOnOffStyles();
 
             VerifyFile();
+            javaSelector();
+            if (GetProfileValue("savedJavas") == null)
+                SetProfileValue("savedJavas", "");
 
+            loadJavajars();
+            if (GetProfileValue("javaJar") == null)
+                SetProfileValue("javaJar", "java");
+            else
+            {
+                cbJavaSwutcher.SelectedIndex = cbJavaSwutcher.FindStringExact(GetProfileValue("javaJar"));
+            }
+
+
+            loadServerJars();
+            jarSelector();
+            if (a == null || a == "")
+                cbJarSwitcher.SelectedIndex = -1;
+            else
+            {
+                
+                cbJarSwitcher.SelectedIndex = cbJarSwitcher.FindStringExact(a);
+                    }
             if (GetProfileValue("langue") == null)
                 SetProfileValue("langue", "EN");
             makeTranslation(GetProfileValue("langue"));
             
+
+            IS_LOADED = true;
         }
+
+
         private void VerifyFile()
         {
             if (!File.Exists(configFilePath))
@@ -185,21 +215,33 @@ namespace MCServCare
         }
         private void getServerCareFiles()
         {
-            string zipFilePath = "https://jmdbymyth.000webhostapp.com/prj/mcservcare/.sc.zip";
             string targetFolderPath = Path.Combine(Application.StartupPath, ".sc");
 
-            using (WebClient webClient = new WebClient())
+            // Vérifier si le dossier '.sc' existe déjà
+            if (Directory.Exists(targetFolderPath))
             {
-                // Télécharger le fichier ZIP depuis l'URL spécifiée
-                webClient.DownloadFile(zipFilePath, "temp.zip");
-
-                // Extraire le contenu du fichier ZIP vers le dossier cible
-                ZipFile.ExtractToDirectory("temp.zip", targetFolderPath);
-
-                // Supprimer le fichier ZIP temporaire
-                File.Delete("temp.zip");
+                // Si c'est le cas, le supprimer
+                Directory.Delete(targetFolderPath, true);
             }
+
+            // Obtenir un flux pour la ressource intégrée
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MCServCare.sc.zip"))
+            {
+                // Créer un fichier temporaire
+                using (FileStream fileStream = new FileStream("temp.zip", FileMode.Create, FileAccess.Write))
+                {
+                    // Copier le contenu de la ressource intégrée dans le fichier temporaire
+                    stream.CopyTo(fileStream);
+                }
+            }
+
+            // Extraire le contenu du fichier ZIP vers le dossier cible
+            ZipFile.ExtractToDirectory("temp.zip", targetFolderPath);
+
+            // Supprimer le fichier ZIP temporaire
+            File.Delete("temp.zip");
         }
+
 
         private void createServerProperties()
         {
@@ -343,6 +385,33 @@ namespace MCServCare
             }
 
             return foldersWithLevelDat;
+        }
+
+        public List<string> getJarList()
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            List<string> jarFiles = new List<string>();
+
+            //code
+            try
+            {
+                // Obtenez tous les fichiers avec l'extension .jar dans le répertoire actuel
+                string[] files = Directory.GetFiles(currentDirectory, "*.jar");
+
+                // Ajoutez les noms de fichiers .jar à la liste (sans les chemins complets)
+                foreach (string filePath in files)
+                {
+                    string fileName = Path.GetFileName(filePath);
+                    jarFiles.Add(fileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Gérez les erreurs selon vos besoins (affichage, journalisation, etc.)
+                Console.WriteLine($"Erreur lors de la récupération des fichiers .jar : {ex.Message}");
+            }
+
+            return jarFiles;
         }
 
         private void btnWhitelistActive_Click(object sender, EventArgs e)
@@ -543,6 +612,7 @@ namespace MCServCare
 
         private void btnStartServer_Click(object sender, EventArgs e)
         {
+            setJar();
             string batchFilePath = Path.Combine(Application.StartupPath, "start.bat");
 
             if (File.Exists(batchFilePath))
@@ -577,7 +647,12 @@ namespace MCServCare
             }
         }
 
-
+        /// <summary>
+        /// Get property inside server.properties
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException"></exception>
         public string GetProperty(string propertyName)
         {
             string filePath = "server.properties";
@@ -606,7 +681,7 @@ namespace MCServCare
             }
 
             // Si la propriété n'est pas trouvée, retourner une valeur par défaut ou générer une exception selon vos besoins
-            throw new ArgumentException($"La propriété '{propertyName}' n'a pas été trouvée dans le fichier server.properties.");
+            return null;
         }
 
         public void makeTranslation(string languageCode)
@@ -946,7 +1021,7 @@ namespace MCServCare
 
         private void versionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("1.0\nBuild : 3");
+            MessageBox.Show($"{APP_VERSION}\nBuild : {APP_BUILD}");
         }
 
         private void changelogToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1067,18 +1142,18 @@ namespace MCServCare
             {
                 if (btn.Tag.ToString() == "true")
                 {
-                    btn.BackColor = Color.Green;
+                    btn.BackColor = Color.FromArgb(68, 117, 68);
                     btn.Text = "ON";
                 }
                 if (btn.Tag.ToString() == "false")
                 {
-                    btn.BackColor = Color.Red;
+                    btn.BackColor = Color.FromArgb(117, 68, 68);
                     btn.Text = "OFF";
                 }
                 if (btn.Tag.ToString() == "dis")
                 {
                     btn.Enabled = false;
-                    btn.BackColor = Color.Orange;
+                    btn.BackColor = Color.FromArgb(157, 120, 68);
                     btn.ForeColor = Color.White;
                     btn.Text = "Not Available";
                 }
@@ -1142,6 +1217,149 @@ namespace MCServCare
         private void contributeursToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/MythMega/MyServerCare/wiki/Contributors");
+        }
+
+        private void refreshJarSwitcher_Click(object sender, EventArgs e)
+        {
+            jarSelector();
+        }
+
+        private void jarSelector()
+        {
+            string directoryPath = AppDomain.CurrentDomain.BaseDirectory;
+            string filePath = Path.Combine(directoryPath, "start.bat");
+            string currentjar = File.ReadAllText(filePath).Split(' ')[3];
+
+            cbJarSwitcher.Items.Clear();
+            foreach (string jar in getJarList())
+            {
+                cbJarSwitcher.Items.Add($"{jar}");
+            }
+        }
+        private void loadServerJars()
+        {
+            string directoryPath = AppDomain.CurrentDomain.BaseDirectory;
+
+            cbJarSwitcher.Items.Clear();
+            foreach (string jar in getJarList())
+            {
+                cbJarSwitcher.Items.Add($"{jar}");
+            }
+        }
+
+        private void loadJavajars()
+        {
+            cbJavaSwutcher.Items.Clear();
+            List<string> jars = new List<string> {};
+            try
+            {
+                string a = GetProfileValue("savedJavas");
+                string[] fiches = a.Split(';');
+                jars.AddRange(fiches);
+            }
+            catch
+            {
+
+            }
+            foreach (string jar in jars)
+            {
+                cbJavaSwutcher.Items.Add($"{jar}");
+            }
+
+        }
+
+        private void setJar()
+        {
+            string directoryPath = AppDomain.CurrentDomain.BaseDirectory;
+            string filePath = Path.Combine(directoryPath, "start.bat");
+            string jar = cbJarSwitcher.Text;
+            string newString = $"{cbJavaSwutcher.Text} -Xmx{numRam.Value.ToString()}G -jar {jar} nogui";
+            SetProfileValue("ServerJar", cbJarSwitcher.Text);
+            SetProfileValue("javaJar", cbJavaSwutcher.Text);
+            
+            WriteInformationToFile(newString, "start.bat");
+
+            sendNotif(Updated + "Server jar : " + cbJarSwitcher.Text + ".");
+        }
+
+        private void cbJarSwitcher_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(IS_LOADED == true)
+                setJar();
+        }
+
+        private void pbPlusjava_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Exe Files|*.exe";
+            openFileDialog.Title = "Sélectionnez un fichier .exe";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string newFile = openFileDialog.FileName;
+                cbJavaSwutcher.Items.Add(newFile);
+                List<string> jars = new List<string>();
+                foreach(string s in cbJavaSwutcher.Items)
+                {
+                    jars.Add(s);
+                }
+                SetProfileValue("savedJavas", String.Join(";", jars));
+            }
+        }
+        private void javaSelector()
+        {
+            loadJavajars();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            WorldImporter worldImporter = new WorldImporter(background, deeperBackground, orangeTextColor);
+            worldImporter.ShowDialog();
+            lvWorldSelection.Items.Clear();
+            ServerManager_Load(sender, e);
+        }
+
+        private void btnDeleteWorld_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string activeWorld = lvWorldSelection.SelectedItems[0].Text;
+                DialogResult dialogResult = MessageBox.Show($"Do you really want to delete that world ({activeWorld}) ? This is permanent.", "Are you sure ?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), activeWorld);
+                    Directory.Delete(path, true);
+                }
+            }
+            catch
+            {
+                MessageBox.Show(noWorld);
+            }
+            
+        }
+
+        private void btnOpenWorldFolder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), lvWorldSelection.SelectedItems[0].Text);
+                Process process = new Process();
+                process.StartInfo.FileName = "explorer.exe";
+                process.StartInfo.Arguments = path;
+                process.Start();
+            }
+            catch
+            {
+                MessageBox.Show(noWorld);
+            }
+        }
+
+        private void numPort_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateServerProperties("server-port", ((int)numPort.Value).ToString());
+
+
+            sendNotif(Updated + "Server port : " + numViewDistance.Value.ToString() + ".");
         }
     }
 }

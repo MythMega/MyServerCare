@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "tag": "dnv.recyclecraft:cut_copper_equivalents"
+    },
+    "result": "minecraft:cut_copper",
+    "count": 1
+}

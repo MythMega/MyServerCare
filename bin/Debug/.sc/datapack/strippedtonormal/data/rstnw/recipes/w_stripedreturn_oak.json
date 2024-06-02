@@ -1,0 +1,15 @@
+{
+    "type": "crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:stripped_oak_wood"
+        },
+	{
+	    "item": "minecraft:bone_meal"
+	}
+    ],
+    "result": {
+        "item": "minecraft:oak_wood",
+        "count": 1
+    }
+}
