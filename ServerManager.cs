@@ -1359,7 +1359,12 @@ namespace MCServCare
             UpdateServerProperties("server-port", ((int)numPort.Value).ToString());
 
 
-            sendNotif(Updated + "Server port : " + numViewDistance.Value.ToString() + ".");
+            sendNotif(Updated + "Server port : " + numPort.Value.ToString() + ".");
+        }
+
+        private void roadMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/MythMega/MyServerCare/wiki/RoadMap");
         }
     }
 }

@@ -47,6 +47,8 @@
             this.lblRam = new System.Windows.Forms.Label();
             this.numRam = new System.Windows.Forms.NumericUpDown();
             this.gbMaps = new System.Windows.Forms.GroupBox();
+            this.btnOpenWorldFolder = new System.Windows.Forms.Button();
+            this.btnDeleteWorld = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblCurrWorld = new System.Windows.Forms.Label();
@@ -100,10 +102,9 @@
             this.CustomJava = new System.Windows.Forms.Label();
             this.pbPlusjava = new System.Windows.Forms.PictureBox();
             this.refreshJarSwitcher = new System.Windows.Forms.PictureBox();
-            this.btnDeleteWorld = new System.Windows.Forms.Button();
-            this.btnOpenWorldFolder = new System.Windows.Forms.Button();
             this.gbPort = new System.Windows.Forms.GroupBox();
             this.numPort = new System.Windows.Forms.NumericUpDown();
+            this.roadMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbSystem.SuspendLayout();
             this.gbWhitelist.SuspendLayout();
             this.gbSettings.SuspendLayout();
@@ -379,6 +380,40 @@
             this.gbMaps.TabIndex = 13;
             this.gbMaps.TabStop = false;
             this.gbMaps.Text = "Maps";
+            // 
+            // btnOpenWorldFolder
+            // 
+            this.btnOpenWorldFolder.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnOpenWorldFolder.FlatAppearance.BorderSize = 0;
+            this.btnOpenWorldFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
+            this.btnOpenWorldFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnOpenWorldFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenWorldFolder.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenWorldFolder.ForeColor = System.Drawing.Color.White;
+            this.btnOpenWorldFolder.Location = new System.Drawing.Point(1, 424);
+            this.btnOpenWorldFolder.Name = "btnOpenWorldFolder";
+            this.btnOpenWorldFolder.Size = new System.Drawing.Size(198, 23);
+            this.btnOpenWorldFolder.TabIndex = 15;
+            this.btnOpenWorldFolder.Text = "Open World Folder";
+            this.btnOpenWorldFolder.UseVisualStyleBackColor = true;
+            this.btnOpenWorldFolder.Click += new System.EventHandler(this.btnOpenWorldFolder_Click);
+            // 
+            // btnDeleteWorld
+            // 
+            this.btnDeleteWorld.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnDeleteWorld.FlatAppearance.BorderSize = 0;
+            this.btnDeleteWorld.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
+            this.btnDeleteWorld.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnDeleteWorld.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteWorld.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteWorld.ForeColor = System.Drawing.Color.White;
+            this.btnDeleteWorld.Location = new System.Drawing.Point(1, 459);
+            this.btnDeleteWorld.Name = "btnDeleteWorld";
+            this.btnDeleteWorld.Size = new System.Drawing.Size(198, 23);
+            this.btnDeleteWorld.TabIndex = 14;
+            this.btnDeleteWorld.Text = "Delete World";
+            this.btnDeleteWorld.UseVisualStyleBackColor = true;
+            this.btnDeleteWorld.Click += new System.EventHandler(this.btnDeleteWorld_Click);
             // 
             // pictureBox2
             // 
@@ -749,7 +784,8 @@
             this.changelogToolStripMenuItem,
             this.reposToolStripMenuItem,
             this.créateursToolStripMenuItem,
-            this.contributeursToolStripMenuItem});
+            this.contributeursToolStripMenuItem,
+            this.roadMapToolStripMenuItem});
             this.infosToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.infosToolStripMenuItem.Name = "infosToolStripMenuItem";
             this.infosToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
@@ -758,35 +794,35 @@
             // versionToolStripMenuItem
             // 
             this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.versionToolStripMenuItem.Text = "Version";
             this.versionToolStripMenuItem.Click += new System.EventHandler(this.versionToolStripMenuItem_Click);
             // 
             // changelogToolStripMenuItem
             // 
             this.changelogToolStripMenuItem.Name = "changelogToolStripMenuItem";
-            this.changelogToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.changelogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.changelogToolStripMenuItem.Text = "Changelog";
             this.changelogToolStripMenuItem.Click += new System.EventHandler(this.changelogToolStripMenuItem_Click);
             // 
             // reposToolStripMenuItem
             // 
             this.reposToolStripMenuItem.Name = "reposToolStripMenuItem";
-            this.reposToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.reposToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.reposToolStripMenuItem.Text = "Repos";
             this.reposToolStripMenuItem.Click += new System.EventHandler(this.reposToolStripMenuItem_Click);
             // 
             // créateursToolStripMenuItem
             // 
             this.créateursToolStripMenuItem.Name = "créateursToolStripMenuItem";
-            this.créateursToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.créateursToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.créateursToolStripMenuItem.Text = "Créateurs";
             this.créateursToolStripMenuItem.Click += new System.EventHandler(this.créateursToolStripMenuItem_Click);
             // 
             // contributeursToolStripMenuItem
             // 
             this.contributeursToolStripMenuItem.Name = "contributeursToolStripMenuItem";
-            this.contributeursToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.contributeursToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.contributeursToolStripMenuItem.Text = "Contributeurs";
             this.contributeursToolStripMenuItem.Click += new System.EventHandler(this.contributeursToolStripMenuItem_Click);
             // 
@@ -975,40 +1011,6 @@
             this.refreshJarSwitcher.TabStop = false;
             this.refreshJarSwitcher.Click += new System.EventHandler(this.refreshJarSwitcher_Click);
             // 
-            // btnDeleteWorld
-            // 
-            this.btnDeleteWorld.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnDeleteWorld.FlatAppearance.BorderSize = 0;
-            this.btnDeleteWorld.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
-            this.btnDeleteWorld.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnDeleteWorld.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteWorld.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteWorld.ForeColor = System.Drawing.Color.White;
-            this.btnDeleteWorld.Location = new System.Drawing.Point(1, 459);
-            this.btnDeleteWorld.Name = "btnDeleteWorld";
-            this.btnDeleteWorld.Size = new System.Drawing.Size(198, 23);
-            this.btnDeleteWorld.TabIndex = 14;
-            this.btnDeleteWorld.Text = "Delete World";
-            this.btnDeleteWorld.UseVisualStyleBackColor = true;
-            this.btnDeleteWorld.Click += new System.EventHandler(this.btnDeleteWorld_Click);
-            // 
-            // btnOpenWorldFolder
-            // 
-            this.btnOpenWorldFolder.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnOpenWorldFolder.FlatAppearance.BorderSize = 0;
-            this.btnOpenWorldFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
-            this.btnOpenWorldFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnOpenWorldFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenWorldFolder.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenWorldFolder.ForeColor = System.Drawing.Color.White;
-            this.btnOpenWorldFolder.Location = new System.Drawing.Point(1, 424);
-            this.btnOpenWorldFolder.Name = "btnOpenWorldFolder";
-            this.btnOpenWorldFolder.Size = new System.Drawing.Size(198, 23);
-            this.btnOpenWorldFolder.TabIndex = 15;
-            this.btnOpenWorldFolder.Text = "Open World Folder";
-            this.btnOpenWorldFolder.UseVisualStyleBackColor = true;
-            this.btnOpenWorldFolder.Click += new System.EventHandler(this.btnOpenWorldFolder_Click);
-            // 
             // gbPort
             // 
             this.gbPort.BackColor = System.Drawing.Color.Transparent;
@@ -1036,6 +1038,13 @@
             this.numPort.Size = new System.Drawing.Size(185, 21);
             this.numPort.TabIndex = 27;
             this.numPort.ValueChanged += new System.EventHandler(this.numPort_ValueChanged);
+            // 
+            // roadMapToolStripMenuItem
+            // 
+            this.roadMapToolStripMenuItem.Name = "roadMapToolStripMenuItem";
+            this.roadMapToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.roadMapToolStripMenuItem.Text = "RoadMap";
+            this.roadMapToolStripMenuItem.Click += new System.EventHandler(this.roadMapToolStripMenuItem_Click);
             // 
             // ServerManager
             // 
@@ -1182,6 +1191,7 @@
         private System.Windows.Forms.Button btnDeleteWorld;
         private System.Windows.Forms.GroupBox gbPort;
         private System.Windows.Forms.NumericUpDown numPort;
+        private System.Windows.Forms.ToolStripMenuItem roadMapToolStripMenuItem;
     }
 }
 

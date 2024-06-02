@@ -1,2 +1,0 @@
-scoreboard objectives add mine_conduit minecraft.mined:minecraft.conduit
-scoreboard objectives add can_spawn_conduit dummy
