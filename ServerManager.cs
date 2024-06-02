@@ -1281,13 +1281,16 @@ namespace MCServCare
             
             WriteInformationToFile(newString, "start.bat");
 
-            sendNotif(Updated + "Server jar : " + cbJarSwitcher.Text + ".");
         }
 
         private void cbJarSwitcher_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(IS_LOADED == true)
                 setJar();
+            if(((ComboBox)sender).Tag.ToString() == "java")
+                sendNotif(Updated + "Java : " + cbJavaSwutcher.Text + ".");
+            if(((ComboBox)sender).Tag.ToString() == "server")
+                sendNotif(Updated + "Server : " + cbJarSwitcher.Text + ".");
         }
 
         private void pbPlusjava_Click(object sender, EventArgs e)
