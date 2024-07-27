@@ -38,8 +38,8 @@ namespace MCServCare
 
         private WorldImporter worldImporter;
 
-        public string APP_VERSION = "1.2";
-        public string APP_BUILD = "31";
+        public string APP_VERSION = "1.2.0a";
+        public string APP_BUILD = "37";
 
         public bool IS_LOADED = false;
 
