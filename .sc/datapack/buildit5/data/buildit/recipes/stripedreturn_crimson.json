@@ -1,0 +1,15 @@
+{
+    "type": "crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:stripped_crimson_stem"
+        },
+	{
+	    "item": "minecraft:bone_meal"
+	}
+    ],
+    "result": {
+        "item": "minecraft:crimson_stem",
+        "count": 1
+    }
+}

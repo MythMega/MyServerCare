@@ -45,6 +45,33 @@ namespace MCServCare
             }
 
             lblTypeGenerationData.Text = "normal";
+
+
+
+            //World Selection
+            gbCreationEditWorld.Text = Traduction.TranslateByCode("WorldCreator.CreationEditionWorld");
+            lblWorldNameSettings.Text = Traduction.TranslateByCode("WorldCreator.WorldName");
+            chbWorldAlreadyExist.Text = Traduction.TranslateByCode("WorldCreator.WorldAlreadyExist");
+            btnVerifNom.Text = Traduction.TranslateByCode("WorldCreator.VerifyName");
+
+            //Generate World
+            gbGenerationSettings.Text = Traduction.TranslateByCode("Common.Generate");
+            btnRefreshWorldPresets.Text = Traduction.TranslateByCode("Common.Refresh");
+            btnGenerationType.Text = Traduction.TranslateByCode("Common.Validate");
+
+            //Datapack management
+            btnRefreshDatapackList.Text = Traduction.TranslateByCode("Common.Refresh");
+            btnDatapackDB.Text = Traduction.TranslateByCode("WorldCreator.DatapackBank");
+            btnValidateDatapackList.Text = Traduction.TranslateByCode("Common.Validate");
+
+            //Other settings
+            lblWorldName.Text = Traduction.TranslateByCode("WorldCreator.WorldName");
+            lblTypeGeneration.Text = Traduction.TranslateByCode("WorldCreator.GenerationPreset");
+            lblDatapackList.Text = Traduction.TranslateByCode("WorldCreator.DatapackList");
+            btnEditWorld.Text = Traduction.TranslateByCode("WorldCreator.EditWorld");
+            btnGenerateWorld.Text = Traduction.TranslateByCode("Common.Generate");
+
+            gbDatapackSettings.Text = "Datapacks";
         }
         
 
@@ -68,12 +95,12 @@ namespace MCServCare
             // Expression régulière pour vérifier si le string contient au moins 3 lettres,
             // avec la possibilité d'avoir des espaces, des tirets et des underscores,
             // mais le premier caractère ne doit pas être un espace.
-            string pattern = @"^(?![\s])[a-zA-Z\s_-]{3,}$";
+            string pattern = @"^(?![\s])[a-zA-Z0-9\s_-]{3,}$";
             Regex regex = new Regex(pattern);
 
             if(regex.IsMatch(txbWorldName.Text) == false)
             {
-                MessageBox.Show("Votre nom doit contenir au moins 3 lettres, ne pas commencer par un espace et ne contenir que des lettres, espaces et tiret (-/_).");
+                MessageBox.Show("Votre nom doit contenir au moins 3 lettres, ne pas commencer par un espace et ne contenir que des lettres ou chiffres, espaces et tiret (-/_).");
                 return;
             }
             else if(txbWorldName.Text == "backups" || txbWorldName.Text == "bundler" || txbWorldName.Text == "cache" || txbWorldName.Text == "config" || txbWorldName.Text == "crash-reports" || txbWorldName.Text == "libraries" || txbWorldName.Text == "logs" || txbWorldName.Text == "plugins" || txbWorldName.Text == "versions")
@@ -164,6 +191,8 @@ namespace MCServCare
                 return;
             }
             addDatapack();
+            MessageBox.Show(Traduction.TranslateByCode("WorldCreator.Success"));
+
         }
 
         public void setColor(Color background, Color deeperBackground)
@@ -257,83 +286,6 @@ namespace MCServCare
         }
 
         #endregion
-        #region translation
-
-        public void makeTranslation(string languageCode)
-        {
-            switch (languageCode)
-            {
-                case "FR":
-                    translationFR();
-                    break;
-                case "EN":
-                    translationEN();
-                    break;
-                    //case "DE":
-                    //    translationDE();
-                    //    break;
-                    //case "ES":
-                    //    translationES();
-                    //    break;
-            }
-        }
-
-        public void translationFR()
-        {
-            //World Selection
-            gbCreationEditWorld.Text = "Création/Edition de monde";
-            lblWorldNameSettings.Text = "Nom du monde :";
-            chbWorldAlreadyExist.Text = "ce monde existe déjà";
-            btnVerifNom.Text = "Vérifier nom";
-
-            //Generate World
-            gbGenerationSettings.Text = "Génération du monde";
-            btnRefreshWorldPresets.Text = "Actualiser";
-            btnGenerationType.Text = "Valider";
-
-            //Datapack management
-            gbDatapackSettings.Text = "Datapacks";
-            btnRefreshDatapackList.Text = "Actualiser";
-            btnDatapackDB.Text = "Banque de datapack";
-            btnValidateDatapackList.Text = "Valider";
-
-            //Other settings
-            lblWorldName.Text = "Nom du monde :";
-            lblTypeGeneration.Text = "Preset de génération :";
-            lblDatapackList.Text = "Liste de datapack :";
-            btnEditWorld.Text = "Éditer le monde";
-            btnGenerateWorld.Text = "Génerer le monde";
-        }
-
-
-        public void translationEN()
-        {
-            //World Selection
-            gbCreationEditWorld.Text = "World Creation/Edition";
-            lblWorldNameSettings.Text = "World name :";
-            chbWorldAlreadyExist.Text = "World already exists";
-            btnVerifNom.Text = "verify name";
-
-            //Generate World
-            gbGenerationSettings.Text = "World generation";
-            btnRefreshWorldPresets.Text = "Refresh";
-            btnGenerationType.Text = "Validate";
-
-            //Datapack management
-            gbDatapackSettings.Text = "Datapacks";
-            btnRefreshDatapackList.Text = "Refresh";
-            btnDatapackDB.Text = "Datapack bank";
-            btnValidateDatapackList.Text = "Validate";
-
-            //Other settings
-            lblWorldName.Text = "World name :";
-            lblTypeGeneration.Text = "Generation preset:";
-            lblDatapackList.Text = "Datapack list :";
-            btnEditWorld.Text = "Edit World";
-            btnGenerateWorld.Text = "Generate World";
-        }
-
-        #endregion
 
         private void lvDatapackList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -351,6 +303,21 @@ namespace MCServCare
                 lblDatapackListData.Text = "{" + r + "}";
                  
             }
+        }
+
+        private void txbWorldName_TextChanged(object sender, EventArgs e)
+        {
+            // Créer une expression régulière qui correspond à tout ce qui n'est pas une lettre, un nombre, un espace, un point ou un underscore
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^a-zA-Z0-9 ._-]");
+
+            // Utiliser l'expression régulière pour remplacer les caractères non désirés par une chaîne vide
+            txbWorldName.Text = regex.Replace(txbWorldName.Text, "");
+
+            // Supprimer les espaces en première et dernière position
+            txbWorldName.Text = txbWorldName.Text.Trim();
+
+            // Positionner le curseur à la fin du texte
+            txbWorldName.SelectionStart = txbWorldName.Text.Length;
         }
     }
 

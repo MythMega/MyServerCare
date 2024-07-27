@@ -1,0 +1,1 @@
+say WORK as @s

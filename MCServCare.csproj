@@ -7,11 +7,26 @@
     <ProjectGuid>{239CD16E-AF76-4525-9506-1E51C653A7B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>MCServCare</RootNamespace>
-    <AssemblyName>MCServCare</AssemblyName>
+    <AssemblyName>MCServerCare</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -22,6 +37,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -59,12 +76,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Creator.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Creator.Designer.cs">
-      <DependentUpon>Creator.cs</DependentUpon>
-    </Compile>
     <Compile Include="DatapackDB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +88,24 @@
     <Compile Include="FrmServerJar.Designer.cs">
       <DependentUpon>FrmServerJar.cs</DependentUpon>
     </Compile>
+    <Compile Include="JavaFinder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JavaFinder.Designer.cs">
+      <DependentUpon>JavaFinder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PluginManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PluginManager.Designer.cs">
+      <DependentUpon>PluginManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RemoveJava.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RemoveJava.Designer.cs">
+      <DependentUpon>RemoveJava.cs</DependentUpon>
+    </Compile>
     <Compile Include="ServerManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,11 +114,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Traduction.cs" />
     <Compile Include="WorldCreation.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WorldCreation.Designer.cs">
       <DependentUpon>WorldCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorldEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorldEditor.Designer.cs">
+      <DependentUpon>WorldEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="WorldImporter.cs">
       <SubType>Form</SubType>
@@ -97,14 +133,20 @@
     <Compile Include="WorldImporter.Designer.cs">
       <DependentUpon>WorldImporter.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Creator.resx">
-      <DependentUpon>Creator.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DatapackDB.resx">
       <DependentUpon>DatapackDB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmServerJar.resx">
       <DependentUpon>FrmServerJar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JavaFinder.resx">
+      <DependentUpon>JavaFinder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PluginManager.resx">
+      <DependentUpon>PluginManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RemoveJava.resx">
+      <DependentUpon>RemoveJava.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ServerManager.resx">
       <DependentUpon>ServerManager.cs</DependentUpon>
@@ -121,6 +163,9 @@
     </Compile>
     <EmbeddedResource Include="WorldCreation.resx">
       <DependentUpon>WorldCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorldEditor.resx">
+      <DependentUpon>WorldEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WorldImporter.resx">
       <DependentUpon>WorldImporter.cs</DependentUpon>
@@ -146,6 +191,18 @@
     <None Include="Resources\import.png" />
     <None Include="Resources\plus.png" />
     <None Include="Resources\orangerefresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 et x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

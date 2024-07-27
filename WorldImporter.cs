@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.ListView;
 
 namespace MCServCare
 {
     public partial class WorldImporter : Form
     {
+        public bool isChanged = false;
         public WorldImporter(Color background, Color deeperBackground, Color orangeTextColor)
         {
             InitializeComponent();
@@ -30,6 +24,12 @@ namespace MCServCare
             btnSelect.ForeColor = orangeTextColor;
             btnDeselect.BackColor = background;
             btnDeselect.ForeColor = orangeTextColor;
+
+            btnSelect.Text = Traduction.TranslateByCode("Common.SelectAll");
+            btnImport.Text = Traduction.TranslateByCode("Common.Import");
+            btnDeselect.Text = Traduction.TranslateByCode("Common.UnselectAll");
+            btnCancel.Text = Traduction.TranslateByCode("Common.Cancel");
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -82,7 +82,7 @@ namespace MCServCare
 
             if (!dir.Exists)
             {
-                throw new DirectoryNotFoundException("Source directory does not exist or could not be found: " + sourceDirName);
+                throw new DirectoryNotFoundException(Traduction.TranslateByCode("Error.DirNotExist", sourceDirName));
             }
 
             if (!Directory.Exists(destDirName))
@@ -107,7 +107,11 @@ namespace MCServCare
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            importWorlds();
+            if(lvWorlds.CheckedItems.Count > 0)
+            {
+                isChanged = true;
+                importWorlds();
+            }
             this.Close();
         }
 

@@ -36,8 +36,10 @@ namespace MCServCare
         private string Updated;
         private string noWorld;
 
+        private WorldImporter worldImporter;
+
         public string APP_VERSION = "1.2";
-        public string APP_BUILD = "24";
+        public string APP_BUILD = "31";
 
         public bool IS_LOADED = false;
 
@@ -75,6 +77,8 @@ namespace MCServCare
 
         private void ServerManager_Load(object sender, EventArgs e)
         {
+            GC.Collect();
+
             string a = GetProfileValue("ServerJar");
 
             getServerCareFiles();
@@ -196,6 +200,7 @@ namespace MCServCare
 
         private void VerifyFile()
         {
+
             if (!File.Exists(configFilePath))
             {
                 // Le fichier n'existe pas, créons-le avec le contenu par défaut
@@ -359,8 +364,8 @@ namespace MCServCare
         {
             WorldCreation frmWorldCreation = new WorldCreation();
             frmWorldCreation.setColor(background, deeperBackground);
-            frmWorldCreation.makeTranslation(FULL_APP_LANGUAGE);
             frmWorldCreation.ShowDialog();
+            frmWorldCreation.Close();
         }
 
         private void quitterToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -686,334 +691,6 @@ namespace MCServCare
             return null;
         }
 
-        public void makeTranslation(string languageCode)
-        {
-            FULL_APP_LANGUAGE = languageCode;
-            switch (languageCode)
-            {
-                case "FR":
-                    translationFR();
-                    SetProfileValue("langue", "FR");
-                    break;
-                case "EN":
-                    translationEN();
-                    SetProfileValue("langue", "EN");
-                    break;
-                case "DE":
-                    translationDE();
-                    SetProfileValue("langue", "DE");
-                    break;
-                case "ES":
-                    translationES();
-                    SetProfileValue("langue", "ES");
-                    break;
-            }
-        }
-
-
-
-        private void françaisToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            makeTranslation("FR");
-        }
-
-        private void anglaisToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            makeTranslation("EN");
-        }
-
-        private void allemandToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            makeTranslation("DE");
-        }
-
-        private void espagnolToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            makeTranslation("ES");
-        }
-
-
-        public void translationFR()
-        {
-            // DEBUT TRADUCTION
-            //label
-            lblViewDistance.Text = "Vue (chunk)";
-
-            //---Boutons
-
-            //boutons systemes
-            btnDownloadServJar.Text = "Télécharger serveur";
-            btnUpdateServer.Text = "Mettre à jour Serveur";
-            btnStartServer.Text = "Démarrer Serveur";
-
-            //boutons paramètres
-            lblRam.Text = "Changer RAM";
-
-            //Maps
-            btnWorldCreation.Text = "Gestion des mondes";
-            btnWorldSelection.Text = "Changer de monde";
-
-
-            //MOTD
-            btnMOTD.Text = "changer MOTD";
-
-            //---Groupes
-            gbSystem.Text = "Système";
-            gbSettings.Text = "Paramètres";
-            gbCracks.Text = "Premium Only";
-            gbWhitelist.Text = "Whitelist";
-            gbPvp.Text = "PvP";
-            gbCommandBlock.Text = "CommandBlock";
-            gbHardcore.Text = "Hardcore";
-            gbMaps.Text = "Gestion de maps";
-            gbDistances.Text = "Distances";
-            gbMOTD.Text = "MOTD";
-
-            //---Menu
-
-            //-Fichier
-            //Head
-            fichierToolStripMenuItem.Text = "Fichier";
-            //Items
-            quitterToolStripMenuItem.Text = "Quitter";
-            rechargerToolStripMenuItem.Text = "Recharger";
-
-            //-Langue
-            //Head
-            langueToolStripMenuItem.Text = "Langue";
-            //Items
-            françaisToolStripMenuItem.Text = "Français";
-            anglaisToolStripMenuItem.Text = "English";
-            allemandToolStripMenuItem.Text = "Deutsch";
-            espagnolToolStripMenuItem.Text = "Español";
-
-            //-Infos
-            //Head
-            infosToolStripMenuItem.Text = "Infos";
-            //Items
-            versionToolStripMenuItem.Text = "Version";
-            changelogToolStripMenuItem.Text = "Changelog";
-            reposToolStripMenuItem.Text = "Repository";
-            créateursToolStripMenuItem.Text = "Créateurs";
-
-            //Specials items label
-            labelDownloadJar = "Télécharger l'un des serveur parmis les types suivants et renommez 'server.jar' .";
-            motdChanged = "Le MOTD a bien été mis a jour.";
-            Updated = "MODIFIÉ - ";
-            noWorld = "Erreur, aucun monde selectionné";
-
-        }
-
-        public void translationEN()
-        {
-            // DEBUT TRADUCTION
-
-            //label
-            lblViewDistance.Text = "View (chunk)";
-
-            //---Boutons
-
-            //boutons systemes
-            btnDownloadServJar.Text = "Download Server";
-            btnUpdateServer.Text = "Update server";
-            btnStartServer.Text = "Start server";
-
-            //boutons paramètres
-            lblRam.Text = "Edit RAM";
-
-            //Maps
-            btnWorldCreation.Text = "Maps management";
-            btnWorldSelection.Text = "Switch active map";
-
-            //MOTD
-            btnMOTD.Text = "change MOTD";
-
-            //---Groupes
-            gbSystem.Text = "System";
-            gbSettings.Text = "Settings";
-            gbCracks.Text = "Premium Only";
-            gbWhitelist.Text = "Whitelist";
-            gbPvp.Text = "PvP";
-            gbCommandBlock.Text = "CommandBlock";
-            gbHardcore.Text = "Hardcore";
-            gbMaps.Text = "Maps management";
-            gbDistances.Text = "Distances";
-            gbMOTD.Text = "MOTD";
-
-            //---Menu
-
-            //-Fichier
-            //Head
-            fichierToolStripMenuItem.Text = "File";
-            //Items
-            quitterToolStripMenuItem.Text = "Quit";
-            rechargerToolStripMenuItem.Text = "Reload";
-
-            //-Langue
-            //Head
-            langueToolStripMenuItem.Text = "Language";
-            //Items
-            françaisToolStripMenuItem.Text = "Français";
-            anglaisToolStripMenuItem.Text = "English";
-            allemandToolStripMenuItem.Text = "Deutsch";
-            espagnolToolStripMenuItem.Text = "Español";
-
-            //-Infos
-            //Head
-            infosToolStripMenuItem.Text = "Infos";
-            //Items
-            versionToolStripMenuItem.Text = "Version";
-            changelogToolStripMenuItem.Text = "Changelog";
-            reposToolStripMenuItem.Text = "Repository";
-            créateursToolStripMenuItem.Text = "Creators";
-
-            //Specials items label
-            labelDownloadJar = "Download jar from theses type, and rename it 'server.jar' .";
-            motdChanged = "MOTD has been updated.";
-            Updated = "UPDATED - ";
-            noWorld = "Error, no world selectionned";
-        }
-
-        public void translationDE()
-        {
-            // DEBUT TRADUCTION
-
-            //label
-            lblViewDistance.Text = "Ansicht (Chunks)";
-
-            //---Boutons
-
-            //boutons systemes
-            btnDownloadServJar.Text = "Server herunterladen";
-            btnUpdateServer.Text = "Server aktualisieren";
-            btnStartServer.Text = "Server starten";
-
-            //boutons paramètres
-            lblRam.Text = "RAM bearbeiten";
-
-            //Maps
-            btnWorldCreation.Text = "Kartenverwaltung";
-            btnWorldSelection.Text = "Aktive Karte wechseln";
-
-            //MOTD
-            btnMOTD.Text = "MOTD ändern";
-
-            //---Groupes
-            gbSystem.Text = "System";
-            gbSettings.Text = "Einstellungen";
-            gbCracks.Text = "Premium Only";
-            gbWhitelist.Text = "Whitelist";
-            gbPvp.Text = "PvP";
-            gbCommandBlock.Text = "Befehlsblock";
-            gbHardcore.Text = "Hardcore";
-            gbMaps.Text = "Kartenverwaltung";
-            gbDistances.Text = "Entfernungen";
-            gbMOTD.Text = "MOTD";
-
-            //---Menu
-
-            //-Fichier
-            //Head
-            fichierToolStripMenuItem.Text = "Datei";
-            //Items
-            quitterToolStripMenuItem.Text = "Beenden";
-            rechargerToolStripMenuItem.Text = "Neu laden";
-
-            //-Langue
-            //Head
-            langueToolStripMenuItem.Text = "Sprache";
-            //Items
-            françaisToolStripMenuItem.Text = "Français";
-            anglaisToolStripMenuItem.Text = "English";
-            allemandToolStripMenuItem.Text = "Deutsch";
-            espagnolToolStripMenuItem.Text = "Español";
-
-            //-Infos
-            //Head
-            infosToolStripMenuItem.Text = "Informationen";
-            //Items
-            versionToolStripMenuItem.Text = "Version";
-            changelogToolStripMenuItem.Text = "Änderungsprotokoll";
-            reposToolStripMenuItem.Text = "Repository";
-            créateursToolStripMenuItem.Text = "Schöpfer";
-
-            //Specials items label
-            labelDownloadJar = "Laden Sie ein Jar von diesen Typen herunter und benennen Sie es in 'server.jar' um.";
-            motdChanged = "MOTD wurde aktualisiert.";
-            Updated = "AKTUALISIERT - ";
-            noWorld = "Fehler, keine Welt ausgewählt";
-        }
-
-        public void translationES()
-        {
-            // DEBUT TRADUCTION
-
-            //label
-            lblViewDistance.Text = "Vista (Chunks)";
-
-            //---Boutons
-
-            //boutons systemes
-            btnDownloadServJar.Text = "Descargar servidor";
-            btnUpdateServer.Text = "Actualizar servidor";
-            btnStartServer.Text = "Iniciar servidor";
-
-            //boutons paramètres
-            lblRam.Text = "Editar RAM";
-
-            //Maps
-            btnWorldCreation.Text = "Gestión de mapas";
-            btnWorldSelection.Text = "Cambiar mapa activo";
-
-            //MOTD
-            btnMOTD.Text = "Cambiar MOTD";
-
-            //---Groupes
-            gbSystem.Text = "Sistema";
-            gbSettings.Text = "Configuración";
-            gbCracks.Text = "Premium Only";
-            gbWhitelist.Text = "Lista blanca";
-            gbPvp.Text = "PvP";
-            gbCommandBlock.Text = "Bloque de comandos";
-            gbHardcore.Text = "Modo hardcore";
-            gbMaps.Text = "Gestión de mapas";
-            gbDistances.Text = "Distancias";
-            gbMOTD.Text = "MOTD";
-
-            //---Menu
-
-            //-Fichier
-            //Head
-            fichierToolStripMenuItem.Text = "Archivo";
-            //Items
-            quitterToolStripMenuItem.Text = "Salir";
-            rechargerToolStripMenuItem.Text = "Recargar";
-
-            //-Langue
-            //Head
-            langueToolStripMenuItem.Text = "Idioma";
-            //Items
-            françaisToolStripMenuItem.Text = "Français";
-            anglaisToolStripMenuItem.Text = "English";
-            allemandToolStripMenuItem.Text = "Deutsch";
-            espagnolToolStripMenuItem.Text = "Español";
-
-            //-Infos
-            //Head
-            infosToolStripMenuItem.Text = "Información";
-            //Items
-            versionToolStripMenuItem.Text = "Versión";
-            changelogToolStripMenuItem.Text = "Registro de cambios";
-            reposToolStripMenuItem.Text = "Repositorio";
-            créateursToolStripMenuItem.Text = "Creadores";
-
-            //Specials items label
-            labelDownloadJar = "Descargue un archivo Jar de estos tipos y cambie su nombre a 'server.jar'.";
-            motdChanged = "El MOTD ha sido actualizado.";
-            Updated = "ACTUALIZADO - ";
-            noWorld = "Error, no se ha seleccionado ningún mundo";
-        }
-
 
         private void rechargerToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1168,6 +845,7 @@ namespace MCServCare
             FrmServerJar frmServerJar = new FrmServerJar();
             frmServerJar.setTextAndColor(background, labelDownloadJar);
             frmServerJar.ShowDialog();
+            frmServerJar.Close();
         }
 
         public string GetProfileValue(string criterion)
@@ -1318,29 +996,52 @@ namespace MCServCare
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            WorldImporter worldImporter = new WorldImporter(background, deeperBackground, orangeTextColor);
+            if (worldImporter == null)
+            {
+                worldImporter = new WorldImporter(background, deeperBackground, orangeTextColor);
+            }
+
             worldImporter.ShowDialog();
-            lvWorldSelection.Items.Clear();
-            ServerManager_Load(sender, e);
-        }
+
+            if (worldImporter.isChanged)
+            {
+                lvWorldSelection.Items.Clear();
+                ServerManager_Load(sender, e);
+            }
+
+            worldImporter.Dispose();
+            worldImporter = null;
+         }
 
         private void btnDeleteWorld_Click(object sender, EventArgs e)
         {
-            try
+            List<string> selectedItemsStrings = new List<string>();
+            foreach(ListViewItem item in lvWorldSelection.SelectedItems)
             {
-                string activeWorld = lvWorldSelection.SelectedItems[0].Text;
-                DialogResult dialogResult = MessageBox.Show($"Do you really want to delete that world ({activeWorld}) ? This is permanent.", "Are you sure ?", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                selectedItemsStrings.Add(item.Text);
+            }
+            string activeWorld = String.Join(", ", selectedItemsStrings);
+            DialogResult dialogResult = MessageBox.Show($"Voulez-vous vraiment supprimer ce monde ({activeWorld}) ? C'est permanent.", "Êtes-vous sûr ?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                try
                 {
-                    string path = Path.Combine(Directory.GetCurrentDirectory(), activeWorld);
-                    Directory.Delete(path, true);
+                    foreach (ListViewItem selectedItem in lvWorldSelection.SelectedItems)
+                    {
+
+                        string path = Path.Combine(Directory.GetCurrentDirectory(), selectedItem.Text);
+                        Directory.Delete(path, true);
+                        lvWorldSelection.Items.Remove(selectedItem); // Supprime l'élément de la ListView
+
+                    }
+                    
                 }
+                catch
+                {
+                    MessageBox.Show(noWorld);
+                }
+                MessageBox.Show("Suppression réussie"); // Message de confirmation
             }
-            catch
-            {
-                MessageBox.Show(noWorld);
-            }
-            
         }
 
         private void btnOpenWorldFolder_Click(object sender, EventArgs e)
@@ -1428,6 +1129,132 @@ namespace MCServCare
             }
         }
 
+        private void btnUpdateMCServerCare_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/MythMega/MyServerCare/releases");
+        
+        }
 
+        private void datapacksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DatapackDB ddb = new DatapackDB();
+            ddb.ShowDialog();
+            ddb.Close();
+        }
+
+        private void btnWorldOptions_Click(object sender, EventArgs e)
+        {
+            if(lvWorldSelection.SelectedItems.Count == 1)
+            {
+                WorldEditor we = new WorldEditor(lvWorldSelection.SelectedItems[0].Text);
+                we.ShowDialog();
+                we.Close();
+            }
+            else if(lvWorldSelection.SelectedItems.Count == 0)
+            {
+                MessageBox.Show(noWorld);
+            }
+
+        }
+
+        private void getOtherJavaVersionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // 
+            JavaFinder jf = new JavaFinder();
+            jf.ShowDialog();
+        }
+
+        private void howToInstallOtherJavaVerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Traduction.TranslateByCode("Main.JAVA_HowToInstallJavaTutorial"));
+        }
+
+        private void removeJavaFromJavaSwitcherToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<string> elements = new List<string>();
+
+            foreach(string lvi in cbJavaSwutcher.Items)
+                elements.Add(lvi);
+
+            RemoveJava rj = new RemoveJava(elements);
+
+            rj.ShowDialog();
+
+            // ajout des items
+
+            foreach(string itemToAdd in rj.toAdd)
+            {
+                cbJavaSwutcher.Items.Add(itemToAdd);      
+            }
+            List<string> jars = new List<string>();
+
+            // suppresion des items
+
+            foreach (string itemToRem in rj.toDel)
+                cbJavaSwutcher.Items.Remove(itemToRem);
+
+
+            foreach (string s in cbJavaSwutcher.Items)
+                jars.Add(s);
+            SetProfileValue("savedJavas", String.Join(";", jars));
+            rj.Close();
+
+        }
+
+        private void togglePluginsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PluginManager pluginManager = new PluginManager();
+            pluginManager.ShowDialog();
+            pluginManager.Close();
+        }
+
+        private void openPluginsFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = Path.Combine(Application.StartupPath, "plugins");
+            Process process = new Process();
+            process.StartInfo.FileName = "explorer.exe";
+            process.StartInfo.Arguments = path;
+            if(Directory.Exists(path))
+            {
+                process.Start();
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("no plugin folder, create one ?", "Warning", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Directory.CreateDirectory(path);
+                    process.Start();
+                }
+                else
+                {
+                    return;
+                }
+
+            }
+        }
+
+        private void pluginListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = Path.Combine(Application.StartupPath, "plugins");
+
+            if (!Directory.Exists(path))
+            {
+                MessageBox.Show("Erreur : Le dossier n'existe pas.");
+                return;
+            }
+
+            var files = Directory.GetFiles(path);
+            var jarFiles = files.Where(file => file.EndsWith(".jar")).ToList();
+            var disabledFiles = files.Where(file => file.EndsWith(".disabled")).ToList();
+
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("------\nON\n");
+            jarFiles.ForEach(jarFile => stringBuilder.AppendLine(Path.GetFileNameWithoutExtension(jarFile)));
+            stringBuilder.AppendLine("\n------\nOFF\n");
+            disabledFiles.ForEach(disabledFile => stringBuilder.AppendLine(Path.GetFileNameWithoutExtension(disabledFile)));
+
+            MessageBox.Show(stringBuilder.ToString());
+        }
     }
 }

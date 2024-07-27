@@ -40,6 +40,8 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.cbVersionMinecraft = new System.Windows.Forms.ComboBox();
+            this.cbType = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnVanilla
@@ -214,12 +216,57 @@
             this.label1.TabIndex = 10;
             this.label1.Text = ".";
             // 
+            // cbVersionMinecraft
+            // 
+            this.cbVersionMinecraft.FormattingEnabled = true;
+            this.cbVersionMinecraft.Items.AddRange(new object[] {
+            "1.17",
+            "1.17.1",
+            "1.18",
+            "1.18.1",
+            "1.18.2",
+            "1.19",
+            "1.19.1",
+            "1.19.2",
+            "1.19.3",
+            "1.19.4",
+            "1.20",
+            "1.20.1",
+            "1.20.2",
+            "1.20.3",
+            "1.20.4",
+            "1.20.6",
+            "1.21"});
+            this.cbVersionMinecraft.Location = new System.Drawing.Point(19, 245);
+            this.cbVersionMinecraft.Name = "cbVersionMinecraft";
+            this.cbVersionMinecraft.Size = new System.Drawing.Size(130, 21);
+            this.cbVersionMinecraft.TabIndex = 11;
+            // 
+            // cbType
+            // 
+            this.cbType.FormattingEnabled = true;
+            this.cbType.Items.AddRange(new object[] {
+            "vanilla",
+            "mods [forge]",
+            "mods [fabric]",
+            "plugins {spigot]",
+            "plugins {paper]",
+            "mod & plugins",
+            "pocket edition",
+            "Bedrock & Java"});
+            this.cbType.Location = new System.Drawing.Point(155, 245);
+            this.cbType.Name = "cbType";
+            this.cbType.Size = new System.Drawing.Size(130, 21);
+            this.cbType.TabIndex = 12;
+            // 
             // FrmServerJar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(440, 185);
+            this.ClientSize = new System.Drawing.Size(440, 366);
+            this.Controls.Add(this.cbType);
+            this.Controls.Add(this.cbVersionMinecraft);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button8);
@@ -253,5 +300,7 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbVersionMinecraft;
+        private System.Windows.Forms.ComboBox cbType;
     }
 }

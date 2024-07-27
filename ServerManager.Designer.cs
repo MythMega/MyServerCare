@@ -37,6 +37,7 @@
             this.btnWorldSelection = new System.Windows.Forms.Button();
             this.lvWorldSelection = new System.Windows.Forms.ListView();
             this.gbSystem = new System.Windows.Forms.GroupBox();
+            this.btnUpdateMCServerCare = new System.Windows.Forms.Button();
             this.btnDownloadServJar = new System.Windows.Forms.Button();
             this.gbWhitelist = new System.Windows.Forms.GroupBox();
             this.gbSettings = new System.Windows.Forms.GroupBox();
@@ -47,6 +48,7 @@
             this.lblRam = new System.Windows.Forms.Label();
             this.numRam = new System.Windows.Forms.NumericUpDown();
             this.gbMaps = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnOpenWorldFolder = new System.Windows.Forms.Button();
             this.btnDeleteWorld = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -80,6 +82,14 @@
             this.anglaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allemandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.espagnolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.italienToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.portugaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.suedoisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.philipinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.japonaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.russeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.helpWithTranslationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changelogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,6 +97,17 @@
             this.créateursToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contributeursToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.roadMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.datapacksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ttmiJava = new System.Windows.Forms.ToolStripMenuItem();
+            this.getOtherJavaVersionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.howToInstallOtherJavaVerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.removeJavaFromJavaSwitcherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.togglePluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pluginListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openPluginsFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.btnUpdateSC = new System.Windows.Forms.Button();
@@ -101,10 +122,10 @@
             this.jarSwitcherText = new System.Windows.Forms.Label();
             this.cbJavaSwutcher = new System.Windows.Forms.ComboBox();
             this.CustomJava = new System.Windows.Forms.Label();
-            this.pbPlusjava = new System.Windows.Forms.PictureBox();
-            this.refreshJarSwitcher = new System.Windows.Forms.PictureBox();
             this.gbPort = new System.Windows.Forms.GroupBox();
             this.numPort = new System.Windows.Forms.NumericUpDown();
+            this.pbPlusjava = new System.Windows.Forms.PictureBox();
+            this.refreshJarSwitcher = new System.Windows.Forms.PictureBox();
             this.gbSystem.SuspendLayout();
             this.gbWhitelist.SuspendLayout();
             this.gbSettings.SuspendLayout();
@@ -126,10 +147,10 @@
             this.groupBox1.SuspendLayout();
             this.gbEnd.SuspendLayout();
             this.gbNether.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPlusjava)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.refreshJarSwitcher)).BeginInit();
             this.gbPort.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlusjava)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshJarSwitcher)).BeginInit();
             this.SuspendLayout();
             // 
             // btnUpdateServer
@@ -160,7 +181,7 @@
             this.btnStartServer.ForeColor = System.Drawing.Color.White;
             this.btnStartServer.Location = new System.Drawing.Point(12, 559);
             this.btnStartServer.Name = "btnStartServer";
-            this.btnStartServer.Size = new System.Drawing.Size(610, 76);
+            this.btnStartServer.Size = new System.Drawing.Size(683, 76);
             this.btnStartServer.TabIndex = 1;
             this.btnStartServer.Text = "Démarrer Serveur";
             this.btnStartServer.UseVisualStyleBackColor = true;
@@ -177,7 +198,7 @@
             this.btnWorldCreation.ForeColor = System.Drawing.Color.White;
             this.btnWorldCreation.Location = new System.Drawing.Point(5, 16);
             this.btnWorldCreation.Name = "btnWorldCreation";
-            this.btnWorldCreation.Size = new System.Drawing.Size(141, 48);
+            this.btnWorldCreation.Size = new System.Drawing.Size(221, 48);
             this.btnWorldCreation.TabIndex = 2;
             this.btnWorldCreation.Text = "Ajouter un monde";
             this.btnWorldCreation.UseVisualStyleBackColor = true;
@@ -210,7 +231,7 @@
             this.btnWorldSelection.ForeColor = System.Drawing.Color.White;
             this.btnWorldSelection.Location = new System.Drawing.Point(1, 348);
             this.btnWorldSelection.Name = "btnWorldSelection";
-            this.btnWorldSelection.Size = new System.Drawing.Size(198, 23);
+            this.btnWorldSelection.Size = new System.Drawing.Size(274, 23);
             this.btnWorldSelection.TabIndex = 8;
             this.btnWorldSelection.Text = "Changer de monde";
             this.btnWorldSelection.UseVisualStyleBackColor = true;
@@ -224,7 +245,7 @@
             this.lvWorldSelection.HideSelection = false;
             this.lvWorldSelection.Location = new System.Drawing.Point(6, 94);
             this.lvWorldSelection.Name = "lvWorldSelection";
-            this.lvWorldSelection.Size = new System.Drawing.Size(188, 246);
+            this.lvWorldSelection.Size = new System.Drawing.Size(263, 246);
             this.lvWorldSelection.TabIndex = 9;
             this.lvWorldSelection.UseCompatibleStateImageBehavior = false;
             this.lvWorldSelection.View = System.Windows.Forms.View.List;
@@ -234,16 +255,34 @@
             // gbSystem
             // 
             this.gbSystem.BackColor = System.Drawing.Color.Transparent;
+            this.gbSystem.Controls.Add(this.btnUpdateMCServerCare);
             this.gbSystem.Controls.Add(this.btnDownloadServJar);
             this.gbSystem.Controls.Add(this.btnUpdateServer);
             this.gbSystem.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbSystem.ForeColor = System.Drawing.Color.Orange;
             this.gbSystem.Location = new System.Drawing.Point(10, 27);
             this.gbSystem.Name = "gbSystem";
-            this.gbSystem.Size = new System.Drawing.Size(200, 92);
+            this.gbSystem.Size = new System.Drawing.Size(200, 117);
             this.gbSystem.TabIndex = 10;
             this.gbSystem.TabStop = false;
             this.gbSystem.Text = "Système";
+            // 
+            // btnUpdateMCServerCare
+            // 
+            this.btnUpdateMCServerCare.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnUpdateMCServerCare.FlatAppearance.BorderSize = 0;
+            this.btnUpdateMCServerCare.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
+            this.btnUpdateMCServerCare.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnUpdateMCServerCare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateMCServerCare.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateMCServerCare.ForeColor = System.Drawing.Color.White;
+            this.btnUpdateMCServerCare.Location = new System.Drawing.Point(1, 82);
+            this.btnUpdateMCServerCare.Name = "btnUpdateMCServerCare";
+            this.btnUpdateMCServerCare.Size = new System.Drawing.Size(198, 23);
+            this.btnUpdateMCServerCare.TabIndex = 3;
+            this.btnUpdateMCServerCare.Text = "update MCServerCare";
+            this.btnUpdateMCServerCare.UseVisualStyleBackColor = true;
+            this.btnUpdateMCServerCare.Click += new System.EventHandler(this.btnUpdateMCServerCare_Click);
             // 
             // btnDownloadServJar
             // 
@@ -268,7 +307,7 @@
             this.gbWhitelist.Controls.Add(this.btnWhitelist);
             this.gbWhitelist.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbWhitelist.ForeColor = System.Drawing.Color.Orange;
-            this.gbWhitelist.Location = new System.Drawing.Point(421, 55);
+            this.gbWhitelist.Location = new System.Drawing.Point(497, 79);
             this.gbWhitelist.Name = "gbWhitelist";
             this.gbWhitelist.Size = new System.Drawing.Size(200, 53);
             this.gbWhitelist.TabIndex = 11;
@@ -286,7 +325,7 @@
             this.gbSettings.Controls.Add(this.numRam);
             this.gbSettings.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbSettings.ForeColor = System.Drawing.Color.Orange;
-            this.gbSettings.Location = new System.Drawing.Point(10, 119);
+            this.gbSettings.Location = new System.Drawing.Point(10, 150);
             this.gbSettings.Name = "gbSettings";
             this.gbSettings.Size = new System.Drawing.Size(200, 180);
             this.gbSettings.TabIndex = 12;
@@ -365,6 +404,7 @@
             // gbMaps
             // 
             this.gbMaps.BackColor = System.Drawing.Color.Transparent;
+            this.gbMaps.Controls.Add(this.button1);
             this.gbMaps.Controls.Add(this.btnOpenWorldFolder);
             this.gbMaps.Controls.Add(this.btnDeleteWorld);
             this.gbMaps.Controls.Add(this.pictureBox2);
@@ -378,10 +418,27 @@
             this.gbMaps.ForeColor = System.Drawing.Color.Orange;
             this.gbMaps.Location = new System.Drawing.Point(215, 27);
             this.gbMaps.Name = "gbMaps";
-            this.gbMaps.Size = new System.Drawing.Size(200, 526);
+            this.gbMaps.Size = new System.Drawing.Size(275, 526);
             this.gbMaps.TabIndex = 13;
             this.gbMaps.TabStop = false;
             this.gbMaps.Text = "Maps";
+            // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(1, 398);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(274, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "World Options";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnWorldOptions_Click);
             // 
             // btnOpenWorldFolder
             // 
@@ -392,9 +449,9 @@
             this.btnOpenWorldFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpenWorldFolder.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOpenWorldFolder.ForeColor = System.Drawing.Color.White;
-            this.btnOpenWorldFolder.Location = new System.Drawing.Point(1, 424);
+            this.btnOpenWorldFolder.Location = new System.Drawing.Point(1, 428);
             this.btnOpenWorldFolder.Name = "btnOpenWorldFolder";
-            this.btnOpenWorldFolder.Size = new System.Drawing.Size(198, 23);
+            this.btnOpenWorldFolder.Size = new System.Drawing.Size(274, 23);
             this.btnOpenWorldFolder.TabIndex = 15;
             this.btnOpenWorldFolder.Text = "Open World Folder";
             this.btnOpenWorldFolder.UseVisualStyleBackColor = true;
@@ -411,7 +468,7 @@
             this.btnDeleteWorld.ForeColor = System.Drawing.Color.White;
             this.btnDeleteWorld.Location = new System.Drawing.Point(1, 459);
             this.btnDeleteWorld.Name = "btnDeleteWorld";
-            this.btnDeleteWorld.Size = new System.Drawing.Size(198, 23);
+            this.btnDeleteWorld.Size = new System.Drawing.Size(274, 23);
             this.btnDeleteWorld.TabIndex = 14;
             this.btnDeleteWorld.Text = "Delete World";
             this.btnDeleteWorld.UseVisualStyleBackColor = true;
@@ -420,7 +477,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::MCServCare.Properties.Resources.import;
-            this.pictureBox2.Location = new System.Drawing.Point(153, 19);
+            this.pictureBox2.Location = new System.Drawing.Point(232, 20);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(36, 36);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -431,7 +488,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::MCServCare.Properties.Resources.orangerefresh;
-            this.pictureBox1.Location = new System.Drawing.Point(170, 68);
+            this.pictureBox1.Location = new System.Drawing.Point(244, 67);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(24, 24);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -460,7 +517,7 @@
             this.btnCreateBackup.ForeColor = System.Drawing.Color.White;
             this.btnCreateBackup.Location = new System.Drawing.Point(1, 492);
             this.btnCreateBackup.Name = "btnCreateBackup";
-            this.btnCreateBackup.Size = new System.Drawing.Size(198, 23);
+            this.btnCreateBackup.Size = new System.Drawing.Size(274, 23);
             this.btnCreateBackup.TabIndex = 10;
             this.btnCreateBackup.Text = "Backup";
             this.btnCreateBackup.UseVisualStyleBackColor = true;
@@ -472,7 +529,7 @@
             this.gbCracks.Controls.Add(this.btnOpenToCrack);
             this.gbCracks.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbCracks.ForeColor = System.Drawing.Color.Orange;
-            this.gbCracks.Location = new System.Drawing.Point(420, 500);
+            this.gbCracks.Location = new System.Drawing.Point(496, 500);
             this.gbCracks.Name = "gbCracks";
             this.gbCracks.Size = new System.Drawing.Size(200, 53);
             this.gbCracks.TabIndex = 14;
@@ -499,7 +556,7 @@
             this.gbCommandBlock.BackColor = System.Drawing.Color.Transparent;
             this.gbCommandBlock.Controls.Add(this.btnCommandBlockActive);
             this.gbCommandBlock.ForeColor = System.Drawing.Color.Orange;
-            this.gbCommandBlock.Location = new System.Drawing.Point(421, 108);
+            this.gbCommandBlock.Location = new System.Drawing.Point(497, 132);
             this.gbCommandBlock.Name = "gbCommandBlock";
             this.gbCommandBlock.Size = new System.Drawing.Size(200, 53);
             this.gbCommandBlock.TabIndex = 15;
@@ -527,7 +584,7 @@
             this.gbPvp.Controls.Add(this.btnPVPActive);
             this.gbPvp.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbPvp.ForeColor = System.Drawing.Color.Orange;
-            this.gbPvp.Location = new System.Drawing.Point(421, 161);
+            this.gbPvp.Location = new System.Drawing.Point(497, 185);
             this.gbPvp.Name = "gbPvp";
             this.gbPvp.Size = new System.Drawing.Size(200, 53);
             this.gbPvp.TabIndex = 16;
@@ -555,7 +612,7 @@
             this.gbHardcore.Controls.Add(this.btnHardcoreActive);
             this.gbHardcore.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbHardcore.ForeColor = System.Drawing.Color.Orange;
-            this.gbHardcore.Location = new System.Drawing.Point(421, 214);
+            this.gbHardcore.Location = new System.Drawing.Point(497, 238);
             this.gbHardcore.Name = "gbHardcore";
             this.gbHardcore.Size = new System.Drawing.Size(200, 51);
             this.gbHardcore.TabIndex = 17;
@@ -584,9 +641,9 @@
             this.gbMOTD.Controls.Add(this.txbMOTD);
             this.gbMOTD.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbMOTD.ForeColor = System.Drawing.Color.Orange;
-            this.gbMOTD.Location = new System.Drawing.Point(421, 371);
+            this.gbMOTD.Location = new System.Drawing.Point(497, 395);
             this.gbMOTD.Name = "gbMOTD";
-            this.gbMOTD.Size = new System.Drawing.Size(200, 125);
+            this.gbMOTD.Size = new System.Drawing.Size(200, 107);
             this.gbMOTD.TabIndex = 22;
             this.gbMOTD.TabStop = false;
             this.gbMOTD.Text = "MOTD";
@@ -600,7 +657,7 @@
             this.btnMOTD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMOTD.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMOTD.ForeColor = System.Drawing.Color.White;
-            this.btnMOTD.Location = new System.Drawing.Point(1, 93);
+            this.btnMOTD.Location = new System.Drawing.Point(0, 74);
             this.btnMOTD.Name = "btnMOTD";
             this.btnMOTD.Size = new System.Drawing.Size(198, 23);
             this.btnMOTD.TabIndex = 1;
@@ -615,7 +672,7 @@
             this.txbMOTD.Location = new System.Drawing.Point(7, 20);
             this.txbMOTD.Multiline = true;
             this.txbMOTD.Name = "txbMOTD";
-            this.txbMOTD.Size = new System.Drawing.Size(187, 69);
+            this.txbMOTD.Size = new System.Drawing.Size(187, 49);
             this.txbMOTD.TabIndex = 0;
             // 
             // gbDistances
@@ -629,7 +686,7 @@
             this.gbDistances.Controls.Add(this.numViewDistance);
             this.gbDistances.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbDistances.ForeColor = System.Drawing.Color.Orange;
-            this.gbDistances.Location = new System.Drawing.Point(10, 299);
+            this.gbDistances.Location = new System.Drawing.Point(10, 330);
             this.gbDistances.Name = "gbDistances";
             this.gbDistances.Size = new System.Drawing.Size(200, 170);
             this.gbDistances.TabIndex = 23;
@@ -705,10 +762,13 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fichierToolStripMenuItem,
             this.langueToolStripMenuItem,
-            this.infosToolStripMenuItem});
+            this.infosToolStripMenuItem,
+            this.datapacksToolStripMenuItem,
+            this.configToolStripMenuItem,
+            this.pluginsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(633, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(709, 24);
             this.menuStrip1.TabIndex = 24;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -744,7 +804,15 @@
             this.françaisToolStripMenuItem,
             this.anglaisToolStripMenuItem,
             this.allemandToolStripMenuItem,
-            this.espagnolToolStripMenuItem});
+            this.espagnolToolStripMenuItem,
+            this.italienToolStripMenuItem,
+            this.portugaisToolStripMenuItem,
+            this.suedoisToolStripMenuItem,
+            this.philipinToolStripMenuItem,
+            this.japonaisToolStripMenuItem,
+            this.russeToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.helpWithTranslationToolStripMenuItem});
             this.langueToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.langueToolStripMenuItem.Name = "langueToolStripMenuItem";
             this.langueToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
@@ -753,30 +821,93 @@
             // françaisToolStripMenuItem
             // 
             this.françaisToolStripMenuItem.Name = "françaisToolStripMenuItem";
-            this.françaisToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.françaisToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.françaisToolStripMenuItem.Tag = "FR";
             this.françaisToolStripMenuItem.Text = "Français";
-            this.françaisToolStripMenuItem.Click += new System.EventHandler(this.françaisToolStripMenuItem_Click);
+            this.françaisToolStripMenuItem.Click += new System.EventHandler(this.ChangeLanguage);
             // 
             // anglaisToolStripMenuItem
             // 
             this.anglaisToolStripMenuItem.Name = "anglaisToolStripMenuItem";
-            this.anglaisToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.anglaisToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.anglaisToolStripMenuItem.Tag = "EN";
             this.anglaisToolStripMenuItem.Text = "Anglais";
-            this.anglaisToolStripMenuItem.Click += new System.EventHandler(this.anglaisToolStripMenuItem_Click);
+            this.anglaisToolStripMenuItem.Click += new System.EventHandler(this.ChangeLanguage);
             // 
             // allemandToolStripMenuItem
             // 
             this.allemandToolStripMenuItem.Name = "allemandToolStripMenuItem";
-            this.allemandToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.allemandToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.allemandToolStripMenuItem.Tag = "DE";
             this.allemandToolStripMenuItem.Text = "Allemand";
-            this.allemandToolStripMenuItem.Click += new System.EventHandler(this.allemandToolStripMenuItem_Click);
+            this.allemandToolStripMenuItem.Click += new System.EventHandler(this.ChangeLanguage);
             // 
             // espagnolToolStripMenuItem
             // 
             this.espagnolToolStripMenuItem.Name = "espagnolToolStripMenuItem";
-            this.espagnolToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.espagnolToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.espagnolToolStripMenuItem.Tag = "ES";
             this.espagnolToolStripMenuItem.Text = "Espagnol";
-            this.espagnolToolStripMenuItem.Click += new System.EventHandler(this.espagnolToolStripMenuItem_Click);
+            this.espagnolToolStripMenuItem.Click += new System.EventHandler(this.ChangeLanguage);
+            // 
+            // italienToolStripMenuItem
+            // 
+            this.italienToolStripMenuItem.Name = "italienToolStripMenuItem";
+            this.italienToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.italienToolStripMenuItem.Tag = "IT";
+            this.italienToolStripMenuItem.Text = "Italien";
+            this.italienToolStripMenuItem.Click += new System.EventHandler(this.ChangeLanguage);
+            // 
+            // portugaisToolStripMenuItem
+            // 
+            this.portugaisToolStripMenuItem.Name = "portugaisToolStripMenuItem";
+            this.portugaisToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.portugaisToolStripMenuItem.Tag = "PT";
+            this.portugaisToolStripMenuItem.Text = "Portugais";
+            this.portugaisToolStripMenuItem.Click += new System.EventHandler(this.ChangeLanguage);
+            // 
+            // suedoisToolStripMenuItem
+            // 
+            this.suedoisToolStripMenuItem.Name = "suedoisToolStripMenuItem";
+            this.suedoisToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.suedoisToolStripMenuItem.Tag = "SE";
+            this.suedoisToolStripMenuItem.Text = "Suedois";
+            this.suedoisToolStripMenuItem.Click += new System.EventHandler(this.ChangeLanguage);
+            // 
+            // philipinToolStripMenuItem
+            // 
+            this.philipinToolStripMenuItem.Name = "philipinToolStripMenuItem";
+            this.philipinToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.philipinToolStripMenuItem.Tag = "PH";
+            this.philipinToolStripMenuItem.Text = "Philipin";
+            this.philipinToolStripMenuItem.Click += new System.EventHandler(this.ChangeLanguage);
+            // 
+            // japonaisToolStripMenuItem
+            // 
+            this.japonaisToolStripMenuItem.Name = "japonaisToolStripMenuItem";
+            this.japonaisToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.japonaisToolStripMenuItem.Tag = "JP";
+            this.japonaisToolStripMenuItem.Text = "Japonais";
+            this.japonaisToolStripMenuItem.Click += new System.EventHandler(this.ChangeLanguage);
+            // 
+            // russeToolStripMenuItem
+            // 
+            this.russeToolStripMenuItem.Name = "russeToolStripMenuItem";
+            this.russeToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.russeToolStripMenuItem.Tag = "RU";
+            this.russeToolStripMenuItem.Text = "Russe";
+            this.russeToolStripMenuItem.Click += new System.EventHandler(this.ChangeLanguage);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(181, 6);
+            // 
+            // helpWithTranslationToolStripMenuItem
+            // 
+            this.helpWithTranslationToolStripMenuItem.Name = "helpWithTranslationToolStripMenuItem";
+            this.helpWithTranslationToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.helpWithTranslationToolStripMenuItem.Text = "Help with translation";
             // 
             // infosToolStripMenuItem
             // 
@@ -835,6 +966,89 @@
             this.roadMapToolStripMenuItem.Text = "RoadMap";
             this.roadMapToolStripMenuItem.Click += new System.EventHandler(this.roadMapToolStripMenuItem_Click);
             // 
+            // datapacksToolStripMenuItem
+            // 
+            this.datapacksToolStripMenuItem.Name = "datapacksToolStripMenuItem";
+            this.datapacksToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.datapacksToolStripMenuItem.Text = "Datapacks";
+            this.datapacksToolStripMenuItem.Click += new System.EventHandler(this.datapacksToolStripMenuItem_Click);
+            // 
+            // configToolStripMenuItem
+            // 
+            this.configToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ttmiJava});
+            this.configToolStripMenuItem.Name = "configToolStripMenuItem";
+            this.configToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.configToolStripMenuItem.Text = "Config";
+            // 
+            // ttmiJava
+            // 
+            this.ttmiJava.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.getOtherJavaVersionToolStripMenuItem,
+            this.howToInstallOtherJavaVerToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.removeJavaFromJavaSwitcherToolStripMenuItem});
+            this.ttmiJava.Name = "ttmiJava";
+            this.ttmiJava.Size = new System.Drawing.Size(180, 22);
+            this.ttmiJava.Text = "Java";
+            // 
+            // getOtherJavaVersionToolStripMenuItem
+            // 
+            this.getOtherJavaVersionToolStripMenuItem.Name = "getOtherJavaVersionToolStripMenuItem";
+            this.getOtherJavaVersionToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.getOtherJavaVersionToolStripMenuItem.Text = "Get other Java version";
+            this.getOtherJavaVersionToolStripMenuItem.Click += new System.EventHandler(this.getOtherJavaVersionToolStripMenuItem_Click);
+            // 
+            // howToInstallOtherJavaVerToolStripMenuItem
+            // 
+            this.howToInstallOtherJavaVerToolStripMenuItem.Name = "howToInstallOtherJavaVerToolStripMenuItem";
+            this.howToInstallOtherJavaVerToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.howToInstallOtherJavaVerToolStripMenuItem.Text = "How to install other Java version";
+            this.howToInstallOtherJavaVerToolStripMenuItem.Click += new System.EventHandler(this.howToInstallOtherJavaVerToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(241, 6);
+            // 
+            // removeJavaFromJavaSwitcherToolStripMenuItem
+            // 
+            this.removeJavaFromJavaSwitcherToolStripMenuItem.Name = "removeJavaFromJavaSwitcherToolStripMenuItem";
+            this.removeJavaFromJavaSwitcherToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.removeJavaFromJavaSwitcherToolStripMenuItem.Text = "Remove Java from Java switcher";
+            this.removeJavaFromJavaSwitcherToolStripMenuItem.Click += new System.EventHandler(this.removeJavaFromJavaSwitcherToolStripMenuItem_Click);
+            // 
+            // pluginsToolStripMenuItem
+            // 
+            this.pluginsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.togglePluginsToolStripMenuItem,
+            this.pluginListToolStripMenuItem,
+            this.openPluginsFolderToolStripMenuItem});
+            this.pluginsToolStripMenuItem.Name = "pluginsToolStripMenuItem";
+            this.pluginsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.pluginsToolStripMenuItem.Text = "Plugins";
+            // 
+            // togglePluginsToolStripMenuItem
+            // 
+            this.togglePluginsToolStripMenuItem.Name = "togglePluginsToolStripMenuItem";
+            this.togglePluginsToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.togglePluginsToolStripMenuItem.Text = "Toggle Plugins";
+            this.togglePluginsToolStripMenuItem.Click += new System.EventHandler(this.togglePluginsToolStripMenuItem_Click);
+            // 
+            // pluginListToolStripMenuItem
+            // 
+            this.pluginListToolStripMenuItem.Name = "pluginListToolStripMenuItem";
+            this.pluginListToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.pluginListToolStripMenuItem.Text = "Plugin list";
+            this.pluginListToolStripMenuItem.Click += new System.EventHandler(this.pluginListToolStripMenuItem_Click);
+            // 
+            // openPluginsFolderToolStripMenuItem
+            // 
+            this.openPluginsFolderToolStripMenuItem.Name = "openPluginsFolderToolStripMenuItem";
+            this.openPluginsFolderToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.openPluginsFolderToolStripMenuItem.Text = "Open Plugins Folder";
+            this.openPluginsFolderToolStripMenuItem.Click += new System.EventHandler(this.openPluginsFolderToolStripMenuItem_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
@@ -843,7 +1057,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.Orange;
             this.groupBox1.Location = new System.Drawing.Point(12, 677);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(610, 80);
+            this.groupBox1.Size = new System.Drawing.Size(684, 80);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ServerCare";
@@ -859,7 +1073,7 @@
             this.btnOpenFolder.ForeColor = System.Drawing.Color.White;
             this.btnOpenFolder.Location = new System.Drawing.Point(7, 50);
             this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(592, 23);
+            this.btnOpenFolder.Size = new System.Drawing.Size(671, 23);
             this.btnOpenFolder.TabIndex = 1;
             this.btnOpenFolder.Text = "Open Folder";
             this.btnOpenFolder.UseVisualStyleBackColor = true;
@@ -877,7 +1091,7 @@
             this.btnUpdateSC.ForeColor = System.Drawing.Color.White;
             this.btnUpdateSC.Location = new System.Drawing.Point(7, 20);
             this.btnUpdateSC.Name = "btnUpdateSC";
-            this.btnUpdateSC.Size = new System.Drawing.Size(592, 23);
+            this.btnUpdateSC.Size = new System.Drawing.Size(671, 23);
             this.btnUpdateSC.TabIndex = 0;
             this.btnUpdateSC.Text = "Update .SC";
             this.btnUpdateSC.UseVisualStyleBackColor = true;
@@ -888,7 +1102,7 @@
             this.gbEnd.Controls.Add(this.btnEndOff);
             this.gbEnd.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbEnd.ForeColor = System.Drawing.Color.Orange;
-            this.gbEnd.Location = new System.Drawing.Point(422, 318);
+            this.gbEnd.Location = new System.Drawing.Point(498, 342);
             this.gbEnd.Name = "gbEnd";
             this.gbEnd.Size = new System.Drawing.Size(200, 53);
             this.gbEnd.TabIndex = 26;
@@ -927,7 +1141,7 @@
             // lblNotif
             // 
             this.lblNotif.AutoSize = true;
-            this.lblNotif.Location = new System.Drawing.Point(425, 35);
+            this.lblNotif.Location = new System.Drawing.Point(496, 27);
             this.lblNotif.MaximumSize = new System.Drawing.Size(200, 0);
             this.lblNotif.Name = "lblNotif";
             this.lblNotif.Size = new System.Drawing.Size(44, 13);
@@ -945,7 +1159,7 @@
             this.gbNether.Controls.Add(this.btnNetherOff);
             this.gbNether.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbNether.ForeColor = System.Drawing.Color.Orange;
-            this.gbNether.Location = new System.Drawing.Point(422, 265);
+            this.gbNether.Location = new System.Drawing.Point(498, 289);
             this.gbNether.Name = "gbNether";
             this.gbNether.Size = new System.Drawing.Size(200, 53);
             this.gbNether.TabIndex = 27;
@@ -957,10 +1171,11 @@
             this.cbJarSwitcher.BackColor = System.Drawing.SystemColors.MenuText;
             this.cbJarSwitcher.ForeColor = System.Drawing.Color.White;
             this.cbJarSwitcher.FormattingEnabled = true;
-            this.cbJarSwitcher.Location = new System.Drawing.Point(15, 654);
+            this.cbJarSwitcher.Location = new System.Drawing.Point(15, 652);
             this.cbJarSwitcher.Name = "cbJarSwitcher";
-            this.cbJarSwitcher.Size = new System.Drawing.Size(248, 21);
+            this.cbJarSwitcher.Size = new System.Drawing.Size(200, 21);
             this.cbJarSwitcher.TabIndex = 20;
+            this.cbJarSwitcher.Tag = "server";
             this.cbJarSwitcher.SelectedIndexChanged += new System.EventHandler(this.cbJarSwitcher_SelectedIndexChanged);
             // 
             // jarSwitcherText
@@ -970,9 +1185,9 @@
             this.jarSwitcherText.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.jarSwitcherText.Location = new System.Drawing.Point(18, 638);
             this.jarSwitcherText.Name = "jarSwitcherText";
-            this.jarSwitcherText.Size = new System.Drawing.Size(58, 15);
+            this.jarSwitcherText.Size = new System.Drawing.Size(112, 15);
             this.jarSwitcherText.TabIndex = 20;
-            this.jarSwitcherText.Text = "ServerJar";
+            this.jarSwitcherText.Text = "Server Jar Switcher";
             // 
             // cbJavaSwutcher
             // 
@@ -981,10 +1196,11 @@
             this.cbJavaSwutcher.FormattingEnabled = true;
             this.cbJavaSwutcher.Items.AddRange(new object[] {
             "java"});
-            this.cbJavaSwutcher.Location = new System.Drawing.Point(342, 654);
+            this.cbJavaSwutcher.Location = new System.Drawing.Point(254, 652);
             this.cbJavaSwutcher.Name = "cbJavaSwutcher";
-            this.cbJavaSwutcher.Size = new System.Drawing.Size(247, 21);
+            this.cbJavaSwutcher.Size = new System.Drawing.Size(411, 21);
             this.cbJavaSwutcher.TabIndex = 28;
+            this.cbJavaSwutcher.Tag = "java";
             this.cbJavaSwutcher.SelectedIndexChanged += new System.EventHandler(this.cbJarSwitcher_SelectedIndexChanged);
             // 
             // CustomJava
@@ -992,33 +1208,11 @@
             this.CustomJava.AutoSize = true;
             this.CustomJava.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomJava.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.CustomJava.Location = new System.Drawing.Point(345, 639);
+            this.CustomJava.Location = new System.Drawing.Point(257, 638);
             this.CustomJava.Name = "CustomJava";
-            this.CustomJava.Size = new System.Drawing.Size(61, 15);
+            this.CustomJava.Size = new System.Drawing.Size(96, 15);
             this.CustomJava.TabIndex = 30;
-            this.CustomJava.Text = "JavaJar /!\\";
-            // 
-            // pbPlusjava
-            // 
-            this.pbPlusjava.Image = global::MCServCare.Properties.Resources.plus;
-            this.pbPlusjava.Location = new System.Drawing.Point(594, 652);
-            this.pbPlusjava.Name = "pbPlusjava";
-            this.pbPlusjava.Size = new System.Drawing.Size(24, 24);
-            this.pbPlusjava.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbPlusjava.TabIndex = 29;
-            this.pbPlusjava.TabStop = false;
-            this.pbPlusjava.Click += new System.EventHandler(this.pbPlusjava_Click);
-            // 
-            // refreshJarSwitcher
-            // 
-            this.refreshJarSwitcher.Image = global::MCServCare.Properties.Resources.orangerefresh;
-            this.refreshJarSwitcher.Location = new System.Drawing.Point(267, 653);
-            this.refreshJarSwitcher.Name = "refreshJarSwitcher";
-            this.refreshJarSwitcher.Size = new System.Drawing.Size(24, 24);
-            this.refreshJarSwitcher.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.refreshJarSwitcher.TabIndex = 13;
-            this.refreshJarSwitcher.TabStop = false;
-            this.refreshJarSwitcher.Click += new System.EventHandler(this.refreshJarSwitcher_Click);
+            this.CustomJava.Text = "Java Switcher /!\\";
             // 
             // gbPort
             // 
@@ -1026,7 +1220,7 @@
             this.gbPort.Controls.Add(this.numPort);
             this.gbPort.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbPort.ForeColor = System.Drawing.Color.Orange;
-            this.gbPort.Location = new System.Drawing.Point(10, 469);
+            this.gbPort.Location = new System.Drawing.Point(10, 500);
             this.gbPort.Name = "gbPort";
             this.gbPort.Size = new System.Drawing.Size(201, 53);
             this.gbPort.TabIndex = 12;
@@ -1048,12 +1242,34 @@
             this.numPort.TabIndex = 27;
             this.numPort.ValueChanged += new System.EventHandler(this.numPort_ValueChanged);
             // 
+            // pbPlusjava
+            // 
+            this.pbPlusjava.Image = global::MCServCare.Properties.Resources.plus;
+            this.pbPlusjava.Location = new System.Drawing.Point(671, 650);
+            this.pbPlusjava.Name = "pbPlusjava";
+            this.pbPlusjava.Size = new System.Drawing.Size(24, 24);
+            this.pbPlusjava.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbPlusjava.TabIndex = 29;
+            this.pbPlusjava.TabStop = false;
+            this.pbPlusjava.Click += new System.EventHandler(this.pbPlusjava_Click);
+            // 
+            // refreshJarSwitcher
+            // 
+            this.refreshJarSwitcher.Image = global::MCServCare.Properties.Resources.orangerefresh;
+            this.refreshJarSwitcher.Location = new System.Drawing.Point(225, 650);
+            this.refreshJarSwitcher.Name = "refreshJarSwitcher";
+            this.refreshJarSwitcher.Size = new System.Drawing.Size(24, 24);
+            this.refreshJarSwitcher.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.refreshJarSwitcher.TabIndex = 13;
+            this.refreshJarSwitcher.TabStop = false;
+            this.refreshJarSwitcher.Click += new System.EventHandler(this.refreshJarSwitcher_Click);
+            // 
             // ServerManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(633, 763);
+            this.ClientSize = new System.Drawing.Size(709, 763);
             this.Controls.Add(this.gbPort);
             this.Controls.Add(this.CustomJava);
             this.Controls.Add(this.btnStartServer);
@@ -1108,10 +1324,10 @@
             this.groupBox1.ResumeLayout(false);
             this.gbEnd.ResumeLayout(false);
             this.gbNether.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbPlusjava)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.refreshJarSwitcher)).EndInit();
             this.gbPort.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlusjava)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshJarSwitcher)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1194,6 +1410,27 @@
         private System.Windows.Forms.GroupBox gbPort;
         private System.Windows.Forms.NumericUpDown numPort;
         private System.Windows.Forms.ToolStripMenuItem roadMapToolStripMenuItem;
+        private System.Windows.Forms.Button btnUpdateMCServerCare;
+        private System.Windows.Forms.ToolStripMenuItem datapacksToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem configToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ttmiJava;
+        private System.Windows.Forms.ToolStripMenuItem getOtherJavaVersionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem howToInstallOtherJavaVerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem removeJavaFromJavaSwitcherToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pluginsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem togglePluginsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pluginListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openPluginsFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem italienToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem portugaisToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem suedoisToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem philipinToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem helpWithTranslationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem japonaisToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem russeToolStripMenuItem;
     }
 }
 

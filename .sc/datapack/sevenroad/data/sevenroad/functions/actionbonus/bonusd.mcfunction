@@ -1,0 +1,3 @@
+give @s minecraft:splash_potion{CustomPotionEffects:[{Id:8,Amplifier:126,Duration:200,ShowParticles:0b}],CustomPotionColor:3400050,display:{Name:"\"JumpusPot\"",Lore:["Cette potions contient l'effet suivant : GIGA JUMP BOOST"]}}
+tellraw @a ["",{"selector":"@s"},{"text":" à eu le bonus "},{"text":"POTION ROAD TO SPACE","color":"dark_green"},{"text":" !"}]
+execute at @a as @a run playsound minecraft:block.bell.use master @a

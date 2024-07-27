@@ -74,6 +74,7 @@
             this.txbWorldName.Name = "txbWorldName";
             this.txbWorldName.Size = new System.Drawing.Size(158, 20);
             this.txbWorldName.TabIndex = 1;
+            this.txbWorldName.TextChanged += new System.EventHandler(this.txbWorldName_TextChanged);
             // 
             // lblWorldNameSettings
             // 

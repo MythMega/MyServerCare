@@ -18,6 +18,8 @@ namespace MCServCare
         public FrmServerJar()
         {
             InitializeComponent();
+            cbType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbVersionMinecraft.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
 
