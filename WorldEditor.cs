@@ -30,6 +30,7 @@ namespace MCServCare
             lblNewDataPack.Text = Traduction.TranslateByCode("WorldEditor.GenerateNewDatapack");
             lblWorldNameChange.Text = Traduction.TranslateByCode("Common.WorldName");
             btnSave.Text = Traduction.TranslateByCode("Common.Save");
+            cbVersion.SelectedIndex = 0;
 
         }
 
@@ -285,16 +286,6 @@ namespace MCServCare
             Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft"));
             Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text));
 
-
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "dimension"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "dimension_type"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "tags"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "loot_tables"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "loot_tables", "entities"));
-            
-            
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "tags", "functions"));
             string loadjson = $@"{{
  ""values"": [
  ""{txbDatapackNew.Text}:load""
@@ -305,54 +296,133 @@ namespace MCServCare
  ""{txbDatapackNew.Text}:loop""
  ]
 }}";
-            File.WriteAllText(Path.Combine(datapackFolder, "data", "minecraft", "tags", "functions", "load.json"), loadjson);
-            File.WriteAllText(Path.Combine(datapackFolder, "data", "minecraft", "tags", "functions", "tick.json"), tickjson);
+
+            switch (cbVersion.Text)
+            {
+                case "1.20 and lower":
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "dimension"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "dimension_type"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "tags"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "loot_tables"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "loot_tables", "entities"));
 
 
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "biome"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "configured_carver"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "configured_feature"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "density_function"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "flat_level_generator_preset"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "noise"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "noise_settings"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "placed_feature"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "processor_list"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "structure"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "structure_set"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "template_pool"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "world_preset"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "tags", "functions"));
+
+                    File.WriteAllText(Path.Combine(datapackFolder, "data", "minecraft", "tags", "functions", "load.json"), loadjson);
+                    File.WriteAllText(Path.Combine(datapackFolder, "data", "minecraft", "tags", "functions", "tick.json"), tickjson);
 
 
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "block_predicate"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "dimension"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "functions"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "advancements"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "recipes"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "loot_tables"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "biome"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "configured_carver"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "configured_feature"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "density_function"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "flat_level_generator_preset"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "noise"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "noise_settings"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "placed_feature"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "processor_list"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "structure"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "structure_set"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "template_pool"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "world_preset"));
 
-            File.WriteAllText(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "functions", "load.mcfunction"), $"# {Traduction.TranslateByCode("WorldEditor.DatapackCommentLoad")}");
-            File.WriteAllText(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "functions", "loop.mcfunction"), $"# {Traduction.TranslateByCode("WorldEditor.DatapackCommentTick")}");
+
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "block_predicate"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "dimension"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "functions"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "advancements"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "recipes"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "loot_tables"));
+
+                    File.WriteAllText(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "functions", "load.mcfunction"), $"# {Traduction.TranslateByCode("WorldEditor.DatapackCommentLoad")}");
+                    File.WriteAllText(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "functions", "loop.mcfunction"), $"# {Traduction.TranslateByCode("WorldEditor.DatapackCommentTick")}");
 
 
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen"));
 
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "biome"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "biome_source"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "chunk_generator"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "configured_carver"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "configured_feature"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "density_function"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "flat_level_generator_preset"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "noise"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "noise_settings"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "placed_feature"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "placement_modifier"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "processor_list"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "structure"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "structure_set"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "template_pool"));
-            Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "world_preset"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "biome"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "biome_source"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "chunk_generator"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "configured_carver"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "configured_feature"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "density_function"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "flat_level_generator_preset"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "noise"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "noise_settings"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "placed_feature"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "placement_modifier"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "processor_list"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "structure"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "structure_set"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "template_pool"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "world_preset"));
+                    break;
+
+                case "1.21 and 1.21 and higher":
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "dimension"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "dimension_type"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "tag"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "loot_table"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "loot_table", "entity"));
+
+
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "tag", "function"));
+                    
+                    File.WriteAllText(Path.Combine(datapackFolder, "data", "minecraft", "tag", "function", "load.json"), loadjson);
+                    File.WriteAllText(Path.Combine(datapackFolder, "data", "minecraft", "tag", "function", "tick.json"), tickjson);
+
+
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "biome"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "configured_carver"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "configured_feature")); 
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "density_function"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "flat_level_generator_preset"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "noise"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "noise_settings"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "placed_feature"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "processor_list"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "structure"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "structure_set"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "template_pool"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", "minecraft", "worldgen", "world_preset"));
+
+
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "block_predicate"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "dimension"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "function"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "advancement"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "recipe"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "loot_table"));
+
+                    File.WriteAllText(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "function", "load.mcfunction"), $"# {Traduction.TranslateByCode("WorldEditor.DatapackCommentLoad")}");
+                    File.WriteAllText(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "function", "loop.mcfunction"), $"# {Traduction.TranslateByCode("WorldEditor.DatapackCommentTick")}");
+
+
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen"));
+
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "biome"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "biome_source"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "chunk_generator"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "configured_carver"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "configured_feature"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "density_function"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "flat_level_generator_preset"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "noise"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "noise_settings"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "placed_feature"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "placement_modifier"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "processor_list"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "structure"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "structure_set"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "template_pool"));
+                    Directory.CreateDirectory(Path.Combine(datapackFolder, "data", txbDatapackNew.Text, "worldgen", "world_preset"));
+                    break;
+
+            }
+            
 
             MessageBox.Show(Traduction.TranslateByCode("Common.Success"));
             loadData();

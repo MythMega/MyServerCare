@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ServerManager));
-            this.btnUpdateServer = new System.Windows.Forms.Button();
             this.btnStartServer = new System.Windows.Forms.Button();
             this.btnWorldCreation = new System.Windows.Forms.Button();
             this.btnWhitelist = new System.Windows.Forms.Button();
@@ -48,11 +47,11 @@
             this.lblRam = new System.Windows.Forms.Label();
             this.numRam = new System.Windows.Forms.NumericUpDown();
             this.gbMaps = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnRefreshWorldList = new System.Windows.Forms.Button();
+            this.btnWorldImporter = new System.Windows.Forms.Button();
+            this.btnWorldOptions = new System.Windows.Forms.Button();
             this.btnOpenWorldFolder = new System.Windows.Forms.Button();
             this.btnDeleteWorld = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblCurrWorld = new System.Windows.Forms.Label();
             this.btnCreateBackup = new System.Windows.Forms.Button();
             this.gbCracks = new System.Windows.Forms.GroupBox();
@@ -108,7 +107,7 @@
             this.togglePluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pluginListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openPluginsFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbServerCare = new System.Windows.Forms.GroupBox();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.btnUpdateSC = new System.Windows.Forms.Button();
             this.gbEnd = new System.Windows.Forms.GroupBox();
@@ -124,16 +123,16 @@
             this.CustomJava = new System.Windows.Forms.Label();
             this.gbPort = new System.Windows.Forms.GroupBox();
             this.numPort = new System.Windows.Forms.NumericUpDown();
-            this.pbPlusjava = new System.Windows.Forms.PictureBox();
-            this.refreshJarSwitcher = new System.Windows.Forms.PictureBox();
+            this.gbHideOnline = new System.Windows.Forms.GroupBox();
+            this.btnHideOnlinePlayer = new System.Windows.Forms.Button();
+            this.btnRefreshJarSwitcher = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.gbSystem.SuspendLayout();
             this.gbWhitelist.SuspendLayout();
             this.gbSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSlotAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRam)).BeginInit();
             this.gbMaps.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbCracks.SuspendLayout();
             this.gbCommandBlock.SuspendLayout();
             this.gbPvp.SuspendLayout();
@@ -144,32 +143,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.numSimulationDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numViewDistance)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbServerCare.SuspendLayout();
             this.gbEnd.SuspendLayout();
             this.gbNether.SuspendLayout();
             this.gbPort.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPlusjava)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.refreshJarSwitcher)).BeginInit();
+            this.gbHideOnline.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnUpdateServer
-            // 
-            this.btnUpdateServer.Enabled = false;
-            this.btnUpdateServer.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnUpdateServer.FlatAppearance.BorderSize = 0;
-            this.btnUpdateServer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
-            this.btnUpdateServer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
-            this.btnUpdateServer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateServer.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateServer.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateServer.Location = new System.Drawing.Point(1, 54);
-            this.btnUpdateServer.Name = "btnUpdateServer";
-            this.btnUpdateServer.Size = new System.Drawing.Size(198, 23);
-            this.btnUpdateServer.TabIndex = 0;
-            this.btnUpdateServer.Text = "Mettre a jour Serveur";
-            this.btnUpdateServer.UseVisualStyleBackColor = true;
-            this.btnUpdateServer.Click += new System.EventHandler(this.btnUpdateServer_Click);
             // 
             // btnStartServer
             // 
@@ -179,7 +159,7 @@
             this.btnStartServer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStartServer.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartServer.ForeColor = System.Drawing.Color.White;
-            this.btnStartServer.Location = new System.Drawing.Point(12, 559);
+            this.btnStartServer.Location = new System.Drawing.Point(12, 589);
             this.btnStartServer.Name = "btnStartServer";
             this.btnStartServer.Size = new System.Drawing.Size(683, 76);
             this.btnStartServer.TabIndex = 1;
@@ -229,7 +209,7 @@
             this.btnWorldSelection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWorldSelection.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnWorldSelection.ForeColor = System.Drawing.Color.White;
-            this.btnWorldSelection.Location = new System.Drawing.Point(1, 348);
+            this.btnWorldSelection.Location = new System.Drawing.Point(1, 377);
             this.btnWorldSelection.Name = "btnWorldSelection";
             this.btnWorldSelection.Size = new System.Drawing.Size(274, 23);
             this.btnWorldSelection.TabIndex = 8;
@@ -245,7 +225,7 @@
             this.lvWorldSelection.HideSelection = false;
             this.lvWorldSelection.Location = new System.Drawing.Point(6, 94);
             this.lvWorldSelection.Name = "lvWorldSelection";
-            this.lvWorldSelection.Size = new System.Drawing.Size(263, 246);
+            this.lvWorldSelection.Size = new System.Drawing.Size(263, 268);
             this.lvWorldSelection.TabIndex = 9;
             this.lvWorldSelection.UseCompatibleStateImageBehavior = false;
             this.lvWorldSelection.View = System.Windows.Forms.View.List;
@@ -257,28 +237,26 @@
             this.gbSystem.BackColor = System.Drawing.Color.Transparent;
             this.gbSystem.Controls.Add(this.btnUpdateMCServerCare);
             this.gbSystem.Controls.Add(this.btnDownloadServJar);
-            this.gbSystem.Controls.Add(this.btnUpdateServer);
             this.gbSystem.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbSystem.ForeColor = System.Drawing.Color.Orange;
             this.gbSystem.Location = new System.Drawing.Point(10, 27);
             this.gbSystem.Name = "gbSystem";
-            this.gbSystem.Size = new System.Drawing.Size(200, 117);
+            this.gbSystem.Size = new System.Drawing.Size(200, 99);
             this.gbSystem.TabIndex = 10;
             this.gbSystem.TabStop = false;
             this.gbSystem.Text = "Système";
             // 
             // btnUpdateMCServerCare
             // 
-            this.btnUpdateMCServerCare.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnUpdateMCServerCare.FlatAppearance.BorderSize = 0;
+            this.btnUpdateMCServerCare.FlatAppearance.BorderColor = System.Drawing.Color.DarkGoldenrod;
             this.btnUpdateMCServerCare.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
             this.btnUpdateMCServerCare.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
             this.btnUpdateMCServerCare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdateMCServerCare.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdateMCServerCare.ForeColor = System.Drawing.Color.White;
-            this.btnUpdateMCServerCare.Location = new System.Drawing.Point(1, 82);
+            this.btnUpdateMCServerCare.Location = new System.Drawing.Point(1, 57);
             this.btnUpdateMCServerCare.Name = "btnUpdateMCServerCare";
-            this.btnUpdateMCServerCare.Size = new System.Drawing.Size(198, 23);
+            this.btnUpdateMCServerCare.Size = new System.Drawing.Size(198, 32);
             this.btnUpdateMCServerCare.TabIndex = 3;
             this.btnUpdateMCServerCare.Text = "update MCServerCare";
             this.btnUpdateMCServerCare.UseVisualStyleBackColor = true;
@@ -295,7 +273,7 @@
             this.btnDownloadServJar.ForeColor = System.Drawing.Color.White;
             this.btnDownloadServJar.Location = new System.Drawing.Point(1, 24);
             this.btnDownloadServJar.Name = "btnDownloadServJar";
-            this.btnDownloadServJar.Size = new System.Drawing.Size(198, 23);
+            this.btnDownloadServJar.Size = new System.Drawing.Size(198, 32);
             this.btnDownloadServJar.TabIndex = 2;
             this.btnDownloadServJar.Text = "Télécharger serveur";
             this.btnDownloadServJar.UseVisualStyleBackColor = true;
@@ -325,7 +303,7 @@
             this.gbSettings.Controls.Add(this.numRam);
             this.gbSettings.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbSettings.ForeColor = System.Drawing.Color.Orange;
-            this.gbSettings.Location = new System.Drawing.Point(10, 150);
+            this.gbSettings.Location = new System.Drawing.Point(10, 125);
             this.gbSettings.Name = "gbSettings";
             this.gbSettings.Size = new System.Drawing.Size(200, 180);
             this.gbSettings.TabIndex = 12;
@@ -356,6 +334,7 @@
             // comboGamemode
             // 
             this.comboGamemode.BackColor = System.Drawing.SystemColors.MenuText;
+            this.comboGamemode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboGamemode.ForeColor = System.Drawing.Color.White;
             this.comboGamemode.FormattingEnabled = true;
             this.comboGamemode.Items.AddRange(new object[] {
@@ -363,7 +342,7 @@
             "creative",
             "adventure",
             "spectator"});
-            this.comboGamemode.Location = new System.Drawing.Point(8, 140);
+            this.comboGamemode.Location = new System.Drawing.Point(8, 144);
             this.comboGamemode.Name = "comboGamemode";
             this.comboGamemode.Size = new System.Drawing.Size(185, 23);
             this.comboGamemode.TabIndex = 11;
@@ -404,11 +383,11 @@
             // gbMaps
             // 
             this.gbMaps.BackColor = System.Drawing.Color.Transparent;
-            this.gbMaps.Controls.Add(this.button1);
+            this.gbMaps.Controls.Add(this.btnRefreshWorldList);
+            this.gbMaps.Controls.Add(this.btnWorldImporter);
+            this.gbMaps.Controls.Add(this.btnWorldOptions);
             this.gbMaps.Controls.Add(this.btnOpenWorldFolder);
             this.gbMaps.Controls.Add(this.btnDeleteWorld);
-            this.gbMaps.Controls.Add(this.pictureBox2);
-            this.gbMaps.Controls.Add(this.pictureBox1);
             this.gbMaps.Controls.Add(this.lblCurrWorld);
             this.gbMaps.Controls.Add(this.btnCreateBackup);
             this.gbMaps.Controls.Add(this.lvWorldSelection);
@@ -418,27 +397,61 @@
             this.gbMaps.ForeColor = System.Drawing.Color.Orange;
             this.gbMaps.Location = new System.Drawing.Point(215, 27);
             this.gbMaps.Name = "gbMaps";
-            this.gbMaps.Size = new System.Drawing.Size(275, 526);
+            this.gbMaps.Size = new System.Drawing.Size(275, 555);
             this.gbMaps.TabIndex = 13;
             this.gbMaps.TabStop = false;
             this.gbMaps.Text = "Maps";
             // 
-            // button1
+            // btnRefreshWorldList
             // 
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(1, 398);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(274, 23);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "World Options";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnWorldOptions_Click);
+            this.btnRefreshWorldList.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnRefreshWorldList.FlatAppearance.BorderSize = 0;
+            this.btnRefreshWorldList.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
+            this.btnRefreshWorldList.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnRefreshWorldList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefreshWorldList.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefreshWorldList.ForeColor = System.Drawing.Color.White;
+            this.btnRefreshWorldList.Image = global::MCServCare.Properties.Resources.orangerefresh_minimized;
+            this.btnRefreshWorldList.Location = new System.Drawing.Point(234, 64);
+            this.btnRefreshWorldList.Name = "btnRefreshWorldList";
+            this.btnRefreshWorldList.Size = new System.Drawing.Size(24, 24);
+            this.btnRefreshWorldList.TabIndex = 18;
+            this.btnRefreshWorldList.UseVisualStyleBackColor = true;
+            this.btnRefreshWorldList.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // btnWorldImporter
+            // 
+            this.btnWorldImporter.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnWorldImporter.FlatAppearance.BorderSize = 0;
+            this.btnWorldImporter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
+            this.btnWorldImporter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnWorldImporter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWorldImporter.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnWorldImporter.ForeColor = System.Drawing.Color.White;
+            this.btnWorldImporter.Image = global::MCServCare.Properties.Resources.import_minimized;
+            this.btnWorldImporter.Location = new System.Drawing.Point(233, 22);
+            this.btnWorldImporter.Name = "btnWorldImporter";
+            this.btnWorldImporter.Size = new System.Drawing.Size(36, 36);
+            this.btnWorldImporter.TabIndex = 17;
+            this.btnWorldImporter.UseVisualStyleBackColor = true;
+            this.btnWorldImporter.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
+            // btnWorldOptions
+            // 
+            this.btnWorldOptions.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnWorldOptions.FlatAppearance.BorderSize = 0;
+            this.btnWorldOptions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Goldenrod;
+            this.btnWorldOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnWorldOptions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWorldOptions.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnWorldOptions.ForeColor = System.Drawing.Color.White;
+            this.btnWorldOptions.Location = new System.Drawing.Point(1, 427);
+            this.btnWorldOptions.Name = "btnWorldOptions";
+            this.btnWorldOptions.Size = new System.Drawing.Size(274, 23);
+            this.btnWorldOptions.TabIndex = 16;
+            this.btnWorldOptions.Text = "World Options";
+            this.btnWorldOptions.UseVisualStyleBackColor = true;
+            this.btnWorldOptions.Click += new System.EventHandler(this.btnWorldOptions_Click);
             // 
             // btnOpenWorldFolder
             // 
@@ -449,7 +462,7 @@
             this.btnOpenWorldFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpenWorldFolder.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOpenWorldFolder.ForeColor = System.Drawing.Color.White;
-            this.btnOpenWorldFolder.Location = new System.Drawing.Point(1, 428);
+            this.btnOpenWorldFolder.Location = new System.Drawing.Point(1, 457);
             this.btnOpenWorldFolder.Name = "btnOpenWorldFolder";
             this.btnOpenWorldFolder.Size = new System.Drawing.Size(274, 23);
             this.btnOpenWorldFolder.TabIndex = 15;
@@ -466,35 +479,13 @@
             this.btnDeleteWorld.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteWorld.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteWorld.ForeColor = System.Drawing.Color.White;
-            this.btnDeleteWorld.Location = new System.Drawing.Point(1, 459);
+            this.btnDeleteWorld.Location = new System.Drawing.Point(1, 488);
             this.btnDeleteWorld.Name = "btnDeleteWorld";
             this.btnDeleteWorld.Size = new System.Drawing.Size(274, 23);
             this.btnDeleteWorld.TabIndex = 14;
             this.btnDeleteWorld.Text = "Delete World";
             this.btnDeleteWorld.UseVisualStyleBackColor = true;
             this.btnDeleteWorld.Click += new System.EventHandler(this.btnDeleteWorld_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::MCServCare.Properties.Resources.import;
-            this.pictureBox2.Location = new System.Drawing.Point(232, 20);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(36, 36);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 13;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::MCServCare.Properties.Resources.orangerefresh;
-            this.pictureBox1.Location = new System.Drawing.Point(244, 67);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(24, 24);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // lblCurrWorld
             // 
@@ -515,7 +506,7 @@
             this.btnCreateBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateBackup.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateBackup.ForeColor = System.Drawing.Color.White;
-            this.btnCreateBackup.Location = new System.Drawing.Point(1, 492);
+            this.btnCreateBackup.Location = new System.Drawing.Point(1, 521);
             this.btnCreateBackup.Name = "btnCreateBackup";
             this.btnCreateBackup.Size = new System.Drawing.Size(274, 23);
             this.btnCreateBackup.TabIndex = 10;
@@ -686,7 +677,7 @@
             this.gbDistances.Controls.Add(this.numViewDistance);
             this.gbDistances.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbDistances.ForeColor = System.Drawing.Color.Orange;
-            this.gbDistances.Location = new System.Drawing.Point(10, 330);
+            this.gbDistances.Location = new System.Drawing.Point(10, 306);
             this.gbDistances.Name = "gbDistances";
             this.gbDistances.Size = new System.Drawing.Size(200, 170);
             this.gbDistances.TabIndex = 23;
@@ -989,7 +980,7 @@
             this.toolStripSeparator1,
             this.removeJavaFromJavaSwitcherToolStripMenuItem});
             this.ttmiJava.Name = "ttmiJava";
-            this.ttmiJava.Size = new System.Drawing.Size(180, 22);
+            this.ttmiJava.Size = new System.Drawing.Size(96, 22);
             this.ttmiJava.Text = "Java";
             // 
             // getOtherJavaVersionToolStripMenuItem
@@ -1049,18 +1040,18 @@
             this.openPluginsFolderToolStripMenuItem.Text = "Open Plugins Folder";
             this.openPluginsFolderToolStripMenuItem.Click += new System.EventHandler(this.openPluginsFolderToolStripMenuItem_Click);
             // 
-            // groupBox1
+            // gbServerCare
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.btnOpenFolder);
-            this.groupBox1.Controls.Add(this.btnUpdateSC);
-            this.groupBox1.ForeColor = System.Drawing.Color.Orange;
-            this.groupBox1.Location = new System.Drawing.Point(12, 677);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(684, 80);
-            this.groupBox1.TabIndex = 25;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "ServerCare";
+            this.gbServerCare.BackColor = System.Drawing.Color.Transparent;
+            this.gbServerCare.Controls.Add(this.btnOpenFolder);
+            this.gbServerCare.Controls.Add(this.btnUpdateSC);
+            this.gbServerCare.ForeColor = System.Drawing.Color.Orange;
+            this.gbServerCare.Location = new System.Drawing.Point(12, 707);
+            this.gbServerCare.Name = "gbServerCare";
+            this.gbServerCare.Size = new System.Drawing.Size(684, 80);
+            this.gbServerCare.TabIndex = 25;
+            this.gbServerCare.TabStop = false;
+            this.gbServerCare.Text = "ServerCare";
             // 
             // btnOpenFolder
             // 
@@ -1169,9 +1160,10 @@
             // cbJarSwitcher
             // 
             this.cbJarSwitcher.BackColor = System.Drawing.SystemColors.MenuText;
+            this.cbJarSwitcher.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbJarSwitcher.ForeColor = System.Drawing.Color.White;
             this.cbJarSwitcher.FormattingEnabled = true;
-            this.cbJarSwitcher.Location = new System.Drawing.Point(15, 652);
+            this.cbJarSwitcher.Location = new System.Drawing.Point(15, 682);
             this.cbJarSwitcher.Name = "cbJarSwitcher";
             this.cbJarSwitcher.Size = new System.Drawing.Size(200, 21);
             this.cbJarSwitcher.TabIndex = 20;
@@ -1183,7 +1175,7 @@
             this.jarSwitcherText.AutoSize = true;
             this.jarSwitcherText.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.jarSwitcherText.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.jarSwitcherText.Location = new System.Drawing.Point(18, 638);
+            this.jarSwitcherText.Location = new System.Drawing.Point(18, 667);
             this.jarSwitcherText.Name = "jarSwitcherText";
             this.jarSwitcherText.Size = new System.Drawing.Size(112, 15);
             this.jarSwitcherText.TabIndex = 20;
@@ -1192,11 +1184,12 @@
             // cbJavaSwutcher
             // 
             this.cbJavaSwutcher.BackColor = System.Drawing.SystemColors.MenuText;
+            this.cbJavaSwutcher.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbJavaSwutcher.ForeColor = System.Drawing.Color.White;
             this.cbJavaSwutcher.FormattingEnabled = true;
             this.cbJavaSwutcher.Items.AddRange(new object[] {
             "java"});
-            this.cbJavaSwutcher.Location = new System.Drawing.Point(254, 652);
+            this.cbJavaSwutcher.Location = new System.Drawing.Point(254, 682);
             this.cbJavaSwutcher.Name = "cbJavaSwutcher";
             this.cbJavaSwutcher.Size = new System.Drawing.Size(411, 21);
             this.cbJavaSwutcher.TabIndex = 28;
@@ -1208,11 +1201,11 @@
             this.CustomJava.AutoSize = true;
             this.CustomJava.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CustomJava.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.CustomJava.Location = new System.Drawing.Point(257, 638);
+            this.CustomJava.Location = new System.Drawing.Point(257, 667);
             this.CustomJava.Name = "CustomJava";
-            this.CustomJava.Size = new System.Drawing.Size(96, 15);
+            this.CustomJava.Size = new System.Drawing.Size(82, 15);
             this.CustomJava.TabIndex = 30;
-            this.CustomJava.Text = "Java Switcher /!\\";
+            this.CustomJava.Text = "Java Switcher";
             // 
             // gbPort
             // 
@@ -1220,7 +1213,7 @@
             this.gbPort.Controls.Add(this.numPort);
             this.gbPort.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbPort.ForeColor = System.Drawing.Color.Orange;
-            this.gbPort.Location = new System.Drawing.Point(10, 500);
+            this.gbPort.Location = new System.Drawing.Point(10, 476);
             this.gbPort.Name = "gbPort";
             this.gbPort.Size = new System.Drawing.Size(201, 53);
             this.gbPort.TabIndex = 12;
@@ -1242,46 +1235,85 @@
             this.numPort.TabIndex = 27;
             this.numPort.ValueChanged += new System.EventHandler(this.numPort_ValueChanged);
             // 
-            // pbPlusjava
+            // gbHideOnline
             // 
-            this.pbPlusjava.Image = global::MCServCare.Properties.Resources.plus;
-            this.pbPlusjava.Location = new System.Drawing.Point(671, 650);
-            this.pbPlusjava.Name = "pbPlusjava";
-            this.pbPlusjava.Size = new System.Drawing.Size(24, 24);
-            this.pbPlusjava.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbPlusjava.TabIndex = 29;
-            this.pbPlusjava.TabStop = false;
-            this.pbPlusjava.Click += new System.EventHandler(this.pbPlusjava_Click);
+            this.gbHideOnline.Controls.Add(this.btnHideOnlinePlayer);
+            this.gbHideOnline.Font = new System.Drawing.Font("Montserrat", 8.249999F);
+            this.gbHideOnline.ForeColor = System.Drawing.Color.Orange;
+            this.gbHideOnline.Location = new System.Drawing.Point(11, 529);
+            this.gbHideOnline.Name = "gbHideOnline";
+            this.gbHideOnline.Size = new System.Drawing.Size(200, 53);
+            this.gbHideOnline.TabIndex = 31;
+            this.gbHideOnline.TabStop = false;
+            this.gbHideOnline.Text = "Hide Online Players";
             // 
-            // refreshJarSwitcher
+            // btnHideOnlinePlayer
             // 
-            this.refreshJarSwitcher.Image = global::MCServCare.Properties.Resources.orangerefresh;
-            this.refreshJarSwitcher.Location = new System.Drawing.Point(225, 650);
-            this.refreshJarSwitcher.Name = "refreshJarSwitcher";
-            this.refreshJarSwitcher.Size = new System.Drawing.Size(24, 24);
-            this.refreshJarSwitcher.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.refreshJarSwitcher.TabIndex = 13;
-            this.refreshJarSwitcher.TabStop = false;
-            this.refreshJarSwitcher.Click += new System.EventHandler(this.refreshJarSwitcher_Click);
+            this.btnHideOnlinePlayer.BackColor = System.Drawing.Color.Black;
+            this.btnHideOnlinePlayer.FlatAppearance.BorderSize = 0;
+            this.btnHideOnlinePlayer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHideOnlinePlayer.ForeColor = System.Drawing.Color.White;
+            this.btnHideOnlinePlayer.Location = new System.Drawing.Point(1, 24);
+            this.btnHideOnlinePlayer.Name = "btnHideOnlinePlayer";
+            this.btnHideOnlinePlayer.Size = new System.Drawing.Size(198, 23);
+            this.btnHideOnlinePlayer.TabIndex = 0;
+            this.btnHideOnlinePlayer.Text = "ON";
+            this.btnHideOnlinePlayer.UseVisualStyleBackColor = false;
+            this.btnHideOnlinePlayer.Click += new System.EventHandler(this.btnHideOnlinePlayer_Click);
+            // 
+            // btnRefreshJarSwitcher
+            // 
+            this.btnRefreshJarSwitcher.FlatAppearance.BorderColor = System.Drawing.Color.DarkCyan;
+            this.btnRefreshJarSwitcher.FlatAppearance.BorderSize = 0;
+            this.btnRefreshJarSwitcher.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
+            this.btnRefreshJarSwitcher.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnRefreshJarSwitcher.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefreshJarSwitcher.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefreshJarSwitcher.ForeColor = System.Drawing.Color.White;
+            this.btnRefreshJarSwitcher.Image = global::MCServCare.Properties.Resources.orangerefresh_minimized;
+            this.btnRefreshJarSwitcher.Location = new System.Drawing.Point(221, 680);
+            this.btnRefreshJarSwitcher.Name = "btnRefreshJarSwitcher";
+            this.btnRefreshJarSwitcher.Size = new System.Drawing.Size(24, 24);
+            this.btnRefreshJarSwitcher.TabIndex = 32;
+            this.btnRefreshJarSwitcher.UseVisualStyleBackColor = true;
+            this.btnRefreshJarSwitcher.Click += new System.EventHandler(this.refreshJarSwitcher_Click);
+            // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.DarkCyan;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Image = global::MCServCare.Properties.Resources.plus_minimized;
+            this.button1.Location = new System.Drawing.Point(668, 679);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(25, 25);
+            this.button1.TabIndex = 33;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.pbPlusjava_Click);
             // 
             // ServerManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(709, 763);
+            this.ClientSize = new System.Drawing.Size(709, 791);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnRefreshJarSwitcher);
+            this.Controls.Add(this.gbHideOnline);
             this.Controls.Add(this.gbPort);
             this.Controls.Add(this.CustomJava);
             this.Controls.Add(this.btnStartServer);
-            this.Controls.Add(this.pbPlusjava);
             this.Controls.Add(this.cbJavaSwutcher);
             this.Controls.Add(this.jarSwitcherText);
-            this.Controls.Add(this.refreshJarSwitcher);
             this.Controls.Add(this.cbJarSwitcher);
             this.Controls.Add(this.gbNether);
             this.Controls.Add(this.lblNotif);
             this.Controls.Add(this.gbEnd);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbServerCare);
             this.Controls.Add(this.gbDistances);
             this.Controls.Add(this.gbMOTD);
             this.Controls.Add(this.gbHardcore);
@@ -1293,9 +1325,11 @@
             this.Controls.Add(this.gbWhitelist);
             this.Controls.Add(this.gbSystem);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ServerManager";
+            this.Opacity = 0.99D;
             this.Text = "MCServerCare";
             this.Load += new System.EventHandler(this.ServerManager_Load);
             this.gbSystem.ResumeLayout(false);
@@ -1306,8 +1340,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numRam)).EndInit();
             this.gbMaps.ResumeLayout(false);
             this.gbMaps.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gbCracks.ResumeLayout(false);
             this.gbCommandBlock.ResumeLayout(false);
             this.gbPvp.ResumeLayout(false);
@@ -1321,21 +1353,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.numViewDistance)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
+            this.gbServerCare.ResumeLayout(false);
             this.gbEnd.ResumeLayout(false);
             this.gbNether.ResumeLayout(false);
             this.gbPort.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPlusjava)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.refreshJarSwitcher)).EndInit();
+            this.gbHideOnline.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnUpdateServer;
         private System.Windows.Forms.Button btnStartServer;
         private System.Windows.Forms.Button btnWorldCreation;
         private System.Windows.Forms.Button btnWhitelist;
@@ -1378,9 +1407,8 @@
         private System.Windows.Forms.ToolStripMenuItem rechargerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem contributeursToolStripMenuItem;
         private System.Windows.Forms.Button btnCreateBackup;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbServerCare;
         private System.Windows.Forms.Button btnOpenFolder;
-        private System.Windows.Forms.Button btnUpdateSC;
         private System.Windows.Forms.GroupBox gbEnd;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button btnEndOff;
@@ -1388,7 +1416,6 @@
         private System.Windows.Forms.Label lblRam;
         private System.Windows.Forms.Label lblMaxPlayers;
         private System.Windows.Forms.Label lblGamemode;
-        private System.Windows.Forms.ComboBox comboGamemode;
         private System.Windows.Forms.Button btnDownloadServJar;
         private System.Windows.Forms.Label lblNotif;
         private System.Windows.Forms.Label label3;
@@ -1397,14 +1424,10 @@
         private System.Windows.Forms.Timer timerItem;
         private System.Windows.Forms.GroupBox gbNether;
         private System.Windows.Forms.Label lblCurrWorld;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ComboBox cbJarSwitcher;
-        private System.Windows.Forms.PictureBox refreshJarSwitcher;
         private System.Windows.Forms.Label jarSwitcherText;
         private System.Windows.Forms.ComboBox cbJavaSwutcher;
-        private System.Windows.Forms.PictureBox pbPlusjava;
         private System.Windows.Forms.Label CustomJava;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btnOpenWorldFolder;
         private System.Windows.Forms.Button btnDeleteWorld;
         private System.Windows.Forms.GroupBox gbPort;
@@ -1412,7 +1435,7 @@
         private System.Windows.Forms.ToolStripMenuItem roadMapToolStripMenuItem;
         private System.Windows.Forms.Button btnUpdateMCServerCare;
         private System.Windows.Forms.ToolStripMenuItem datapacksToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnWorldOptions;
         private System.Windows.Forms.ToolStripMenuItem configToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ttmiJava;
         private System.Windows.Forms.ToolStripMenuItem getOtherJavaVersionToolStripMenuItem;
@@ -1431,6 +1454,14 @@
         private System.Windows.Forms.ToolStripMenuItem helpWithTranslationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem japonaisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem russeToolStripMenuItem;
+        private System.Windows.Forms.Button btnUpdateSC;
+        private System.Windows.Forms.GroupBox gbHideOnline;
+        private System.Windows.Forms.Button btnHideOnlinePlayer;
+        private System.Windows.Forms.Button btnWorldImporter;
+        private System.Windows.Forms.Button btnRefreshWorldList;
+        private System.Windows.Forms.Button btnRefreshJarSwitcher;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox comboGamemode;
     }
 }
 

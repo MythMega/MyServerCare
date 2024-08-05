@@ -921,7 +921,7 @@ namespace MCServCare
 
             //boutons systemes
             btnDownloadServJar.Text = Traduction.TranslateByCode("Main.DownloadServerJar");
-            btnUpdateServer.Text = Traduction.TranslateByCode("Main.UpdateServer");
+            //btnUpdateServer.Text = Traduction.TranslateByCode("Main.UpdateServer");
             btnStartServer.Text = Traduction.TranslateByCode("Main.StartServer");
 
             //boutons paramètres

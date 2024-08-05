@@ -45,6 +45,7 @@
             this.txbWorldNameEdit = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblWorldNameChange = new System.Windows.Forms.Label();
+            this.cbVersion = new System.Windows.Forms.ComboBox();
             this.gbDatapack.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,6 +84,7 @@
             // 
             // gbDatapack
             // 
+            this.gbDatapack.Controls.Add(this.cbVersion);
             this.gbDatapack.Controls.Add(this.lblNewDataPack);
             this.gbDatapack.Controls.Add(this.lblDPCustom);
             this.gbDatapack.Controls.Add(this.generate);
@@ -130,7 +132,7 @@
             this.generate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.generate.Font = new System.Drawing.Font("Montserrat", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.generate.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.generate.Location = new System.Drawing.Point(180, 431);
+            this.generate.Location = new System.Drawing.Point(302, 431);
             this.generate.Name = "generate";
             this.generate.Size = new System.Drawing.Size(75, 23);
             this.generate.TabIndex = 7;
@@ -154,7 +156,7 @@
             this.txbDatapackNew.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txbDatapackNew.Font = new System.Drawing.Font("Montserrat", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbDatapackNew.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txbDatapackNew.Location = new System.Drawing.Point(6, 431);
+            this.txbDatapackNew.Location = new System.Drawing.Point(128, 431);
             this.txbDatapackNew.Name = "txbDatapackNew";
             this.txbDatapackNew.Size = new System.Drawing.Size(168, 22);
             this.txbDatapackNew.TabIndex = 6;
@@ -251,6 +253,21 @@
             this.lblWorldNameChange.TabIndex = 8;
             this.lblWorldNameChange.Text = "World Name";
             // 
+            // cbVersion
+            // 
+            this.cbVersion.BackColor = System.Drawing.Color.Teal;
+            this.cbVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbVersion.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.cbVersion.FormattingEnabled = true;
+            this.cbVersion.Items.AddRange(new object[] {
+            "1.21 and higher",
+            "1.20 and lower"});
+            this.cbVersion.Location = new System.Drawing.Point(9, 430);
+            this.cbVersion.Name = "cbVersion";
+            this.cbVersion.Size = new System.Drawing.Size(113, 24);
+            this.cbVersion.TabIndex = 10;
+            // 
             // WorldEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -288,5 +305,6 @@
         private System.Windows.Forms.Button generate;
         private System.Windows.Forms.Label lblWorldNameChange;
         private System.Windows.Forms.Label lblNewDataPack;
+        private System.Windows.Forms.ComboBox cbVersion;
     }
 }
