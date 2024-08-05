@@ -73,6 +73,16 @@ namespace MCServCare.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap import_minimized {
+            get {
+                object obj = ResourceManager.GetObject("import_minimized", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap orangerefresh {
             get {
                 object obj = ResourceManager.GetObject("orangerefresh", resourceCulture);
@@ -83,9 +93,29 @@ namespace MCServCare.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap orangerefresh_minimized {
+            get {
+                object obj = ResourceManager.GetObject("orangerefresh_minimized", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap plus {
             get {
                 object obj = ResourceManager.GetObject("plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap plus_minimized {
+            get {
+                object obj = ResourceManager.GetObject("plus_minimized", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

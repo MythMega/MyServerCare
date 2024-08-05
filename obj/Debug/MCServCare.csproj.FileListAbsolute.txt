@@ -3,6 +3,7 @@ C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.csproj.SuggestedBind
 C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.DatapackDB.resources
 C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.FrmServerJar.resources
 C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.JavaFinder.resources
+C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.PluginManager.resources
 C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.RemoveJava.resources
 C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.ServerManager.resources
 C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.Properties.Resources.resources
@@ -11,11 +12,14 @@ C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.WorldEditor.resource
 C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.WorldImporter.resources
 C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.csproj.GenerateResource.cache
 C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.csproj.CoreCompileInputs.cache
-C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.PluginManager.resources
 C:\Users\mythm\source\repos\MCServCare\bin\Debug\MCServerCare.exe.config
 C:\Users\mythm\source\repos\MCServCare\bin\Debug\MCServerCare.exe
 C:\Users\mythm\source\repos\MCServCare\bin\Debug\MCServerCare.pdb
 C:\Users\mythm\source\repos\MCServCare\bin\Debug\MCServerCare.exe.CodeAnalysisLog.xml
 C:\Users\mythm\source\repos\MCServCare\bin\Debug\MCServerCare.exe.lastcodeanalysissucceeded
+C:\Users\mythm\source\repos\MCServCare\bin\Debug\Newtonsoft.Json.xml
+C:\Users\mythm\source\repos\MCServCare\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.csproj.Fody.CopyLocal.cache
+C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServCare.csproj.CopyComplete
 C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServerCare.exe
 C:\Users\mythm\source\repos\MCServCare\obj\Debug\MCServerCare.pdb

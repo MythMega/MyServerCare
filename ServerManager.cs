@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Net;
-using System.Net.NetworkInformation;
 using System.Reflection;
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.InteropServices;
-using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace MCServCare
 {
@@ -38,8 +34,14 @@ namespace MCServCare
 
         private WorldImporter worldImporter;
 
-        public string APP_VERSION = "1.2.0a";
-        public string APP_BUILD = "37";
+        public string APP_VERSION = "1.2.1a";
+        public string APP_BUILD = "38";
+        private static string repoOwner = "MythMega";
+        private static string repoName = "MyServerCare";
+
+        public string lastVersionUrl = $"https://github.com/MythMega/MyServerCare/releases/latest";
+
+        public int versionLate = 0 ;
 
         public bool IS_LOADED = false;
 
@@ -53,6 +55,7 @@ namespace MCServCare
             btnOnOff.Add(btnOpenToCrack);
             btnOnOff.Add(btnPVPActive);
             btnOnOff.Add(btnCommandBlockActive);
+            btnOnOff.Add(btnHideOnlinePlayer);
 
             
 
@@ -83,7 +86,7 @@ namespace MCServCare
 
             getServerCareFiles();
 
-
+            try { checkVersion(); } catch { }
 
             // Vérifier si le fichier server.properties existe
             string serverPropertiesPath = Path.Combine(Application.StartupPath, "server.properties");
@@ -146,6 +149,7 @@ namespace MCServCare
             btnNetherOff.Tag = GetProperty("allow-nether");
             btnOpenToCrack.Tag = GetProperty("online-mode");
             btnCommandBlockActive.Tag = GetProperty("enable-command-block");
+            btnHideOnlinePlayer.Tag = GetProperty("hide-online-players");
 
             string gm = GetProperty("gamemode");
             int selectedIndex = -1;
@@ -197,6 +201,46 @@ namespace MCServCare
             IS_LOADED = true;
         }
 
+        private async void checkVersion()
+        {
+            string latestVersion = await GetLatestVersionFromGitHub();
+            if (IsNewVersionAvailable(APP_VERSION, latestVersion))
+            {
+
+                DialogResult dialogResult = MessageBox.Show($"New version available. You're {versionLate} late. Click Yes to download latest version of MCServerCare.", "Warning", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    btnUpdateMCServerCare_Click(null, null);
+                }
+            }
+            else
+            {
+                btnUpdateMCServerCare.Enabled = false;
+                btnUpdateMCServerCare.FlatAppearance.BorderSize = 0;
+            }
+
+            
+
+        }
+        private static async Task<string> GetLatestVersionFromGitHub()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("User-Agent", "C# App");
+                string url = $"https://api.github.com/repos/{repoOwner}/{repoName}/releases/latest";
+                string json = await client.GetStringAsync(url);
+                JObject release = JObject.Parse(json);
+                return release["tag_name"].ToString();
+            }
+        }
+
+        private bool IsNewVersionAvailable(string currentVersion, string latestVersion)
+        {
+            int current = int.Parse(APP_BUILD);
+            int latest = int.Parse(latestVersion);
+            versionLate = latest - current;
+            return latest > current;
+        }
 
         private void VerifyFile()
         {
@@ -1131,7 +1175,7 @@ namespace MCServCare
 
         private void btnUpdateMCServerCare_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/MythMega/MyServerCare/releases");
+            System.Diagnostics.Process.Start(lastVersionUrl);
         
         }
 
@@ -1255,6 +1299,23 @@ namespace MCServCare
             disabledFiles.ForEach(disabledFile => stringBuilder.AppendLine(Path.GetFileNameWithoutExtension(disabledFile)));
 
             MessageBox.Show(stringBuilder.ToString());
+        }
+
+        private void btnHideOnlinePlayer_Click(object sender, EventArgs e)
+        {
+            Button myb = (Button)sender;
+            if (myb.Tag.ToString() == "true")
+            {
+                UpdateServerProperties("hide-online-players", "false");
+                myb.Tag = "false";
+            }
+            else
+            {
+                UpdateServerProperties("hide-online-players", "true");
+                myb.Tag = "true";
+            }
+            updateOnOffStyles();
+            sendNotif(Updated + gbHideOnline.Text + " : " + myb.Text + ".");
         }
     }
 }
