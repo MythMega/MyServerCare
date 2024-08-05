@@ -34,8 +34,8 @@ namespace MCServCare
 
         private WorldImporter worldImporter;
 
-        public string APP_VERSION = "1.2.1a";
-        public string APP_BUILD = "38";
+        public string APP_VERSION = "1.2.1b";
+        public string APP_BUILD = "39";
         private static string repoOwner = "MythMega";
         private static string repoName = "MyServerCare";
 
@@ -116,13 +116,8 @@ namespace MCServCare
                 // a voir ce qu'on fait
             }
             lblCurrWorld.Text = "- X X X -";
-            foreach (string worldName in getWorldList())
-            {
-                lvWorldSelection.Items.Add(new ListViewItem($"{worldName}"));
-                string c = GetProperty("level-name");
-                if (worldName == c)
-                    lblCurrWorld.Text = "- " + worldName + " -";
-            }
+
+            refreshComboWorldList();
 
             numRam.Value = GetMemoryAllocationFromStartBat();
             numSlotAmount.Value = int.Parse(GetProperty("max-players"));
@@ -183,8 +178,6 @@ namespace MCServCare
                 cbJavaSwutcher.SelectedIndex = cbJavaSwutcher.FindStringExact(GetProfileValue("javaJar"));
             }
 
-
-            loadServerJars();
             jarSelector();
             if (a == null || a == "")
                 cbJarSwitcher.SelectedIndex = -1;
@@ -199,6 +192,18 @@ namespace MCServCare
             
 
             IS_LOADED = true;
+        }
+
+        private void refreshComboWorldList()
+        {
+            lvWorldSelection.Items.Clear();
+            foreach (string worldName in getWorldList())
+            {
+                lvWorldSelection.Items.Add(new ListViewItem($"{worldName}"));
+                string c = GetProperty("level-name");
+                if (worldName == c)
+                    lblCurrWorld.Text = "- " + worldName + " -";
+            }
         }
 
         private async void checkVersion()
@@ -934,8 +939,7 @@ namespace MCServCare
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            lvWorldSelection.Items.Clear();
-            ServerManager_Load(sender, e);
+            refreshComboWorldList();
         }
 
         private void contributeursToolStripMenuItem_Click(object sender, EventArgs e)
@@ -950,20 +954,6 @@ namespace MCServCare
 
         private void jarSelector()
         {
-            string directoryPath = AppDomain.CurrentDomain.BaseDirectory;
-            string filePath = Path.Combine(directoryPath, "start.bat");
-            string currentjar = File.ReadAllText(filePath).Split(' ')[3];
-
-            cbJarSwitcher.Items.Clear();
-            foreach (string jar in getJarList())
-            {
-                cbJarSwitcher.Items.Add($"{jar}");
-            }
-        }
-        private void loadServerJars()
-        {
-            string directoryPath = AppDomain.CurrentDomain.BaseDirectory;
-
             cbJarSwitcher.Items.Clear();
             foreach (string jar in getJarList())
             {
@@ -971,26 +961,6 @@ namespace MCServCare
             }
         }
 
-        private void loadJavajars()
-        {
-            cbJavaSwutcher.Items.Clear();
-            List<string> jars = new List<string> {};
-            try
-            {
-                string a = GetProfileValue("savedJavas");
-                string[] fiches = a.Split(';');
-                jars.AddRange(fiches);
-            }
-            catch
-            {
-
-            }
-            foreach (string jar in jars)
-            {
-                cbJavaSwutcher.Items.Add($"{jar}");
-            }
-
-        }
 
         private void setJar()
         {
@@ -1036,6 +1006,27 @@ namespace MCServCare
         private void javaSelector()
         {
             loadJavajars();
+        }
+
+        private void loadJavajars()
+        {
+            cbJavaSwutcher.Items.Clear();
+            List<string> jars = new List<string> { };
+            try
+            {
+                string a = GetProfileValue("savedJavas");
+                string[] fiches = a.Split(';');
+                jars.AddRange(fiches);
+            }
+            catch
+            {
+
+            }
+            foreach (string jar in jars)
+            {
+                cbJavaSwutcher.Items.Add($"{jar}");
+            }
+
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
