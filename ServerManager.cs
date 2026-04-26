@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -41,7 +41,7 @@ namespace MCServCare
 
         public string lastVersionUrl = $"https://github.com/MythMega/MyServerCare/releases/latest";
 
-        public int versionLate = 0 ;
+        public int versionLate = 0;
 
         public bool IS_LOADED = false;
 
@@ -56,8 +56,6 @@ namespace MCServCare
             btnOnOff.Add(btnPVPActive);
             btnOnOff.Add(btnCommandBlockActive);
             btnOnOff.Add(btnHideOnlinePlayer);
-
-            
 
             this.BackColor = background;
             lvWorldSelection.BackColor = deeperBackground;
@@ -109,11 +107,11 @@ namespace MCServCare
                 createEula();
             }
 
-            // Vérifier si le fichier server.jar existe
+            // server.jar presence check — no automatic action for now (user must supply their own jar)
             string serverJarPath = Path.Combine(Application.StartupPath, "server.jar");
-            if (!File.Exists(eulaPath))
+            if (!File.Exists(serverJarPath))
             {
-                // a voir ce qu'on fait
+                // TODO: prompt user to download a server jar if none is found
             }
             lblCurrWorld.Text = "- X X X -";
 
@@ -166,7 +164,7 @@ namespace MCServCare
             updateOnOffStyles();
 
             VerifyFile();
-            javaSelector();
+            loadJavajars();
             if (GetProfileValue("savedJavas") == null)
                 SetProfileValue("savedJavas", "");
 
@@ -183,13 +181,11 @@ namespace MCServCare
                 cbJarSwitcher.SelectedIndex = -1;
             else
             {
-                
                 cbJarSwitcher.SelectedIndex = cbJarSwitcher.FindStringExact(a);
-                    }
+            }
             if (GetProfileValue("langue") == null)
                 SetProfileValue("langue", "EN");
             makeTranslation(GetProfileValue("langue"));
-            
 
             IS_LOADED = true;
         }
@@ -211,7 +207,6 @@ namespace MCServCare
             string latestVersion = await GetLatestVersionFromGitHub();
             if (IsNewVersionAvailable(APP_VERSION, latestVersion))
             {
-
                 DialogResult dialogResult = MessageBox.Show($"New version available. You're {versionLate} late. Click Yes to download latest version of MCServerCare.", "Warning", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
@@ -223,10 +218,8 @@ namespace MCServCare
                 btnUpdateMCServerCare.Enabled = false;
                 btnUpdateMCServerCare.FlatAppearance.BorderSize = 0;
             }
-
-            
-
         }
+
         private static async Task<string> GetLatestVersionFromGitHub()
         {
             using (HttpClient client = new HttpClient())
@@ -249,7 +242,6 @@ namespace MCServCare
 
         private void VerifyFile()
         {
-
             if (!File.Exists(configFilePath))
             {
                 // Le fichier n'existe pas, créons-le avec le contenu par défaut
@@ -269,6 +261,7 @@ namespace MCServCare
                 Console.WriteLine("Le fichier existe déjà.");
             }
         }
+
         private void getServerCareFiles()
         {
             string targetFolderPath = Path.Combine(Application.StartupPath, ".sc");
@@ -298,7 +291,6 @@ namespace MCServCare
             File.Delete("temp.zip");
         }
 
-
         private void createServerProperties()
         {
             WriteInformationToFile("#Minecraft server properties\r\n#Mon Jul 10 23:12:52 CEST 2023\r\nenable-jmx-monitoring=false\r\nrcon.port=25575\r\nlevel-seed=\r\ngamemode=survival\r\nenable-command-block=false\r\nenable-query=false\r\ngenerator-settings={}\r\nenforce-secure-profile=true\r\nlevel-name=world\r\nmotd=A Minecraft Server\r\nquery.port=25565\r\npvp=true\r\ngenerate-structures=true\r\nmax-chained-neighbor-updates=1000000\r\ndifficulty=easy\r\nnetwork-compression-threshold=256\r\nmax-tick-time=60000\r\nrequire-resource-pack=false\r\nuse-native-transport=true\r\nmax-players=20\r\nonline-mode=true\r\nenable-status=true\r\nallow-flight=false\r\ninitial-disabled-packs=\r\nbroadcast-rcon-to-ops=true\r\nview-distance=10\r\nserver-ip=\r\nresource-pack-prompt=\r\nallow-nether=true\r\nserver-port=25565\r\nenable-rcon=false\r\nsync-chunk-writes=true\r\nop-permission-level=4\r\nprevent-proxy-connections=false\r\nhide-online-players=false\r\nresource-pack=\r\nentity-broadcast-range-percentage=100\r\nsimulation-distance=10\r\nrcon.password=\r\nplayer-idle-timeout=0\r\ndebug=false\r\nforce-gamemode=false\r\nrate-limit=0\r\nhardcore=false\r\nwhite-list=false\r\nbroadcast-console-to-ops=true\r\nspawn-npcs=true\r\nspawn-animals=true\r\nfunction-permission-level=2\r\ninitial-enabled-packs=vanilla\r\nlevel-type=minecraft\\:normal\r\ntext-filtering-config=\r\nspawn-monsters=true\r\nenforce-whitelist=false\r\nspawn-protection=16\r\nresource-pack-sha1=\r\nmax-world-size=29999984\r\n", "server.properties");
@@ -322,7 +314,6 @@ namespace MCServCare
                 WriteInformationToFile("eula=true", "eula.txt");
                 return;
             }
-            
         }
 
         private void WriteInformationToFile(string information, string file)
@@ -391,16 +382,13 @@ namespace MCServCare
             // Lire le contenu du fichier
             string[] lines = File.ReadAllLines(filePath);
 
-            // Parcourir toutes les lignes du fichier
+            // Match on 'property=' to avoid partial key matches (e.g. "pvp" vs "pvp-something")
+            string keyPrefix = property + "=";
             for (int i = 0; i < lines.Length; i++)
             {
-                string line = lines[i];
-
-                // Vérifier si la ligne contient la variable "white-list"
-                if (line.StartsWith(property))
+                if (lines[i].StartsWith(keyPrefix))
                 {
-                    // Modifier la valeur de la variable à "true"
-                    lines[i] = property + "=" + value;
+                    lines[i] = keyPrefix + value;
                     break;
                 }
             }
@@ -470,111 +458,40 @@ namespace MCServCare
             return jarFiles;
         }
 
-        private void btnWhitelistActive_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Generic handler for all boolean (on/off) server properties.
+        /// Toggles the tag between "true" and "false", updates server.properties,
+        /// refreshes button styles and shows a notification.
+        /// </summary>
+        /// <param name="btn">The toggle button.</param>
+        /// <param name="propertyName">The server.properties key to update.</param>
+        /// <param name="groupLabel">Label shown in the notification (typically the GroupBox text).</param>
+        private void ToggleBooleanProperty(Button btn, string propertyName, string groupLabel)
         {
-            Button myb = (Button)sender;
-            if(myb.Tag.ToString() == "true")
-            {
-                UpdateServerProperties("white-list", "false");
-                myb.Tag = "false";
-            }
-            else
-            {
-                UpdateServerProperties("white-list", "true");
-                myb.Tag = "true";
-            }
+            string newValue = btn.Tag.ToString() == "true" ? "false" : "true";
+            UpdateServerProperties(propertyName, newValue);
+            btn.Tag = newValue;
             updateOnOffStyles();
-            sendNotif(Updated + gbWhitelist.Text + " : " + myb.Text + ".");
+            sendNotif(Updated + groupLabel + " : " + btn.Text + ".");
         }
 
-        private void btnNetherOff_Click(object sender, EventArgs e)
-        {
-            Button myb = (Button)sender;
-            if (myb.Tag.ToString() == "true")
-            {
-                UpdateServerProperties("allow-nether", "false");
-                myb.Tag = "false";
-            }
-            else
-            {
-                UpdateServerProperties("allow-nether", "true");
-                myb.Tag = "true";
-            }
-            updateOnOffStyles();
-            sendNotif(Updated + gbNether.Text + " : " + myb.Text + ".");
-        }
+        private void btnWhitelistActive_Click(object sender, EventArgs e) =>
+            ToggleBooleanProperty((Button)sender, "white-list", gbWhitelist.Text);
 
-        private void btnOpenToCrack_Click(object sender, EventArgs e)
-        {
-            Button myb = (Button)sender;
-            if (myb.Tag.ToString() == "true")
-            {
-                UpdateServerProperties("online-mode", "false");
-                myb.Tag = "false";
-            }
-            else
-            {
-                UpdateServerProperties("online-mode", "true");
-                myb.Tag = "true";
-            }
-            updateOnOffStyles();
-            sendNotif(Updated + gbCracks.Text + " : " + myb.Text + ".");
-        }
+        private void btnNetherOff_Click(object sender, EventArgs e) =>
+            ToggleBooleanProperty((Button)sender, "allow-nether", gbNether.Text);
 
+        private void btnOpenToCrack_Click(object sender, EventArgs e) =>
+            ToggleBooleanProperty((Button)sender, "online-mode", gbCracks.Text);
 
-        private void btnPVPActive_Click(object sender, EventArgs e)
-        {
-            Button myb = (Button)sender;
-            if (myb.Tag.ToString() == "true")
-            {
-                UpdateServerProperties("pvp", "false");
-                myb.Tag = "false";
-            }
-            else
-            {
-                UpdateServerProperties("pvp", "true");
-                myb.Tag = "true";
-            }
-            updateOnOffStyles();
-            sendNotif(Updated + gbPvp.Text + " : " + myb.Text + ".");
-        }
+        private void btnPVPActive_Click(object sender, EventArgs e) =>
+            ToggleBooleanProperty((Button)sender, "pvp", gbPvp.Text);
 
+        private void btnCommandBlockActive_Click(object sender, EventArgs e) =>
+            ToggleBooleanProperty((Button)sender, "enable-command-block", gbCommandBlock.Text);
 
-        private void btnCommandBlockActive_Click(object sender, EventArgs e)
-        {
-            Button myb = (Button)sender;
-            if (myb.Tag.ToString() == "true")
-            {
-                UpdateServerProperties("enable-command-block", "false");
-                myb.Tag = "false";
-            }
-            else
-            {
-                UpdateServerProperties("enable-command-block", "true");
-                myb.Tag = "true";
-            }
-            updateOnOffStyles();
-            sendNotif(Updated + gbCommandBlock.Text + " : " + myb.Text + ".");
-        }
-
-        private void btnHardcoreActive_Click(object sender, EventArgs e)
-        {
-            Button myb = (Button)sender;
-            if (myb.Tag.ToString() == "true")
-            {
-                UpdateServerProperties("hardcore", "false");
-                myb.Tag = "false";
-            }
-            else
-            {
-                UpdateServerProperties("hardcore", "true");
-                myb.Tag = "true";
-            }
-            updateOnOffStyles();
-            sendNotif(Updated + gbHardcore.Text + " : " + myb.Text + ".");
-            
-        }
-
+        private void btnHardcoreActive_Click(object sender, EventArgs e) =>
+            ToggleBooleanProperty((Button)sender, "hardcore", gbHardcore.Text);
 
         private void btnWorldSelection_Click(object sender, EventArgs e)
         {
@@ -584,7 +501,8 @@ namespace MCServCare
                 UpdateServerProperties("level-name", activeWorld);
                 lblCurrWorld.Text = "- " + activeWorld + " -";
             }
-            catch {
+            catch
+            {
                 MessageBox.Show(noWorld);
                 lblCurrWorld.Text = "- X X X -";
             }
@@ -620,33 +538,26 @@ namespace MCServCare
         {
             UpdateServerProperties("max-players", ((int)numSlotAmount.Value).ToString());
 
-
             sendNotif(Updated + "Max Players : " + numSlotAmount.Value.ToString() + ".");
         }
 
         private void numViewDistance_ValueChanged(object sender, EventArgs e)
         {
-
             UpdateServerProperties("view-distance", ((int)numViewDistance.Value).ToString());
-
 
             sendNotif(Updated + "View distance : " + numViewDistance.Value.ToString() + ".");
         }
 
         private void numSimulationDistance_ValueChanged(object sender, EventArgs e)
         {
-
             UpdateServerProperties("simulation-distance", ((int)numSimulationDistance.Value).ToString());
-
 
             sendNotif(Updated + "Simulation distance : " + numSimulationDistance.Value.ToString() + ".");
         }
 
         private void numSpawnProtecDistance_ValueChanged(object sender, EventArgs e)
         {
-
             UpdateServerProperties("spawn-protection", ((int)numSpawnProtecDistance.Value).ToString());
-
 
             sendNotif(Updated + "Spawn protection : " + numSpawnProtecDistance.Value.ToString() + ".");
         }
@@ -660,7 +571,6 @@ namespace MCServCare
 
         private void btnMOTD_Click(object sender, EventArgs e)
         {
-
             UpdateServerProperties("motd", txbMOTD.Text);
 
             sendNotif(motdChanged);
@@ -709,37 +619,30 @@ namespace MCServCare
         /// <param name="propertyName"></param>
         /// <returns></returns>
         /// <exception cref="FileNotFoundException"></exception>
+        /// <summary>
+        /// Reads a single property value from server.properties.
+        /// Splits only on the first '=' to support values that contain '=' (e.g. level-type, motd).
+        /// </summary>
         public string GetProperty(string propertyName)
         {
             string filePath = "server.properties";
 
-            // Vérifier si le fichier existe
             if (!File.Exists(filePath))
-            {
                 throw new FileNotFoundException("Le fichier server.properties n'existe pas.");
-            }
 
-            // Lire toutes les lignes du fichier
-            string[] lines = File.ReadAllLines(filePath);
-
-            // Parcourir chaque ligne et extraire la valeur associée à la propriété
-            foreach (string line in lines)
+            foreach (string line in File.ReadAllLines(filePath))
             {
-                // Séparer la ligne en propriété et valeur en utilisant le signe "=" comme délimiteur
-                string[] parts = line.Split('=');
+                // Ignore comments and blank lines
+                if (string.IsNullOrWhiteSpace(line) || line.StartsWith("#"))
+                    continue;
 
-                // Vérifier si la propriété correspond
-                if (parts.Length == 2 && parts[0].Trim().Equals(propertyName))
-                {
-                    // Retourner la valeur associée à la propriété
-                    return parts[1].Trim();
-                }
+                int idx = line.IndexOf('=');
+                if (idx > 0 && line.Substring(0, idx).Trim().Equals(propertyName))
+                    return line.Substring(idx + 1).Trim();
             }
 
-            // Si la propriété n'est pas trouvée, retourner une valeur par défaut ou générer une exception selon vos besoins
             return null;
         }
-
 
         private void rechargerToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -766,6 +669,7 @@ namespace MCServCare
         {
             System.Diagnostics.Process.Start("https://github.com/MythMega/MyServerCare/wiki/Creators");
         }
+
         private void contributors(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/MythMega/MyServerCare/wiki/Contributors");
@@ -775,40 +679,40 @@ namespace MCServCare
         {
             foreach (ListViewItem selectedItem in lvWorldSelection.SelectedItems)
             {
-            string worldName = selectedItem.Text; // Nom du monde
+                string worldName = selectedItem.Text; // Nom du monde
 
-            // Créer un nom de fichier pour la sauvegarde
-            string backupName = $"{worldName}-backup-{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.zip";
+                // Créer un nom de fichier pour la sauvegarde
+                string backupName = $"{worldName}-backup-{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.zip";
 
-            // Chemin du dossier à sauvegarder
-            string worldFolderPath = Path.Combine(Application.StartupPath, worldName);
+                // Chemin du dossier à sauvegarder
+                string worldFolderPath = Path.Combine(Application.StartupPath, worldName);
 
-            // Chemin complet du fichier de sauvegarde
-            string backupFilePath = Path.Combine(Application.StartupPath, backupName);
+                // Chemin complet du fichier de sauvegarde
+                string backupFilePath = Path.Combine(Application.StartupPath, backupName);
 
-            // Créer une archive ZIP du dossier du monde
-            ZipFile.CreateFromDirectory(worldFolderPath, backupFilePath);
+                // Créer une archive ZIP du dossier du monde
+                ZipFile.CreateFromDirectory(worldFolderPath, backupFilePath);
 
-            // Dossier de sauvegarde principal
-            string backupDirectory = Path.Combine(Application.StartupPath, "backup");
+                // Dossier de sauvegarde principal
+                string backupDirectory = Path.Combine(Application.StartupPath, "backup");
 
-            // Sous-dossier portant le nom du monde
-            string worldBackupDirectory = Path.Combine(backupDirectory, worldName);
+                // Sous-dossier portant le nom du monde
+                string worldBackupDirectory = Path.Combine(backupDirectory, worldName);
 
-            // Créer le dossier de sauvegarde principal s'il n'existe pas
-            Directory.CreateDirectory(backupDirectory);
+                // Créer le dossier de sauvegarde principal s'il n'existe pas
+                Directory.CreateDirectory(backupDirectory);
 
-            // Créer le sous-dossier portant le nom du monde s'il n'existe pas
-            Directory.CreateDirectory(worldBackupDirectory);
+                // Créer le sous-dossier portant le nom du monde s'il n'existe pas
+                Directory.CreateDirectory(worldBackupDirectory);
 
-            // Déplacer le fichier de sauvegarde vers le sous-dossier approprié
-            string destinationFilePath = Path.Combine(worldBackupDirectory, backupName);
-            File.Move(backupFilePath, destinationFilePath);
+                // Déplacer le fichier de sauvegarde vers le sous-dossier approprié
+                string destinationFilePath = Path.Combine(worldBackupDirectory, backupName);
+                File.Move(backupFilePath, destinationFilePath);
 
-            // Afficher un message de succès
-            MessageBox.Show($"Sauvegarde créée : {destinationFilePath}");
+                // Afficher un message de succès
+                MessageBox.Show($"Sauvegarde créée : {destinationFilePath}");
+            }
         }
-    }
 
         private void btnUpdateSC_Click(object sender, EventArgs e)
         {
@@ -864,6 +768,7 @@ namespace MCServCare
             timerItem.Stop();
             lblNotif.Text = ""; // Réinitialisez le texte
         }
+
         private void updateOnOffStyles()
         {
             foreach (Button btn in btnOnOff)
@@ -885,7 +790,6 @@ namespace MCServCare
                     btn.ForeColor = Color.White;
                     btn.Text = "Not Available";
                 }
-
             }
         }
 
@@ -899,16 +803,23 @@ namespace MCServCare
 
         public string GetProfileValue(string criterion)
         {
-            string[] lines = File.ReadAllLines(configFilePath);
-
-            foreach (string line in lines)
+            try
             {
-                string[] parts = line.Split('=');
+                string[] lines = File.ReadAllLines(configFilePath);
 
-                if (parts.Length == 2 && parts[0] == criterion)
+                foreach (string line in lines)
                 {
-                    return parts[1];
+                    string[] parts = line.Split('=');
+
+                    if (parts.Length == 2 && parts[0] == criterion)
+                    {
+                        return parts[1];
+                    }
                 }
+            }
+            catch
+            {
+                return null;
             }
 
             // Critère non trouvé, retourner une valeur par défaut ou une chaîne vide
@@ -961,7 +872,6 @@ namespace MCServCare
             }
         }
 
-
         private void setJar()
         {
             string directoryPath = AppDomain.CurrentDomain.BaseDirectory;
@@ -970,18 +880,22 @@ namespace MCServCare
             string newString = $"{cbJavaSwutcher.Text} -Xmx{numRam.Value.ToString()}G -jar {jar} nogui";
             SetProfileValue("ServerJar", cbJarSwitcher.Text);
             SetProfileValue("javaJar", cbJavaSwutcher.Text);
-            
-            WriteInformationToFile(newString, "start.bat");
 
+            WriteInformationToFile(newString, "start.bat");
         }
 
         private void cbJarSwitcher_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(IS_LOADED == true)
-                setJar();
-            if(((ComboBox)sender).Tag.ToString() == "java")
+            // Avoid writing start.bat during form initialisation (before IS_LOADED is set)
+            if (!IS_LOADED)
+                return;
+
+            setJar();
+
+            var cb = (ComboBox)sender;
+            if (cb.Tag?.ToString() == "java")
                 sendNotif(Updated + "Java : " + cbJavaSwutcher.Text + ".");
-            if(((ComboBox)sender).Tag.ToString() == "server")
+            else if (cb.Tag?.ToString() == "server")
                 sendNotif(Updated + "Server : " + cbJarSwitcher.Text + ".");
         }
 
@@ -996,37 +910,24 @@ namespace MCServCare
                 string newFile = openFileDialog.FileName;
                 cbJavaSwutcher.Items.Add(newFile);
                 List<string> jars = new List<string>();
-                foreach(string s in cbJavaSwutcher.Items)
+                foreach (string s in cbJavaSwutcher.Items)
                 {
                     jars.Add(s);
                 }
                 SetProfileValue("savedJavas", String.Join(";", jars));
             }
         }
-        private void javaSelector()
-        {
-            loadJavajars();
-        }
 
         private void loadJavajars()
         {
             cbJavaSwutcher.Items.Clear();
-            List<string> jars = new List<string> { };
-            try
-            {
-                string a = GetProfileValue("savedJavas");
-                string[] fiches = a.Split(';');
-                jars.AddRange(fiches);
-            }
-            catch
-            {
+            string saved = GetProfileValue("savedJavas");
+            if (string.IsNullOrWhiteSpace(saved))
+                return;
 
-            }
-            foreach (string jar in jars)
-            {
-                cbJavaSwutcher.Items.Add($"{jar}");
-            }
-
+            // Filter out blank entries that can appear if the saved string ends with ';'
+            foreach (string jar in saved.Split(';').Where(s => !string.IsNullOrWhiteSpace(s)))
+                cbJavaSwutcher.Items.Add(jar);
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -1046,12 +947,12 @@ namespace MCServCare
 
             worldImporter.Dispose();
             worldImporter = null;
-         }
+        }
 
         private void btnDeleteWorld_Click(object sender, EventArgs e)
         {
             List<string> selectedItemsStrings = new List<string>();
-            foreach(ListViewItem item in lvWorldSelection.SelectedItems)
+            foreach (ListViewItem item in lvWorldSelection.SelectedItems)
             {
                 selectedItemsStrings.Add(item.Text);
             }
@@ -1063,13 +964,10 @@ namespace MCServCare
                 {
                     foreach (ListViewItem selectedItem in lvWorldSelection.SelectedItems)
                     {
-
                         string path = Path.Combine(Directory.GetCurrentDirectory(), selectedItem.Text);
                         Directory.Delete(path, true);
                         lvWorldSelection.Items.Remove(selectedItem); // Supprime l'élément de la ListView
-
                     }
-                    
                 }
                 catch
                 {
@@ -1098,7 +996,6 @@ namespace MCServCare
         private void numPort_ValueChanged(object sender, EventArgs e)
         {
             UpdateServerProperties("server-port", ((int)numPort.Value).ToString());
-
 
             sendNotif(Updated + "Server port : " + numPort.Value.ToString() + ".");
         }
@@ -1158,7 +1055,7 @@ namespace MCServCare
                     MessageBox.Show($"L'élément nommé \"{file}\" n'est pas un monde Minecraft valide.");
                 }
             }
-            if(needReload)
+            if (needReload)
             {
                 pictureBox1_Click(null, null);
             }
@@ -1167,7 +1064,6 @@ namespace MCServCare
         private void btnUpdateMCServerCare_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(lastVersionUrl);
-        
         }
 
         private void datapacksToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1179,22 +1075,21 @@ namespace MCServCare
 
         private void btnWorldOptions_Click(object sender, EventArgs e)
         {
-            if(lvWorldSelection.SelectedItems.Count == 1)
+            if (lvWorldSelection.SelectedItems.Count == 1)
             {
                 WorldEditor we = new WorldEditor(lvWorldSelection.SelectedItems[0].Text);
                 we.ShowDialog();
                 we.Close();
             }
-            else if(lvWorldSelection.SelectedItems.Count == 0)
+            else if (lvWorldSelection.SelectedItems.Count == 0)
             {
                 MessageBox.Show(noWorld);
             }
-
         }
 
         private void getOtherJavaVersionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // 
+            //
             JavaFinder jf = new JavaFinder();
             jf.ShowDialog();
         }
@@ -1208,7 +1103,7 @@ namespace MCServCare
         {
             List<string> elements = new List<string>();
 
-            foreach(string lvi in cbJavaSwutcher.Items)
+            foreach (string lvi in cbJavaSwutcher.Items)
                 elements.Add(lvi);
 
             RemoveJava rj = new RemoveJava(elements);
@@ -1217,9 +1112,9 @@ namespace MCServCare
 
             // ajout des items
 
-            foreach(string itemToAdd in rj.toAdd)
+            foreach (string itemToAdd in rj.toAdd)
             {
-                cbJavaSwutcher.Items.Add(itemToAdd);      
+                cbJavaSwutcher.Items.Add(itemToAdd);
             }
             List<string> jars = new List<string>();
 
@@ -1228,12 +1123,10 @@ namespace MCServCare
             foreach (string itemToRem in rj.toDel)
                 cbJavaSwutcher.Items.Remove(itemToRem);
 
-
             foreach (string s in cbJavaSwutcher.Items)
                 jars.Add(s);
             SetProfileValue("savedJavas", String.Join(";", jars));
             rj.Close();
-
         }
 
         private void togglePluginsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1249,7 +1142,7 @@ namespace MCServCare
             Process process = new Process();
             process.StartInfo.FileName = "explorer.exe";
             process.StartInfo.Arguments = path;
-            if(Directory.Exists(path))
+            if (Directory.Exists(path))
             {
                 process.Start();
             }
@@ -1265,7 +1158,6 @@ namespace MCServCare
                 {
                     return;
                 }
-
             }
         }
 
@@ -1292,21 +1184,7 @@ namespace MCServCare
             MessageBox.Show(stringBuilder.ToString());
         }
 
-        private void btnHideOnlinePlayer_Click(object sender, EventArgs e)
-        {
-            Button myb = (Button)sender;
-            if (myb.Tag.ToString() == "true")
-            {
-                UpdateServerProperties("hide-online-players", "false");
-                myb.Tag = "false";
-            }
-            else
-            {
-                UpdateServerProperties("hide-online-players", "true");
-                myb.Tag = "true";
-            }
-            updateOnOffStyles();
-            sendNotif(Updated + gbHideOnline.Text + " : " + myb.Text + ".");
-        }
+        private void btnHideOnlinePlayer_Click(object sender, EventArgs e) =>
+            ToggleBooleanProperty((Button)sender, "hide-online-players", gbHideOnline.Text);
     }
 }
